@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI ニュース — 2026年5月12日号</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --sidebar-bg: #13151f;
+      --card: #1a1d27;
+      --border: #2a2d3e;
+      --accent: #6c63ff;
+      --accent2: #00c9a7;
+      --text: #e2e4f0;
+      --muted: #8b8fa8;
+      --sidebar-w: 220px;
+      --tag-eng: #1e3a5f;       --tag-eng-text: #60a5fa;
+      --tag-agent: #1e3a2f;     --tag-agent-text: #34d399;
+      --tag-model: #3a1e3a;     --tag-model-text: #c084fc;
+      --tag-security: #3a1e1e;  --tag-security-text: #f87171;
+      --tag-creative: #3a2e1e;  --tag-creative-text: #fb923c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      overflow-y: auto;
+      padding: 1.5rem 0;
+    }
+    .sidebar-logo {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+      padding: 0 1.2rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: 0.05em;
+    }
+    .sidebar-section {
+      padding: 1rem 1.2rem 0.4rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .issue-link {
+      display: block;
+      padding: 0.45rem 1.2rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: all 0.15s;
+      line-height: 1.4;
+    }
+    .issue-link:hover {
+      color: var(--text);
+      background: rgba(108,99,255,0.07);
+    }
+    .issue-link.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: rgba(108,99,255,0.08);
+    }
+    .issue-link .issue-date { display: block; font-size: 0.75rem; }
+    .issue-link .issue-label { display: block; font-size: 0.7rem; color: var(--muted); margin-top: 0.1rem; }
+
+    /* ── Main ── */
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      padding: 2rem 2rem 3rem;
+      max-width: 900px;
+    }
+    header { margin-bottom: 2.5rem; }
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    header p { color: var(--muted); margin-top: 0.4rem; font-size: 0.9rem; }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card-header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 0.75rem; }
+    .number {
+      font-size: 1.5rem; font-weight: 800; color: var(--accent);
+      flex-shrink: 0; min-width: 2rem; line-height: 1.3;
+    }
+    .card-header-text { flex: 1; }
+    .card h2 { font-size: 1.05rem; font-weight: 600; color: var(--text); }
+    .meta { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.3rem; flex-wrap: wrap; }
+    .date { font-size: 0.78rem; color: var(--muted); }
+    .tag {
+      font-size: 0.7rem; font-weight: 600;
+      padding: 0.15rem 0.55rem; border-radius: 999px;
+    }
+    .tag-eng      { background: var(--tag-eng);      color: var(--tag-eng-text); }
+    .tag-agent    { background: var(--tag-agent);    color: var(--tag-agent-text); }
+    .tag-model    { background: var(--tag-model);    color: var(--tag-model-text); }
+    .tag-security { background: var(--tag-security); color: var(--tag-security-text); }
+    .tag-creative { background: var(--tag-creative); color: var(--tag-creative-text); }
+    .card p { font-size: 0.91rem; color: #c4c7db; line-height: 1.75; }
+    .card a.source {
+      color: var(--accent); text-decoration: none;
+      font-size: 0.8rem; display: inline-block; margin-top: 0.75rem;
+    }
+    .card a.source:hover { text-decoration: underline; }
+    .highlight {
+      background: rgba(108,99,255,0.08);
+      border-left: 3px solid var(--accent);
+      padding: 0.4rem 0.75rem;
+      border-radius: 0 6px 6px 0;
+      margin-top: 0.75rem;
+      font-size: 0.86rem;
+      color: var(--accent2);
+      line-height: 1.6;
+    }
+    footer {
+      margin-top: 3rem; color: var(--muted);
+      font-size: 0.78rem; border-top: 1px solid var(--border); padding-top: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<aside class="sidebar">
+  <div class="sidebar-logo">⬡ AI Weekly</div>
+  <div class="sidebar-section">バックナンバー</div>
+
+  <!-- ISSUES_LIST_START -->
+  <a href="2026_05_12.html" class="issue-link active">
+    <span class="issue-date">2026年5月12日</span>
+    <span class="issue-label">GPT-5.5 / dreaming / iOS 27</span>
+  </a>
+  <!-- ISSUES_LIST_END -->
+
+</aside>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<div class="main">
+  <header>
+    <h1>AI ニュースまとめ</h1>
+    <p>2026年5月5日〜12日 ／ エンジニア・クリエイター向けピックアップ 10 本</p>
+  </header>
+
+  <!-- 1 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">01</div>
+      <div class="card-header-text">
+        <h2>GPT-5.5 Instant が ChatGPT のデフォルトモデルに ― 幻覚が 52.5% 減</h2>
+        <div class="meta">
+          <span class="date">May 5, 2026</span>
+          <span class="tag tag-model">新モデル</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      OpenAI が <strong>GPT-5.5 Instant</strong> を無料ユーザー含む全 ChatGPT ユーザーへ展開し、GPT-5.3 Instant を置き換えた。
+      社内評価では医療・法律・金融などハイリスクなプロンプトへの幻覚が <strong>52.5% 削減</strong>。
+      コーディング、オンライン調査、データ分析、スプレッドシート作成などに強く、
+      「やりたいことを素早く理解して多くの作業を自律的にこなせる」と説明されている。
+    </p>
+    <div class="highlight">エンジニア的注目点: 同モデルは API でも利用可能。低レイテンシを維持しながら精度が上がったため、プロダクション組み込みの再評価タイミング。</div>
+    <a class="source" href="https://techcrunch.com/2026/05/05/openai-releases-gpt-5-5-instant-a-new-default-model-for-chatgpt/" target="_blank">→ TechCrunch で読む</a>
+  </div>
+
+  <!-- 2 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">02</div>
+      <div class="card-header-text">
+        <h2>Anthropic、AI エージェントに「dreaming（夢を見る）」機能を追加</h2>
+        <div class="meta">
+          <span class="date">May 6, 2026</span>
+          <span class="tag tag-agent">エージェント</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Anthropic が <strong>Claude Managed Agents</strong> のリサーチプレビューとして <em>dreaming</em> を発表。
+      エージェントが次のセッション開始前に過去の会話・メモリストアを振り返り、重複排除・古い情報の削除・
+      繰り返すミスやチームの好みをパターンとして抽出し「プレイブック」として保存する。
+      モデルウェイト自体は変更せず、あくまで平文メモとして蓄積される。
+      法律系 AI スタートアップ <strong>Harvey</strong> の試験導入ではタスク完了率が <strong>約 6 倍</strong>に向上。
+    </p>
+    <div class="highlight">エンジニア的注目点: 人間が手動でスキルを定義しなくてもエージェントが自律改善する設計。SDK 対応の実装パターンが公式ブログで公開済み。</div>
+    <a class="source" href="https://venturebeat.com/technology/anthropic-introduces-dreaming-a-system-that-lets-ai-agents-learn-from-their-own-mistakes" target="_blank">→ VentureBeat で読む</a>
+  </div>
+
+  <!-- 3 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">03</div>
+      <div class="card-header-text">
+        <h2>iOS 27 で AI モデルを自分で選べる ― Gemini・Claude が Siri に入る</h2>
+        <div class="meta">
+          <span class="date">May 5–6, 2026</span>
+          <span class="tag tag-creative">プラットフォーム</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Bloomberg と TechCrunch が報じた Apple の新方針。<strong>iOS 27 / macOS 27</strong>（秋リリース予定）では
+      <em>Extensions</em> フレームワーク経由で Google Gemini や Anthropic Claude などサードパーティ AI モデルを
+      Siri・Writing Tools・Image Playground などの Apple Intelligence 機能に割り当てられるようになる。
+      異なる AI プロバイダーに異なる Siri の声を設定するなど、細かなカスタマイズも可能とされる。
+      正式発表は <strong>WWDC（6 月 8 日〜）</strong> の予定。
+    </p>
+    <div class="highlight">エンジニア的注目点: App Store 経由でモデルを配布するアーキテクチャは新しい AI アプリ流通モデルになりうる。</div>
+    <a class="source" href="https://techcrunch.com/2026/05/05/apple-plans-to-make-ios-27-a-choose-your-own-adventure-of-ai-models/" target="_blank">→ TechCrunch で読む</a>
+  </div>
+
+  <!-- 4 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">04</div>
+      <div class="card-header-text">
+        <h2>「Code with Claude 2026」開発者カンファレンス ― 自律ソフトウェアエンジニアリング時代の幕開け</h2>
+        <div class="meta">
+          <span class="date">May 7, 2026</span>
+          <span class="tag tag-agent">エージェント</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Anthropic 主催の開発者カンファレンス <strong>Code with Claude 2026</strong> が開催。
+      Claude Managed Agents の新機能（dreaming 含む 3 機能）の詳細なセッションが行われ、
+      「Human-Guided Coding Agents」というパラダイムシフト ― エンジニアはコードを書くのではなく
+      エージェントを指揮する役割へ ― について深掘りされた。
+      Anthropic 社内では Claude Code によって書かれるコードが <strong>70〜90%</strong> に達していることも改めて明かされた。
+    </p>
+    <div class="highlight">エンジニア的注目点: セッション録画は公式 YouTube で公開。Claude Code Hooks の実践的な使い方デモが特に評判。</div>
+    <a class="source" href="https://atalupadhyay.wordpress.com/2026/05/07/anthropics-claude-developer-conference-2026-the-complete-guide-to-autonomous-software-engineering/" target="_blank">→ 詳細レポートを読む</a>
+  </div>
+
+  <!-- 5 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">05</div>
+      <div class="card-header-text">
+        <h2>Qwen3-Coder-Next リリース ― SWE-Bench 70% 超えのローカル動作コーディング AI</h2>
+        <div class="meta">
+          <span class="date">May 9, 2026</span>
+          <span class="tag tag-model">新モデル</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Alibaba の Qwen チームがオープンウェイトモデル <strong>Qwen3-Coder-Next</strong> をリリース。
+      総パラメータ 80B ながら <strong>有効パラメータはわずか 3B</strong>（MoE 構造）で、
+      SWE-Bench Verified で <strong>70.6%</strong> を達成。これは 10〜20 倍の有効パラメータを持つモデルに匹敵する成績。
+      コンテキスト長 <strong>256k トークン</strong>、Claude Code・Cursor・Cline 等のスキャフォールドと統合可能。
+      ローカルで動かせる本格コーディングエージェントとして注目度が高い。
+    </p>
+    <div class="highlight">エンジニア的注目点: Hugging Face からダウンロード可能。M3 Max / RTX 4090 クラスのローカル環境でも実用速度で動作報告あり。</div>
+    <a class="source" href="https://dev.to/sienna/qwen3-coder-next-the-complete-2026-guide-to-running-powerful-ai-coding-agents-locally-1k95" target="_blank">→ DEV Community ガイドを読む</a>
+  </div>
+
+  <!-- 6 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">06</div>
+      <div class="card-header-text">
+        <h2>Gemini 3.1 Flash Lite リリース ― 高速・軽量マルチモーダルモデル</h2>
+        <div class="meta">
+          <span class="date">May 8, 2026</span>
+          <span class="tag tag-model">新モデル</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Google が <strong>Gemini 3.1 Flash Lite</strong> を公開。Flash シリーズ最軽量版として低コスト・低レイテンシを維持しながら
+      マルチモーダル性能を強化。API 経由での大量呼び出し用途やリアルタイムアプリでの活用が想定されている。
+      4 月の怒涛の 9 リリースが続いた後、5 月最初の主要モデル更新となった。
+    </p>
+    <div class="highlight">エンジニア的注目点: Gemini API の Flash Lite ティアはコスト最小化が最優先のバッチ処理ユースケースに適合。</div>
+    <a class="source" href="https://llm-stats.com/llm-updates" target="_blank">→ LLM Stats で確認する</a>
+  </div>
+
+  <!-- 7 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">07</div>
+      <div class="card-header-text">
+        <h2>Google のコードの 75% が AI 生成 ― 業界全体でシフトが加速</h2>
+        <div class="meta">
+          <span class="date">May 2026</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Google CEO が「現在 Google の新規コードの <strong>75%</strong> が AI 生成（昨秋比 50%→75%）」と発言。
+      Anthropic 社内でも Claude Code によって書かれるコードが <strong>70〜90%</strong> に達している。
+      McKinsey の調査（2026年2月、4,500 人超の開発者対象）では、AI コーディングツールが
+      ルーティンタスクにかかる時間を平均 <strong>46% 削減</strong>している一方、
+      レビューなしで AI コードをそのままマージするとバグ密度が <strong>23% 増加</strong>するという課題も報告された。
+    </p>
+    <div class="highlight">エンジニア的注目点: 生産性向上と品質維持の両立がますます重要。AI コードレビュー自動化の需要が急上昇中。</div>
+    <a class="source" href="https://newsletter.pragmaticengineer.com/p/the-impact-of-ai-on-software-engineers-2026" target="_blank">→ Pragmatic Engineer で読む</a>
+  </div>
+
+  <!-- 8 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">08</div>
+      <div class="card-header-text">
+        <h2>ServiceNow Build Agent が Cursor・Claude Code・GitHub Copilot に統合</h2>
+        <div class="meta">
+          <span class="date">May 2026</span>
+          <span class="tag tag-agent">エージェント</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      ServiceNow が <strong>Build Agent</strong> を主要コーディングツール全社対応にアップデート。
+      Cursor、Windsurf、<strong>Claude Code</strong>、GitHub Copilot から直接 ServiceNow プラットフォーム操作が可能になり、
+      デフォルトでガバナンスが適用される設計になった。
+      エンタープライズ向け IT 自動化とコーディング環境の境界がなくなる一例として話題に。
+    </p>
+    <div class="highlight">エンジニア的注目点: MCP（Model Context Protocol）経由の統合が増え、IDE を離れずにバックエンドシステムを操作できるエコシステムが急拡大中。</div>
+    <a class="source" href="https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-Build-Agent-now-works-inside-every-major-AI-coding-tool-governed-by-default/default.aspx" target="_blank">→ ServiceNow プレスリリースを読む</a>
+  </div>
+
+  <!-- 9 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">09</div>
+      <div class="card-header-text">
+        <h2>Snowflake が「Cortex Code」発表 ― データコンテキストを理解するコーディング AI</h2>
+        <div class="meta">
+          <span class="date">May 2026</span>
+          <span class="tag tag-eng">開発者向け</span>
+          <span class="tag tag-model">プラットフォーム</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Snowflake が <strong>Cortex Code</strong> を発表。既存のコーディング AI と異なり、
+      Snowflake 上のデータスキーマ・クエリ履歴・パイプライン構成を理解した上でコードを生成・修正する。
+      「アイデアからプロダクションまでを劇的に短縮する」とのこと。
+      データエンジニアやアナリティクスエンジニアが主なターゲット。
+    </p>
+    <div class="highlight">エンジニア的注目点: データウェアハウス固有のコンテキストをモデルに注入するアプローチは、特定ドメイン向け AI コーディングの今後のトレンドを示唆。</div>
+    <a class="source" href="https://www.snowflake.com/en/news/press-releases/snowflake-unveils-cortex-code-an-ai-coding-agent-that-drastically-increases-productivity-by-understanding-your-enterprise-data-context/" target="_blank">→ Snowflake プレスリリースを読む</a>
+  </div>
+
+  <!-- 10 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">10</div>
+      <div class="card-header-text">
+        <h2>AI エージェントの「致命的な三つ子」リスク ― パスワード・API キー漏洩事例</h2>
+        <div class="meta">
+          <span class="date">May 2026</span>
+          <span class="tag tag-security">セキュリティ</span>
+          <span class="tag tag-agent">エージェント</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      数学者 Hannah Fry 氏が OpenClaw 系 AI エージェントを使った実験で、
+      ソーシャルエンジニアリングによってパスワードと API キーが漏洩することを実証。
+      研究者らはこの状況を <strong>「致命的な三つ子（Lethal Trifecta）」</strong> と命名 ―
+      ① インターネットアクセス、② プライベート情報へのアクセス、③ 信頼されていないプロンプトの受け入れ
+      ― の 3 条件が揃うと危険になると警告。
+      自律エージェントの普及が進む中、設計段階でのセキュリティ考慮が不可欠になっている。
+    </p>
+    <div class="highlight">エンジニア的注目点: エージェントに渡す権限の最小化（Least Privilege）と、外部プロンプトのサニタイズが急務。プロダクションへの導入前に必ず確認を。</div>
+    <a class="source" href="https://www.marketingprofs.com/opinions/2026/54655/ai-update-may-8-2026-ai-news-and-views-from-the-past-week" target="_blank">→ MarketingProfs 週次まとめで読む</a>
+  </div>
+
+  <footer>
+    <p>作成日: 2026年5月12日 ／ 情報収集: Web 検索（各記事のリンク先を必ず確認してください）</p>
+  </footer>
+</div>
+
+</body>
+</html>
