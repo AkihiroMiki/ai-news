@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI ニュース — 2026年5月27日号</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --sidebar-bg: #13151f;
+      --card: #1a1d27;
+      --border: #2a2d3e;
+      --accent: #6c63ff;
+      --accent2: #00c9a7;
+      --text: #e2e4f0;
+      --muted: #8b8fa8;
+      --sidebar-w: 220px;
+      --tag-eng: #1e3a5f;       --tag-eng-text: #60a5fa;
+      --tag-agent: #1e3a2f;     --tag-agent-text: #34d399;
+      --tag-model: #3a1e3a;     --tag-model-text: #c084fc;
+      --tag-security: #3a1e1e;  --tag-security-text: #f87171;
+      --tag-creative: #3a2e1e;  --tag-creative-text: #fb923c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      overflow-y: auto;
+      padding: 1.5rem 0;
+    }
+    .sidebar-logo {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+      padding: 0 1.2rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: 0.05em;
+    }
+    .sidebar-section {
+      padding: 1rem 1.2rem 0.4rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .issue-link {
+      display: block;
+      padding: 0.45rem 1.2rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: all 0.15s;
+      line-height: 1.4;
+    }
+    .issue-link:hover {
+      color: var(--text);
+      background: rgba(108,99,255,0.07);
+    }
+    .issue-link.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: rgba(108,99,255,0.08);
+    }
+    .issue-link .issue-date { display: block; font-size: 0.75rem; }
+    .issue-link .issue-label { display: block; font-size: 0.7rem; color: var(--muted); margin-top: 0.1rem; }
+
+    /* ── Main ── */
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      padding: 2rem 2rem 3rem;
+      max-width: 900px;
+    }
+    header { margin-bottom: 2.5rem; }
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    header p { color: var(--muted); margin-top: 0.4rem; font-size: 0.9rem; }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card-header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 0.75rem; }
+    .number {
+      font-size: 1.5rem; font-weight: 800; color: var(--accent);
+      flex-shrink: 0; min-width: 2rem; line-height: 1.3;
+    }
+    .card-header-text { flex: 1; }
+    .card h2 { font-size: 1.05rem; font-weight: 600; color: var(--text); }
+    .meta { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.3rem; flex-wrap: wrap; }
+    .date { font-size: 0.78rem; color: var(--muted); }
+    .tag {
+      font-size: 0.7rem; font-weight: 600;
+      padding: 0.15rem 0.55rem; border-radius: 999px;
+    }
+    .tag-eng      { background: var(--tag-eng);      color: var(--tag-eng-text); }
+    .tag-agent    { background: var(--tag-agent);    color: var(--tag-agent-text); }
+    .tag-model    { background: var(--tag-model);    color: var(--tag-model-text); }
+    .tag-security { background: var(--tag-security); color: var(--tag-security-text); }
+    .tag-creative { background: var(--tag-creative); color: var(--tag-creative-text); }
+    .card p { font-size: 0.91rem; color: #c4c7db; line-height: 1.75; }
+    .card a.source {
+      color: var(--accent); text-decoration: none;
+      font-size: 0.8rem; display: inline-block; margin-top: 0.75rem;
+    }
+    .card a.source:hover { text-decoration: underline; }
+    .highlight {
+      background: rgba(108,99,255,0.08);
+      border-left: 3px solid var(--accent);
+      padding: 0.4rem 0.75rem;
+      border-radius: 0 6px 6px 0;
+      margin-top: 0.75rem;
+      font-size: 0.86rem;
+      color: var(--accent2);
+      line-height: 1.6;
+    }
+    footer {
+      margin-top: 3rem; color: var(--muted);
+      font-size: 0.78rem; border-top: 1px solid var(--border); padding-top: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<aside class="sidebar">
+  <div class="sidebar-logo">⬡ AI Weekly</div>
+  <div class="sidebar-section">バックナンバー</div>
+
+  <!-- ISSUES_LIST_START -->
+  <a href="2026_05_27.html" class="issue-link active">
+    <span class="issue-date">2026年5月27日</span>
+    <span class="issue-label">Google I/O / Gemini 3.5 / SubQ</span>
+  </a>
+  <a href="2026_05_12.html" class="issue-link">
+    <span class="issue-date">2026年5月12日</span>
+    <span class="issue-label">GPT-5.5 / dreaming / iOS 27</span>
+  </a>
+  <!-- ISSUES_LIST_END -->
+
+</aside>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<div class="main">
+  <header>
+    <h1>AI ニュースまとめ</h1>
+    <p>2026年5月20日〜27日 ／ エンジニア・クリエイター向けピックアップ 10 本</p>
+  </header>
+
+  <!-- 1 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">01</div>
+      <div class="card-header-text">
+        <h2>Google I/O 2026：Gemini 3.5 Flash が GA、Antigravity でマルチエージェント時代へ</h2>
+        <div class="meta">
+          <span class="date">May 20–21, 2026</span>
+          <span class="tag tag-model">新モデル</span>
+          <span class="tag tag-agent">エージェント</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Google I/O 2026 で <strong>Gemini 3.5 Flash</strong> が正式 GA。同等クラスのモデル比で
+      <strong>4 倍の速度</strong>、Terminal-Bench 2.1 で <strong>76.2%</strong> を達成し、
+      価格は $1.50 / $9（入力/出力 per 1M トークン）。
+      併せてエージェントファーストの開発プラットフォーム <strong>Antigravity</strong> を大幅刷新し、
+      サブエージェント・非同期タスク管理・フックなど新プリミティブを追加。
+      さらにマルチモーダル創作モデル <strong>Gemini Omni</strong>（動画入力を起点に何でも生成）も発表された。
+    </p>
+    <div class="highlight">エンジニア的注目点: Antigravity の新フックモデルは Claude Code Hooks と設計思想が近く、エージェントオーケストレーション標準が収れんしつつある。Managed Agents API との比較検討を推奨。</div>
+    <a class="source" href="https://developers.googleblog.com/all-the-news-from-the-google-io-2026-developer-keynote/" target="_blank">→ Google Developers Blog で読む</a>
+  </div>
+
+  <!-- 2 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">02</div>
+      <div class="card-header-text">
+        <h2>SubQ 1M-Preview — 世界初の商用サブクワドラティック LLM、12M トークンコンテキスト</h2>
+        <div class="meta">
+          <span class="date">May 22, 2026</span>
+          <span class="tag tag-model">新モデル</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Subquadratic 社が <strong>SubQ 1M-Preview</strong> を公開。標準の Transformer ではなく
+      <strong>完全サブクワドラティック・スパース Attention アーキテクチャ</strong>を採用した初の商用 LLM。
+      ネイティブコンテキスト長は <strong>1,200 万トークン</strong>、Attention 計算速度はスケール時に最大
+      <strong>52 倍</strong>速く、コストはフロンティアモデルの約 <strong>1/5</strong> と主張。
+      長大なコードベース全体を一度に解析するユースケースでの活用が期待される。
+    </p>
+    <div class="highlight">エンジニア的注目点: 1,200 万トークンのコンテキストはモノレポ全体を丸ごと投げ込める規模。RAG 設計の見直しが必要になるほどのゲームチェンジャー候補。</div>
+    <a class="source" href="https://whatllm.org/blog/new-ai-models-may-2026" target="_blank">→ WhatLLM.org で読む</a>
+  </div>
+
+  <!-- 3 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">03</div>
+      <div class="card-header-text">
+        <h2>Qwen3 Coder Next & MiniMax M2.7 リリース ― オープンソース勢が快進撃</h2>
+        <div class="meta">
+          <span class="date">May 22, 2026</span>
+          <span class="tag tag-model">新モデル</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      5 月 22 日に複数のオープンモデルが一斉リリース。Alibaba の
+      <strong>Qwen3 Coder Next</strong> は MoE 構造で実効パラメータ 3B ながら SWE-Bench Verified 70.6% を達成。
+      MiniMax からは <strong>M2.5 Highspeed</strong>・<strong>M2.7 Highspeed</strong>・<strong>M2.7</strong> の 3 モデルが同日投入され、
+      長文処理とコスト効率を強みとする。
+      Google の <strong>Gemma 4 ファミリー</strong>（5 月 4 日 GA）も引き続き高評価を受けており、
+      オープンウェイト競争が加速している。
+    </p>
+    <div class="highlight">エンジニア的注目点: Qwen3 Coder Next は Claude Code・Cursor・Cline と統合可能。ローカル実行でコスト無限ゼロのコーディングエージェントを構築できる好機。</div>
+    <a class="source" href="https://llm-stats.com/llm-updates" target="_blank">→ LLM Stats で確認する</a>
+  </div>
+
+  <!-- 4 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">04</div>
+      <div class="card-header-text">
+        <h2>OpenAI が「Daybreak」発表 ― AI 駆動の脆弱性検出＆パッチ自動生成</h2>
+        <div class="meta">
+          <span class="date">May 2026</span>
+          <span class="tag tag-security">セキュリティ</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      OpenAI が新サイバーセキュリティイニシアチブ <strong>Daybreak</strong> を発表。
+      Codex Security と連携し、リポジトリから現実的な攻撃経路に特化したスレットモデルを自動構築、
+      隔離環境で脆弱性を特定・テストし修正パッチを提案する。
+      Akamai・Cisco・Cloudflare・CrowdStrike・Fortinet など主要セキュリティ企業が
+      <em>Trusted Access for Cyber</em> として統合を表明。
+    </p>
+    <div class="highlight">エンジニア的注目点: CI/CD パイプラインへの組み込みで「コミット前に脆弱性検出→パッチ提案」が自動化される時代が現実に。既存 SAST ツールとの比較評価を推奨。</div>
+    <a class="source" href="https://thehackernews.com/2026/05/openai-launches-daybreak-for-ai-powered.html" target="_blank">→ The Hacker News で読む</a>
+  </div>
+
+  <!-- 5 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">05</div>
+      <div class="card-header-text">
+        <h2>Anthropic「Claude Security」パブリックベータ ― コードベース全体の脆弱性スキャン＋パッチ生成</h2>
+        <div class="meta">
+          <span class="date">May 1, 2026</span>
+          <span class="tag tag-security">セキュリティ</span>
+          <span class="tag tag-agent">エージェント</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Anthropic が <strong>Claude Security</strong> をパブリックベータとして公開。
+      Opus 4.7 ベースのエンタープライズ向けセキュリティエージェントで、
+      コードベース全体を走査して脆弱性を検出し、ターゲットを絞ったパッチを自動生成する。
+      単一ファイルのスキャンではなくリポジトリ横断的な依存関係分析が特徴で、
+      同社が 5 月にリリースした Claude Finance Agents（10 種の金融特化エージェント）と並ぶ
+      垂直特化エージェント戦略の一環。
+    </p>
+    <div class="highlight">エンジニア的注目点: Opus 4.7 の長いコンテキスト活用と垂直特化の組み合わせ。セキュリティチームとデブオプスの融合が加速するユースケース。</div>
+    <a class="source" href="https://www.akoode.com/blog/top-agentic-ai-coding-tools" target="_blank">→ Akoode ブログで読む</a>
+  </div>
+
+  <!-- 6 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">06</div>
+      <div class="card-header-text">
+        <h2>Microsoft Security Blog：AI エージェントフレームワークに RCE 脆弱性 ― 「プロンプトがシェルになる」</h2>
+        <div class="meta">
+          <span class="date">May 7, 2026</span>
+          <span class="tag tag-security">セキュリティ</span>
+          <span class="tag tag-agent">エージェント</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Microsoft Security Blog が <em>「プロンプトがシェルになるとき」</em> という題で
+      主要 AI エージェントフレームワーク複数に <strong>リモートコード実行（RCE）脆弱性</strong> が存在することを公開。
+      悪意あるプロンプトがツール呼び出しを介してホスト環境で任意コマンドを実行できる経路が確認された。
+      2026 年のセキュリティ監査では AI システムの <strong>73%</strong> がプロンプトインジェクション脆弱性にさらされているという調査結果とも一致する。
+    </p>
+    <div class="highlight">エンジニア的注目点: エージェントに与えるツールの権限スコープを最小化し、外部コンテンツ（Web・ファイル・メール）からのプロンプトは必ずサニタイズ。本番導入前の必読文書。</div>
+    <a class="source" href="https://www.microsoft.com/en-us/security/blog/2026/05/07/prompts-become-shells-rce-vulnerabilities-ai-agent-frameworks/" target="_blank">→ Microsoft Security Blog で読む</a>
+  </div>
+
+  <!-- 7 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">07</div>
+      <div class="card-header-text">
+        <h2>Claude Code が AI コーディングツール No.1 に ― GitHub Copilot・Cursor を逆転</h2>
+        <div class="meta">
+          <span class="date">May 2026</span>
+          <span class="tag tag-eng">開発者向け</span>
+          <span class="tag tag-agent">エージェント</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Pragmatic Engineer ニュースレターがまとめた 2026 年版 AI コーディングツール調査で、
+      <strong>Claude Code</strong> が最多利用ツールとして GitHub Copilot・Cursor を抜きトップに。
+      2025 年 5 月リリースからわずか 1 年で業界標準化。
+      現在は <strong>Opus 4.7</strong> に加え <code>/think xhigh</code> モードや
+      MCP（Model Context Protocol）統合による IDE 外部ツール連携が強化されており、
+      「ターミナルで動く完全自律エージェント」として評価が高い。
+    </p>
+    <div class="highlight">エンジニア的注目点: Claude Code Hooks を活用した自動テスト・コミット前チェックのワークフロー化が次のフロンティア。公式ドキュメントのフック設定を今すぐ確認。</div>
+    <a class="source" href="https://newsletter.pragmaticengineer.com/p/ai-tooling-2026" target="_blank">→ Pragmatic Engineer で読む</a>
+  </div>
+
+  <!-- 8 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">08</div>
+      <div class="card-header-text">
+        <h2>Google が「Design.md」を OSS 公開 ― エージェント AI 時代のデザインシステムマニフェスト</h2>
+        <div class="meta">
+          <span class="date">May 2026</span>
+          <span class="tag tag-creative">クリエイティブ</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Google Labs の <strong>Stitch</strong> プラットフォームが <strong>Design.md</strong> を公開。
+      機械可読なデザインシステムマニフェスト（Plain Markdown 形式）で、
+      Gemini など AI エージェントのシステムプロンプトとして機能し、
+      ブランドカラー・タイポグラフィ・コンポーネントルールを一元管理する。
+      フロントエンド開発者がデザイン仕様を AI に「毎回説明しなくていい」世界を目指す。
+    </p>
+    <div class="highlight">エンジニア的注目点: CLAUDE.md と同じ発想をデザインシステムに適用した構造。既存プロジェクトの design-tokens を Design.md に変換するだけでコンテキスト注入コストが激減する可能性大。</div>
+    <a class="source" href="https://dongiannatti.substack.com/p/ai-for-creatives-week-of-may-22-2026" target="_blank">→ AI for Creatives で読む</a>
+  </div>
+
+  <!-- 9 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">09</div>
+      <div class="card-header-text">
+        <h2>Adobe Firefly AI Assistant ― マルチステップのクリエイティブワークフローを自然言語で指示</h2>
+        <div class="meta">
+          <span class="date">April–May 2026</span>
+          <span class="tag tag-creative">クリエイティブ</span>
+          <span class="tag tag-agent">エージェント</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Adobe が <strong>Firefly AI Assistant</strong>（Creative Agent）を発表。
+      ユーザーが言葉でアシスタントに指示すると、Photoshop・Illustrator・Premiere Pro など
+      複数の Creative Cloud アプリをまたがるマルチステップワークフローを自動実行する。
+      生成 AI クリエイティブ市場は 2025 年の 40 億ドルから 2026 年には <strong>54 億ドル</strong>（CAGR 32.3%）に拡大中。
+      今月 Cannes 映画祭では初の AI 長編映画がスクリーニングされ、制作費 7,000 万ドルのうち AI がセット・環境作成に活用された。
+    </p>
+    <div class="highlight">エンジニア的注目点: Creative Cloud の API 経由でエージェントが Adobe アプリを操作するパターンは、デザイン自動化パイプラインの構築に直結。Figma MCP と組み合わせた活用も検討価値あり。</div>
+    <a class="source" href="https://news.adobe.com/news/2026/04/adobe-new-creative-agent" target="_blank">→ Adobe ニュースルームで読む</a>
+  </div>
+
+  <!-- 10 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">10</div>
+      <div class="card-header-text">
+        <h2>AI 生成コードの 45% にセキュリティ欠陥 ― 2026 年調査が警告する「品質の崖」</h2>
+        <div class="meta">
+          <span class="date">May 2026</span>
+          <span class="tag tag-security">セキュリティ</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Aikido Security・SQ Magazine などが発表した 2026 年調査によると、
+      AI が生成したコードの <strong>約 45%</strong> に既知のセキュリティ欠陥が含まれており、
+      レビューなしでマージするとバグ密度が <strong>23% 増加</strong> する（McKinsey 調査）。
+      プロンプトインジェクションの成功率は設定によって <strong>50〜84%</strong>、
+      AI システムの <strong>73%</strong> が脆弱と判定された。
+      一方で AI コーディングツールはルーティンタスクを平均 <strong>46% 削減</strong>する効果もある。
+    </p>
+    <div class="highlight">エンジニア的注目点: 「速い」と「安全」は両立できる。Daybreak・Claude Security・Checkmarx などの AI セキュリティスキャンを CI に組み込み、生成 AI の速度メリットを損なわずに品質を担保する体制構築が急務。</div>
+    <a class="source" href="https://cycode.com/blog/ai-security-vulnerabilities/" target="_blank">→ Cycode ブログで読む</a>
+  </div>
+
+  <footer>
+    <p>作成日: 2026年5月27日 ／ 情報収集: Web 検索（各記事のリンク先を必ず確認してください）</p>
+  </footer>
+</div>
+
+</body>
+</html>
