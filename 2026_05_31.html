@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI ニュース — 2026年5月31日号</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --sidebar-bg: #13151f;
+      --card: #1a1d27;
+      --border: #2a2d3e;
+      --accent: #6c63ff;
+      --accent2: #00c9a7;
+      --text: #e2e4f0;
+      --muted: #8b8fa8;
+      --sidebar-w: 220px;
+      --tag-eng: #1e3a5f;       --tag-eng-text: #60a5fa;
+      --tag-agent: #1e3a2f;     --tag-agent-text: #34d399;
+      --tag-model: #3a1e3a;     --tag-model-text: #c084fc;
+      --tag-security: #3a1e1e;  --tag-security-text: #f87171;
+      --tag-creative: #3a2e1e;  --tag-creative-text: #fb923c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      overflow-y: auto;
+      padding: 1.5rem 0;
+    }
+    .sidebar-logo {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+      padding: 0 1.2rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: 0.05em;
+    }
+    .sidebar-section {
+      padding: 1rem 1.2rem 0.4rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .issue-link {
+      display: block;
+      padding: 0.45rem 1.2rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: all 0.15s;
+      line-height: 1.4;
+    }
+    .issue-link:hover { color: var(--text); background: rgba(108,99,255,0.07); }
+    .issue-link.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: rgba(108,99,255,0.08);
+    }
+    .issue-link .issue-date { display: block; font-size: 0.75rem; }
+    .issue-link .issue-label { display: block; font-size: 0.7rem; color: var(--muted); margin-top: 0.1rem; }
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      padding: 2rem 2rem 3rem;
+      max-width: 900px;
+    }
+    header { margin-bottom: 2.5rem; }
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    header p { color: var(--muted); margin-top: 0.4rem; font-size: 0.9rem; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card-header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 0.75rem; }
+    .number { font-size: 1.5rem; font-weight: 800; color: var(--accent); flex-shrink: 0; min-width: 2rem; line-height: 1.3; }
+    .card-header-text { flex: 1; }
+    .card h2 { font-size: 1.05rem; font-weight: 600; color: var(--text); }
+    .meta { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.3rem; flex-wrap: wrap; }
+    .date { font-size: 0.78rem; color: var(--muted); }
+    .tag { font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.55rem; border-radius: 999px; }
+    .tag-eng      { background: var(--tag-eng);      color: var(--tag-eng-text); }
+    .tag-agent    { background: var(--tag-agent);    color: var(--tag-agent-text); }
+    .tag-model    { background: var(--tag-model);    color: var(--tag-model-text); }
+    .tag-security { background: var(--tag-security); color: var(--tag-security-text); }
+    .tag-creative { background: var(--tag-creative); color: var(--tag-creative-text); }
+    .card p { font-size: 0.91rem; color: #c4c7db; line-height: 1.75; }
+    .card a.source { color: var(--accent); text-decoration: none; font-size: 0.8rem; display: inline-block; margin-top: 0.75rem; }
+    .card a.source:hover { text-decoration: underline; }
+    .highlight {
+      background: rgba(108,99,255,0.08);
+      border-left: 3px solid var(--accent);
+      padding: 0.4rem 0.75rem;
+      border-radius: 0 6px 6px 0;
+      margin-top: 0.75rem;
+      font-size: 0.86rem;
+      color: var(--accent2);
+      line-height: 1.6;
+    }
+    footer { margin-top: 3rem; color: var(--muted); font-size: 0.78rem; border-top: 1px solid var(--border); padding-top: 1.5rem; }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">&#x2B21; AI Weekly</div>
+  <div class="sidebar-section">バックナンバー</div>
+  <!-- ISSUES_LIST_START -->
+  <a href="2026_05_31.html" class="issue-link active">
+    <span class="issue-date">2026年5月31日</span>
+    <span class="issue-label">Managed Agents / Qwen3 Coder / Canva AI 2.0</span>
+  </a>
+  <a href="2026_05_27.html" class="issue-link">
+    <span class="issue-date">2026年5月27日</span>
+    <span class="issue-label">Google I/O / Gemini 3.5 / SubQ</span>
+  </a>
+  <a href="2026_05_12.html" class="issue-link">
+    <span class="issue-date">2026年5月12日</span>
+    <span class="issue-label">GPT-5.5 / dreaming / iOS 27</span>
+  </a>
+  <!-- ISSUES_LIST_END -->
+</aside>
+
+<div class="main">
+  <header>
+    <h1>AI ニュースまとめ</h1>
+    <p>2026年5月25日〜31日 ／ エンジニア・クリエイター向けピックアップ 10 本</p>
+  </header>
+
+  <!-- 1 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">01</div>
+      <div class="card-header-text">
+        <h2>Anthropic「Code w/ Claude London」― Managed Agents セルフホストサンドボックス公開ベータ &amp; MCP トンネル研究プレビュー</h2>
+        <div class="meta">
+          <span class="date">May 26, 2026</span>
+          <span class="tag tag-agent">エージェント</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Anthropic が 5 月 26 日に開催した <strong>Code w/ Claude London</strong> イベントで、
+      <strong>Claude Managed Agents</strong> の重要アップデートを発表。
+      エージェントのツール実行を企業自身のインフラ上で動かせる
+      <strong>セルフホストサンドボックス（公開ベータ）</strong> が解禁され、
+      データ主権・コンプライアンス要件を持つ企業でも本番導入が現実的になった。
+      さらに MCP サーバーをセキュアなトンネル経由で接続する
+      <strong>MCP Tunnels（研究プレビュー）</strong> も公開。
+      プライベートネットワーク内の社内ツールにエージェントからアクセスできる経路が整備された。
+    </p>
+    <div class="highlight">エンジニア的注目点: セルフホストサンドボックス + MCP Tunnels の組み合わせで「クラウドに出さずに動く完全社内エージェント」が構築可能に。既存の VPC / オンプレ環境との統合設計をすぐ始めるべきタイミング。</div>
+    <a class="source" href="https://sdtimes.com/ai/may-8-2026-ai-updates-from-the-past-week-coder-agents-launch-snyk-claude-partnership-opsera-cursor-partnership-and-more/" target="_blank">→ SD Times で読む</a>
+  </div>
+
+  <!-- 2 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">02</div>
+      <div class="card-header-text">
+        <h2>Qwen3 Coder Next リリース ― SWE-Bench Verified 70.6%、MoE で実効 3B のローカル最強コーディングモデル</h2>
+        <div class="meta">
+          <span class="date">May 28, 2026</span>
+          <span class="tag tag-model">新モデル</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Alibaba Cloud が <strong>Qwen3 Coder Next</strong> を 5 月 28 日にリリース。
+      MoE（Mixture-of-Experts）アーキテクチャを採用し、実効アクティブパラメータは <strong>3B</strong> 程度ながら
+      <strong>SWE-Bench Verified 70.6%</strong> を達成。クローズドモデルに迫るコーディング精度を
+      ローカル実行で実現した。Apache 2.0 ライセンスで商用利用可。
+      Claude Code・Cursor・Cline など主要エージェントフレームワークとのバックエンド統合が既に進んでおり、
+      コスト無限ゼロのローカルコーディングエージェント構築が現実的な選択肢となった。
+    </p>
+    <div class="highlight">エンジニア的注目点: ローカル GPU（24GB VRAM 目安）で動かすことで API コストをゼロにしながら GPT-4 クラスのコーディング精度を実現。Ollama + Cline の構成で即日試せる。</div>
+    <a class="source" href="https://llm-stats.com/llm-updates" target="_blank">→ LLM Stats で確認する</a>
+  </div>
+
+  <!-- 3 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">03</div>
+      <div class="card-header-text">
+        <h2>MiniMax M2.5 / M2.7 Highspeed ― 3 モデル同日投入、長文処理 &amp; コスト効率でエンタープライズに照準</h2>
+        <div class="meta">
+          <span class="date">May 28, 2026</span>
+          <span class="tag tag-model">新モデル</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      MiniMax が 5 月 28 日に <strong>M2.5 Highspeed・M2.7 Highspeed・M2.7</strong> の 3 モデルを同日リリース。
+      いずれも長文コンテキスト処理とコスト効率を強みとし、エンタープライズ向けバッチ処理・RAG パイプラインでの
+      活用を想定した設計。M2.7 はフラッグシップ位置づけで推論精度と長文要約において
+      同クラスのオープンモデルを上回るとしている。
+      同日リリースのラッシュは、オープンウェイト競争が質より供給速度の段階に入ったことを示している。
+    </p>
+    <div class="highlight">エンジニア的注目点: 長文 RAG（100k トークン超）かつコスト重視のユースケースで第一候補になりうる。既存パイプラインへの差し替え評価はベンチより自社データでの実測を優先すること。</div>
+    <a class="source" href="https://llm-stats.com/ai-news" target="_blank">→ LLM Stats AI News で読む</a>
+  </div>
+
+  <!-- 4 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">04</div>
+      <div class="card-header-text">
+        <h2>Google Antigravity SDK 詳細 ― agy CLI・4 サーフェス統合・5 エージェント並列実行の実装解説</h2>
+        <div class="meta">
+          <span class="date">May 19–26, 2026</span>
+          <span class="tag tag-agent">エージェント</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Google I/O 2026 で発表された <strong>Antigravity</strong> のドキュメント・サンプルコードが
+      順次公開され、全貌が明らかになった。単一エージェントハーネスが
+      <strong>Antigravity デスクトップアプリ・agy CLI・Antigravity SDK・Gemini API Managed Agents</strong>
+      の 4 サーフェスで統一して動作する。
+      デスクトップアプリでは同一コードベースの異なる部分に対して
+      <strong>最大 5 エージェントを並列実行</strong>でき、非同期タスク管理・フック・サブエージェント呼び出しが
+      標準 API として提供される。Claude Code Hooks との設計思想的な類似点も多い。
+    </p>
+    <div class="highlight">エンジニア的注目点: Gemini API 経由の Managed Agents は Anthropic の同機能と直接競合。コスト・レイテンシ・サンドボックス要件で使い分ける比較評価が今週の必須タスク。</div>
+    <a class="source" href="https://blog.google/innovation-and-ai/technology/developers-tools/google-io-2026-developer-highlights/" target="_blank">→ Google Developers Blog で読む</a>
+  </div>
+
+  <!-- 5 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">05</div>
+      <div class="card-header-text">
+        <h2>Anthropic が Add-ins・Dreaming・Outcomes を正式発表 ― エージェント設計の新プリミティブ</h2>
+        <div class="meta">
+          <span class="date">May 8, 2026</span>
+          <span class="tag tag-agent">エージェント</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Anthropic が 5 月 8 日のアップデートで 3 つの新コンセプトを発表。
+      <strong>Add-ins</strong>：Claude に外部ツール・データソースを動的に拡張接続するプラグイン機構。
+      <strong>Dreaming</strong>：セッション間でのメモリ整理・統合をスケジュール実行するバックグラウンドプロセス。
+      <strong>Outcomes</strong>：ルーブリック（評価基準）を定義することでエージェントの出力品質を定量評価する仕組み。
+      加えてリードエージェントが複数サブエージェントをオーケストレーションする
+      <strong>リードエージェント + サブエージェントモデル</strong> が公式パターンとして整備された。
+    </p>
+    <div class="highlight">エンジニア的注目点: Outcomes によるルーブリック評価は「エージェントが正しく動いたか」を自動判定する基盤。プロダクション導入の品質ゲートとして即活用できる設計。</div>
+    <a class="source" href="https://sdtimes.com/ai/may-8-2026-ai-updates-from-the-past-week-coder-agents-launch-snyk-claude-partnership-opsera-cursor-partnership-and-more/" target="_blank">→ SD Times で読む</a>
+  </div>
+
+  <!-- 6 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">06</div>
+      <div class="card-header-text">
+        <h2>Snyk × Claude パートナーシップ ― コードスキャン + AI 修正提案をシームレス統合</h2>
+        <div class="meta">
+          <span class="date">May 8, 2026</span>
+          <span class="tag tag-security">セキュリティ</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      セキュリティプラットフォーム大手 <strong>Snyk</strong> が Anthropic とのパートナーシップを発表。
+      Snyk の静的解析エンジンが検出した脆弱性を Claude が即座に解釈し、
+      コンテキストを踏まえた修正コードを直接提案する統合フローが実現。
+      開発者は脆弱性レポートを読み解く手間なく、IDE 内で
+      「検出 → 説明 → パッチ適用」をワンフローで完結できる。
+      Snyk Code・Snyk Container いずれの検出結果にも対応予定。
+    </p>
+    <div class="highlight">エンジニア的注目点: SAST の「警告を出すだけ」問題を AI が解決する最前線事例。Snyk を既に使っているチームはまず Claude 統合の有効化から始めると ROI が出やすい。</div>
+    <a class="source" href="https://sdtimes.com/ai/may-8-2026-ai-updates-from-the-past-week-coder-agents-launch-snyk-claude-partnership-opsera-cursor-partnership-and-more/" target="_blank">→ SD Times で読む</a>
+  </div>
+
+  <!-- 7 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">07</div>
+      <div class="card-header-text">
+        <h2>Opsera × Cursor ― DevSecOps エージェントを IDE 内に直接埋め込む</h2>
+        <div class="meta">
+          <span class="date">May 8, 2026</span>
+          <span class="tag tag-security">セキュリティ</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      DevSecOps プラットフォームの <strong>Opsera</strong> が <strong>Cursor</strong> と統合パートナーシップを締結。
+      Cursor IDE の補完フローの中に Opsera の DevSecOps エージェントが組み込まれ、
+      コード生成と同時にポリシー準拠チェック・コンプライアンス検証・パイプライン整合性確認が走る。
+      高速なコード生成が企業標準から外れないよう「ガードレール付き生成」を実現するアプローチで、
+      金融・医療・公共分野の規制要件に応えることを想定している。
+    </p>
+    <div class="highlight">エンジニア的注目点: Cursor を既に使っているエンタープライズチームに刺さる提案。コンプライアンス部門と開発部門の摩擦を IDE レベルで吸収するアーキテクチャパターンとして参考になる。</div>
+    <a class="source" href="https://sdtimes.com/ai/may-8-2026-ai-updates-from-the-past-week-coder-agents-launch-snyk-claude-partnership-opsera-cursor-partnership-and-more/" target="_blank">→ SD Times で読む</a>
+  </div>
+
+  <!-- 8 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">08</div>
+      <div class="card-header-text">
+        <h2>Canva AI 2.0「Creative OS」― Claude・ChatGPT と直接統合してデザイン→配信をワンストップ化</h2>
+        <div class="meta">
+          <span class="date">April–May 2026</span>
+          <span class="tag tag-creative">クリエイティブ</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Canva が Canva Create で発表した <strong>Canva AI 2.0</strong> が「<strong>Creative OS</strong>」として本格稼働。
+      プラットフォームを単なるデザインツールから AI オーケストレーション基盤へと再アーキテクチャし、
+      <strong>Claude・ChatGPT との直接統合</strong> により、これらの LLM で生成したコンテンツを
+      Canva に取り込んでそのまま編集・配信できるようになった。
+      API 経由でも利用可能で、コンテンツパイプラインに Canva を組み込む
+      プログラマティックなデザイン自動化が現実的な選択肢になった。
+    </p>
+    <div class="highlight">エンジニア的注目点: Canva API + Claude の組み合わせで「文章生成→ビジュアル化→SNS/広告配信」を全自動化するパイプラインが構築可能。マーケ自動化系のプロダクト開発に直結する。</div>
+    <a class="source" href="https://medium.com/design-bootcamp/5-new-ai-design-tools-to-try-in-2026-bba38068b142" target="_blank">→ Design Bootcamp で読む</a>
+  </div>
+
+  <!-- 9 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">09</div>
+      <div class="card-header-text">
+        <h2>n8n ブログ「2026年、AI エージェント開発ツールを再定義する」― ビジュアルオーケストレーションの新基準</h2>
+        <div class="meta">
+          <span class="date">May 2026</span>
+          <span class="tag tag-agent">エージェント</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      ワークフロー自動化ツール <strong>n8n</strong> が「2026 年の AI エージェント開発ツールを再定義する必要がある」と題した記事を公開。
+      Claude Code・Antigravity・Managed Agents などコードファーストのエージェントフレームワークが台頭する一方、
+      n8n のようなビジュアルオーケストレーターが <strong>LLM ノード・ツール呼び出しノード・ループノード</strong> を持つことで
+      「コーダー以外でもエージェントを組める」新しいポジションを確立していると論じる。
+      記事では複数エージェントの依存グラフ管理・エラーリカバリー・監査ログという
+      プロダクション要件を満たすための設計パターンも整理されている。
+    </p>
+    <div class="highlight">エンジニア的注目点: コードで書くか、ビジュアルで組むかの設計判断軸が整理されている良記事。n8n の Self-hosted × MCP ノードでプライバシー要件をクリアしながらエージェントを届けるパターンは試す価値あり。</div>
+    <a class="source" href="https://blog.n8n.io/we-need-re-learn-what-ai-agent-development-tools-are-in-2026/" target="_blank">→ n8n ブログで読む</a>
+  </div>
+
+  <!-- 10 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">10</div>
+      <div class="card-header-text">
+        <h2>AI コーディングツール実態調査 2026 ― 開発者 95% が週次利用、上位 20 ツールの実力比較</h2>
+        <div class="meta">
+          <span class="date">May 2026</span>
+          <span class="tag tag-eng">開発者向け</span>
+          <span class="tag tag-agent">エージェント</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      StartupHub が発表した「<strong>開発者が毎日使う AI コーディングエージェント 20 選 2026</strong>」では、
+      調査対象開発者の <strong>95%</strong> が AI ツールを週次以上で使用し、
+      <strong>75%</strong> が業務時間の半分以上に AI を活用していることが判明。
+      上位ツールは Claude Code・Cursor・Copilot・Cline・Aider の順で、
+      ターミナル型（Claude Code・Aider）の伸びが IDE 拡張型を上回っている。
+      また Agentic.ai の評価では「全自律型」と「コパイロット型」の市場分断が鮮明になっており、
+      ユースケースに応じた使い分けが主流になっている。
+    </p>
+    <div class="highlight">エンジニア的注目点: 「どれか 1 つを選ぶ」時代から「タスクタイプで使い分ける」時代へ。複雑な自律タスクにはターミナル型、インライン補完にはコパイロット型という二刀流設定が定着しつつある。</div>
+    <a class="source" href="https://www.startuphub.ai/ai-news/insights/2026/ai-coding-agents-daily-2026" target="_blank">→ StartupHub.ai で読む</a>
+  </div>
+
+  <footer>
+    <p>作成日: 2026年5月31日 ／ 情報収集: Web 検索（各記事のリンク先を必ず確認してください）</p>
+  </footer>
+</div>
+
+</body>
+</html>
