@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI ニュース — 2026年6月14日号</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --sidebar-bg: #13151f;
+      --card: #1a1d27;
+      --border: #2a2d3e;
+      --accent: #6c63ff;
+      --accent2: #00c9a7;
+      --text: #e2e4f0;
+      --muted: #8b8fa8;
+      --sidebar-w: 220px;
+      --tag-eng: #1e3a5f;       --tag-eng-text: #60a5fa;
+      --tag-agent: #1e3a2f;     --tag-agent-text: #34d399;
+      --tag-model: #3a1e3a;     --tag-model-text: #c084fc;
+      --tag-security: #3a1e1e;  --tag-security-text: #f87171;
+      --tag-creative: #3a2e1e;  --tag-creative-text: #fb923c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      overflow-y: auto;
+      padding: 1.5rem 0;
+    }
+    .sidebar-logo {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+      padding: 0 1.2rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: 0.05em;
+    }
+    .sidebar-section {
+      padding: 1rem 1.2rem 0.4rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .issue-link {
+      display: block;
+      padding: 0.45rem 1.2rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: all 0.15s;
+      line-height: 1.4;
+    }
+    .issue-link:hover { color: var(--text); background: rgba(108,99,255,0.07); }
+    .issue-link.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: rgba(108,99,255,0.08);
+    }
+    .issue-link .issue-date { display: block; font-size: 0.75rem; }
+    .issue-link .issue-label { display: block; font-size: 0.7rem; color: var(--muted); margin-top: 0.1rem; }
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      padding: 2rem 2rem 3rem;
+      max-width: 900px;
+    }
+    header { margin-bottom: 2.5rem; }
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    header p { color: var(--muted); margin-top: 0.4rem; font-size: 0.9rem; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card-header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 0.75rem; }
+    .number { font-size: 1.5rem; font-weight: 800; color: var(--accent); flex-shrink: 0; min-width: 2rem; line-height: 1.3; }
+    .card-header-text { flex: 1; }
+    .card h2 { font-size: 1.05rem; font-weight: 600; color: var(--text); }
+    .meta { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.3rem; flex-wrap: wrap; }
+    .date { font-size: 0.78rem; color: var(--muted); }
+    .tag { font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.55rem; border-radius: 999px; }
+    .tag-eng      { background: var(--tag-eng);      color: var(--tag-eng-text); }
+    .tag-agent    { background: var(--tag-agent);    color: var(--tag-agent-text); }
+    .tag-model    { background: var(--tag-model);    color: var(--tag-model-text); }
+    .tag-security { background: var(--tag-security); color: var(--tag-security-text); }
+    .tag-creative { background: var(--tag-creative); color: var(--tag-creative-text); }
+    .card p { font-size: 0.91rem; color: #c4c7db; line-height: 1.75; }
+    .card a.source { color: var(--accent); text-decoration: none; font-size: 0.8rem; display: inline-block; margin-top: 0.75rem; }
+    .card a.source:hover { text-decoration: underline; }
+    .highlight {
+      background: rgba(108,99,255,0.08);
+      border-left: 3px solid var(--accent);
+      padding: 0.4rem 0.75rem;
+      border-radius: 0 6px 6px 0;
+      margin-top: 0.75rem;
+      font-size: 0.86rem;
+      color: var(--accent2);
+      line-height: 1.6;
+    }
+    footer { margin-top: 3rem; color: var(--muted); font-size: 0.78rem; border-top: 1px solid var(--border); padding-top: 1.5rem; }
+  </style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">&#x2B21; AI Weekly</div>
+  <div class="sidebar-section">バックナンバー</div>
+  <!-- ISSUES_LIST_START -->
+  <a href="2026_06_14.html" class="issue-link active">
+    <span class="issue-date">2026年6月14日</span>
+    <span class="issue-label">Fable 5 / OpenCode / Kimi K2.7</span>
+  </a>
+  <a href="2026_06_07.html" class="issue-link">
+    <span class="issue-date">2026年6月7日</span>
+    <span class="issue-label">Claude自己実装80% / Copilot課金 / Gemini 3.5</span>
+  </a>
+  <a href="2026_05_31.html" class="issue-link">
+    <span class="issue-date">2026年5月31日</span>
+    <span class="issue-label">Managed Agents / Qwen3 Coder / Canva AI 2.0</span>
+  </a>
+  <a href="2026_05_27.html" class="issue-link">
+    <span class="issue-date">2026年5月27日</span>
+    <span class="issue-label">Google I/O / Gemini 3.5 / SubQ</span>
+  </a>
+  <a href="2026_05_12.html" class="issue-link">
+    <span class="issue-date">2026年5月12日</span>
+    <span class="issue-label">GPT-5.5 / dreaming / iOS 27</span>
+  </a>
+  <!-- ISSUES_LIST_END -->
+</aside>
+
+<div class="main">
+  <header>
+    <h1>AI ニュースまとめ</h1>
+    <p>2026年6月8日〜14日 ／ エンジニア・クリエイター向けピックアップ 10 本</p>
+  </header>
+
+  <!-- 1 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">01</div>
+      <div class="card-header-text">
+        <h2>Anthropic「Fable 5」正式リリース ― GitHub Copilot でも同日利用開始、AI コーディングの新基準へ</h2>
+        <div class="meta">
+          <span class="date">June 9, 2026</span>
+          <span class="tag tag-model">新モデル</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Anthropic が <strong>Fable 5</strong> を 6 月 9 日に正式リリース。
+      発表と同日に GitHub が <strong>GitHub Copilot 内でも Fable 5 を利用可能</strong> にし、
+      既存の Copilot ユーザーは追加設定なしで最新モデルにアクセスできるようになった。
+      SWE-bench Verified で <strong>88.6%（Claude Opus 4.8）</strong>、Terminal-Bench 2.1 では
+      GPT-5.5 が 83.4% を記録しており、フロンティアモデルのコーディング能力が
+      プロ開発者と肩を並べるレベルに到達した週として記憶される。
+      Claude Code Pro ($20/mo) との組み合わせで大規模リファクタリングや自動化を担う
+      「Cursor + Claude Code 二刀流」構成が個人開発者の標準になりつつある。
+    </p>
+    <div class="highlight">エンジニア的注目点: Copilot の Fable 5 統合は追加コスト不要。まず GitHub Copilot のモデル選択から Fable 5 を選んでコードレビュー・コメント生成を試してみること。内部的なトークン消費変化も要モニタリング。</div>
+    <a class="source" href="https://www.developersdigest.tech/blog/best-ai-coding-tools-june-2026-post-fable5" target="_blank">→ Developers Digest で読む</a>
+  </div>
+
+  <!-- 2 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">02</div>
+      <div class="card-header-text">
+        <h2>OpenCode が GitHub Stars 160K 超・MAU 750万人で AI コーディングエージェント No.1 に ― オープンソース史上最大の採用速度</h2>
+        <div class="meta">
+          <span class="date">June 2026</span>
+          <span class="tag tag-agent">エージェント</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      LogRocket の「AI Dev Tool Power Rankings June 2026」で <strong>OpenCode</strong> が初登場 1 位を獲得。
+      GitHub Stars <strong>160K+</strong>、月間アクティブ開発者 <strong>750万人</strong> は
+      オープンソースのコーディングエージェントとして史上最速の採用スピード。
+      Cursor 3 の大規模リビルド以来、開発者の日常作業フローを最も大きく変えたツールと評価されている。
+      IDE に縛られないターミナルネイティブ設計で、任意のエディタから呼び出せる柔軟性が採用を後押しした。
+      既存の Copilot/Cursor ユーザーが「もう一本目の槍」として並用するケースが急増している。
+    </p>
+    <div class="highlight">エンジニア的注目点: OpenCode はバックグラウンドでサブエージェントを複数起動しながらタスクを並列処理する設計。既存のシングルスレッドな AI 活用から「並列エージェント委任」へのメンタルモデル転換を求めるツール。まず npm/pip でのインストールから試すべき。</div>
+    <a class="source" href="https://blog.logrocket.com/ai-dev-tool-power-rankings/" target="_blank">→ LogRocket Blog で読む</a>
+  </div>
+
+  <!-- 3 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">03</div>
+      <div class="card-header-text">
+        <h2>MiniMax M3 発表 ― 従来比 1/20 の計算量・最大 100 万トークン・プレフィル 9 倍速でエンタープライズ長文処理を再定義</h2>
+        <div class="meta">
+          <span class="date">June 2026</span>
+          <span class="tag tag-model">新モデル</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      MiniMax が発表した新フラッグシップ <strong>M3</strong> は、
+      トークンあたりの計算コストを従来モデルの <strong>1/20</strong> に削減し、
+      最大 <strong>100 万トークン</strong> のコンテキストウィンドウに対応。
+      プレフィル速度が <strong>9 倍</strong>、デコード速度が <strong>15 倍</strong> に向上し、
+      大量文書の RAG・法律文書の全文解析・長尺コードベースの横断理解が現実的なコストで実現できる。
+      OpenAI 互換 API を提供しており、既存の GPT-4 ベースの実装から
+      ベースURL 変更のみで移行テストが可能。
+    </p>
+    <div class="highlight">エンジニア的注目点: 「コンテキスト 100 万トークン」は大規模コードベース全体を1リクエストに詰め込めることを意味する。モノレポのコード横断理解やリポジトリ丸ごとのリファクタリング提案が単一プロンプトで動く時代が来た。まずコスト計算から。</div>
+    <a class="source" href="https://www.buildfastwithai.com/blogs/ai-news-today-june-8-2026" target="_blank">→ Build Fast with AI で読む</a>
+  </div>
+
+  <!-- 4 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">04</div>
+      <div class="card-header-text">
+        <h2>Qwen3 Coder Next リリース（June 12） ― Alibaba のコーディング特化最新モデルが SWE ベンチで新記録</h2>
+        <div class="meta">
+          <span class="date">June 12, 2026</span>
+          <span class="tag tag-model">新モデル</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Alibaba が 6 月 12 日に <strong>Qwen3 Coder Next</strong> を公開。
+      前世代の Qwen3 Coder から推論精度とコーディング特化の微調整をさらに強化し、
+      SWE-bench 系ベンチマークで新記録を更新した。
+      Apache 2.0 ライセンスで商用利用可能な点が強みで、
+      Hugging Face からの重みダウンロードにより完全ローカルでの運用が可能。
+      エージェントフレームワーク（LangChain・CrewAI・AutoGen）との統合も確認されており、
+      プライベートコードベースを外部 API に送りたくない企業にとっての有力な選択肢となる。
+    </p>
+    <div class="highlight">エンジニア的注目点: オープンウェイトかつコーディング特化という組み合わせは、社内 AI コードレビューボットや CI/CD に組み込む自動修正エージェントの構築に最適。GPU を持つ企業はオンプレミス展開コストの試算を今週中に。</div>
+    <a class="source" href="https://llm-stats.com/ai-news" target="_blank">→ LLM Stats AI News で読む</a>
+  </div>
+
+  <!-- 5 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">05</div>
+      <div class="card-header-text">
+        <h2>Kimi K2.7 Code リリース ― 推論トークン消費 30% 削減、長大コンテキストでも高速に</h2>
+        <div class="meta">
+          <span class="date">June 12, 2026</span>
+          <span class="tag tag-model">新モデル</span>
+          <span class="tag tag-agent">エージェント</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Moonshot AI が 6 月 12 日に <strong>Kimi K2.7 Code</strong> を公開。
+      前バージョン K2.6 比でコーディングタスクの <strong>推論トークン消費を 30% 削減</strong> しながら
+      精度を維持することに成功した。
+      長大コンテキストでの速度低下が抑えられており、
+      大規模コードベース横断のバグ検出・自動修正ループを回す際の実行コストが実質的に改善する。
+      API 経由のアクセスに加え、Moonshot の Kimi Chat からも利用できる。
+      コーディングエージェントのバックエンドとして採用するチームが中国・東南アジアを中心に拡大中。
+    </p>
+    <div class="highlight">エンジニア的注目点: 推論トークン 30% 削減はエージェントループを多数回す場合に直接コスト削減に直結する。Kimi を API コールで使っているプロジェクトは K2.7 Code への移行テストで月次コストを比較すること。</div>
+    <a class="source" href="https://llm-stats.com/ai-news" target="_blank">→ LLM Stats AI News で読む</a>
+  </div>
+
+  <!-- 6 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">06</div>
+      <div class="card-header-text">
+        <h2>Inception Mercury 2 ― 拡散アーキテクチャで 1,000 トークン/秒超えの推論速度を実現する新世代 LLM</h2>
+        <div class="meta">
+          <span class="date">June 2026</span>
+          <span class="tag tag-model">新モデル</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Inception が <strong>Mercury 2</strong> をリリース。
+      通常の自己回帰型 Transformer ではなく <strong>拡散（Diffusion）アーキテクチャ</strong> を採用し、
+      トークンを並列生成することで <strong>1,000 トークン/秒以上</strong> のスループットを達成した。
+      従来の LLM がシーケンシャルにトークンを出力するのに対し、
+      Mercury 2 は文章全体を同時に「彫刻」するように生成するため、
+      長文レスポンスでも体感レイテンシが大幅に低い。
+      リアルタイムコード補完・ライブチャット・ストリーミング翻訳など
+      低レイテンシが命題となるユースケースでのポテンシャルが高い。
+    </p>
+    <div class="highlight">エンジニア的注目点: 1,000 トークン/秒は実用的なリアルタイムコード補完の閾値を大幅に超える。オートコンプリートや IDE 内の即時フィードバック機能に組み込む際、API レイテンシよりモデル生成速度がボトルネックになるケースが解消される可能性を評価すべき。</div>
+    <a class="source" href="https://llm-stats.com/ai-news" target="_blank">→ LLM Stats AI News で読む</a>
+  </div>
+
+  <!-- 7 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">07</div>
+      <div class="card-header-text">
+        <h2>Google＆Kaggle「AI Agents Intensive」無料5日間コース 6/15 開講 ― プロダクション対応エージェント構築を手を動かして学ぶ</h2>
+        <div class="meta">
+          <span class="date">June 15–19, 2026</span>
+          <span class="tag tag-agent">エージェント</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Google と Kaggle が共同で <strong>AI Agents Intensive</strong> コースを 6 月 15 日〜19 日の 5 日間、
+      <strong>完全無料</strong> で開催。
+      自然言語ワークフローとハンズオンコーディングで
+      <strong>プロダクション対応の AI エージェント</strong> を構築することを目標とした内容で、
+      マルチエージェントオーケストレーション・ツール統合・エラーハンドリング・評価手法をカバー。
+      昨年の Generative AI Intensive に続く第 2 弾で、前回は世界 120 か国以上から参加があった。
+      受講後には Google の修了証明書が発行される予定。
+    </p>
+    <div class="highlight">エンジニア的注目点: 6 月 15 日開講と今週末直前。Kaggle のコース登録ページで即座に申し込みを完了させること。チーム全員で同時受講すると、その後のエージェントアーキテクチャ議論の語彙が揃い意思決定が速くなる。</div>
+    <a class="source" href="https://blog.google/innovation-and-ai/technology/developers-tools/kaggle-genai-intensive-course-vibe-coding-june-2026/" target="_blank">→ Google ブログで読む</a>
+  </div>
+
+  <!-- 8 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">08</div>
+      <div class="card-header-text">
+        <h2>AI コーディング「エージェント工学フェーズ」突入 ― 補完→委任→マルチエージェント並列実行へ、2026 年が転換点に</h2>
+        <div class="meta">
+          <span class="date">June 2026</span>
+          <span class="tag tag-agent">エージェント</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      複数の調査・ランキングサイトが 2026 年を「AI コーディングのエージェント工学フェーズ元年」と位置づける分析を公開。
+      2023 年のコード補完・2024〜25 年の AI IDE の時代を経て、
+      現在は<strong>Issue・テスト・マイグレーション・クリーンアップを丸ごとエージェントに委任</strong>する運用が標準化しつつある。
+      IDE・CLI・GitHub Issues・Slack・モバイルアプリ・クラウド環境が「連携した実行サーフェス」となり、
+      エージェントがコードを書いて自分でデプロイまで行うケースも登場した。
+      Codex CLI on GPT-5.5（Terminal-Bench 83.4%）・Claude Opus 4.8（SWE-bench 88.6%）が
+      この新フェーズを牽引している。
+    </p>
+    <div class="highlight">エンジニア的注目点: 「エージェントに委任できる最小単位のタスク」を今週チームでブレインストーミングすること。Issue ラベル付け・PR description 生成・テストケース追加あたりから始めると摩擦が少ない。自動化ループの監査ログ設計を先に決めておくと後悔しない。</div>
+    <a class="source" href="https://codepick.dev/en/guides/ai-coding-agents-2026-roadmap/" target="_blank">→ CodePick で読む</a>
+  </div>
+
+  <!-- 9 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">09</div>
+      <div class="card-header-text">
+        <h2>Adobe Firefly Creative Agent ＆ Gemini コネクタ発表 ― Photoshop・Premiere・Firefly を AI が横断操作する「クリエイティブ OS」へ</h2>
+        <div class="meta">
+          <span class="date">April–June 2026</span>
+          <span class="tag tag-creative">クリエイティブ</span>
+          <span class="tag tag-agent">エージェント</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Adobe が発表した <strong>Firefly AI Assistant</strong> と <strong>Gemini コネクタ</strong> が
+      業界の注目を集めている。
+      テキスト指示だけで Photoshop のレイヤー操作・Premiere のカット編集・Firefly による画像生成を
+      <strong>横断して自動実行</strong> するクリエイティブエージェントで、
+      ブランドガイドラインに沿ったアセット量産をエージェントが担う未来を示している。
+      同時期に Canva AI 2.0 が「Creative Operating System」として再設計され、
+      生成 AI 市場の重心がツール利用から<strong>エージェントによるワークフロー自動化</strong> に移った。
+      2026 年の生成 AI in クリエイティブ産業市場規模は 54 億ドル（前年比 +32%）と予測される。
+    </p>
+    <div class="highlight">エンジニア的注目点: Creative Agent を API で呼び出せるようになると、コンテンツパイプラインの終点（画像・動画出力）まで自動化できる。Adobe API の Webhook イベントと自社のコンテンツ管理システムを繋ぐ実装設計を今から考えておくと先行優位になる。</div>
+    <a class="source" href="https://news.adobe.com/news/2026/04/adobe-new-creative-agent" target="_blank">→ Adobe ニュースルームで読む</a>
+  </div>
+
+  <!-- 10 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">10</div>
+      <div class="card-header-text">
+        <h2>コロラド州 AI 法 6/30 施行 ― 米国初の AI 強制力ある規制、高リスク AI を使う企業に影響リスク</h2>
+        <div class="meta">
+          <span class="date">June 30, 2026 施行</span>
+          <span class="tag tag-security">セキュリティ</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      <strong>コロラド州消費者保護 AI 法（Colorado Consumer Protections for Artificial Intelligence Act）</strong>が
+      6 月 30 日に米国で初めて実効性ある AI 規制として施行される。
+      対象は<strong>高リスク AI システム</strong>（雇用・住宅・医療・教育など「重大な決定」に使う AI）を開発・展開する企業で、
+      リスク管理プログラムの整備・年次影響評価・AI 利用時の開示義務が課される。
+      州外の企業であっても、コロラド州在住者を対象とするサービスに AI を使う場合は適用範囲に入る可能性があり、
+      日本企業も対象になりうる点に注意が必要。
+    </p>
+    <div class="highlight">エンジニア的注目点: 「重大な決定」に AI を使っているシステムのインベントリを今すぐ作ること。採用選考・ローン審査・医療トリアージへの AI 適用がある場合は法務と連携して 6/30 前に文書化・開示フローを整備する必要がある。</div>
+    <a class="source" href="https://www.buildfastwithai.com/blogs/ai-news-today-june-8-2026" target="_blank">→ Build Fast with AI で読む</a>
+  </div>
+
+  <footer>
+    <p>作成日: 2026年6月14日 ／ 情報収集: Web 検索（各記事のリンク先を必ず確認してください）</p>
+  </footer>
+</div>
+
+</body>
+</html>
