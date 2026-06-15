@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI ニュース — 2026年6月15日号</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --sidebar-bg: #13151f;
+      --card: #1a1d27;
+      --border: #2a2d3e;
+      --accent: #6c63ff;
+      --accent2: #00c9a7;
+      --text: #e2e4f0;
+      --muted: #8b8fa8;
+      --sidebar-w: 220px;
+      --tag-eng: #1e3a5f;       --tag-eng-text: #60a5fa;
+      --tag-agent: #1e3a2f;     --tag-agent-text: #34d399;
+      --tag-model: #3a1e3a;     --tag-model-text: #c084fc;
+      --tag-security: #3a1e1e;  --tag-security-text: #f87171;
+      --tag-creative: #3a2e1e;  --tag-creative-text: #fb923c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      overflow-y: auto;
+      padding: 1.5rem 0;
+    }
+    .sidebar-logo {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+      padding: 0 1.2rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: 0.05em;
+    }
+    .sidebar-section {
+      padding: 1rem 1.2rem 0.4rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .issue-link {
+      display: block;
+      padding: 0.45rem 1.2rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: all 0.15s;
+      line-height: 1.4;
+    }
+    .issue-link:hover {
+      color: var(--text);
+      background: rgba(108,99,255,0.07);
+    }
+    .issue-link.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: rgba(108,99,255,0.08);
+    }
+    .issue-link .issue-date { display: block; font-size: 0.75rem; }
+    .issue-link .issue-label { display: block; font-size: 0.7rem; color: var(--muted); margin-top: 0.1rem; }
+
+    /* ── Main ── */
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      padding: 2rem 2rem 3rem;
+      max-width: 900px;
+    }
+    header { margin-bottom: 2.5rem; }
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    header p { color: var(--muted); margin-top: 0.4rem; font-size: 0.9rem; }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card-header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 0.75rem; }
+    .number {
+      font-size: 1.5rem; font-weight: 800; color: var(--accent);
+      flex-shrink: 0; min-width: 2rem; line-height: 1.3;
+    }
+    .card-header-text { flex: 1; }
+    .card h2 { font-size: 1.05rem; font-weight: 600; color: var(--text); }
+    .meta { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.3rem; flex-wrap: wrap; }
+    .date { font-size: 0.78rem; color: var(--muted); }
+    .tag {
+      font-size: 0.7rem; font-weight: 600;
+      padding: 0.15rem 0.55rem; border-radius: 999px;
+    }
+    .tag-eng      { background: var(--tag-eng);      color: var(--tag-eng-text); }
+    .tag-agent    { background: var(--tag-agent);    color: var(--tag-agent-text); }
+    .tag-model    { background: var(--tag-model);    color: var(--tag-model-text); }
+    .tag-security { background: var(--tag-security); color: var(--tag-security-text); }
+    .tag-creative { background: var(--tag-creative); color: var(--tag-creative-text); }
+    .card p { font-size: 0.91rem; color: #c4c7db; line-height: 1.75; }
+    .card a.source {
+      color: var(--accent); text-decoration: none;
+      font-size: 0.8rem; display: inline-block; margin-top: 0.75rem;
+    }
+    .card a.source:hover { text-decoration: underline; }
+    .highlight {
+      background: rgba(108,99,255,0.08);
+      border-left: 3px solid var(--accent);
+      padding: 0.4rem 0.75rem;
+      border-radius: 0 6px 6px 0;
+      margin-top: 0.75rem;
+      font-size: 0.86rem;
+      color: var(--accent2);
+      line-height: 1.6;
+    }
+    footer {
+      margin-top: 3rem; color: var(--muted);
+      font-size: 0.78rem; border-top: 1px solid var(--border); padding-top: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<aside class="sidebar">
+  <div class="sidebar-logo">⬡ AI Weekly</div>
+  <div class="sidebar-section">バックナンバー</div>
+
+  <!-- ISSUES_LIST_START -->
+  <a href="2026_06_15.html" class="issue-link active">
+    <span class="issue-date">2026年6月15日</span>
+    <span class="issue-label">Gemma 4 / Siri AI / Mercury 2</span>
+  </a>
+  <a href="2026_06_14.html" class="issue-link">
+    <span class="issue-date">2026年6月14日</span>
+    <span class="issue-label">Fable 5 / OpenCode / Kimi K2.7</span>
+  </a>
+  <a href="2026_06_07.html" class="issue-link">
+    <span class="issue-date">2026年6月7日</span>
+    <span class="issue-label">Claude自己実装80% / Copilot課金 / Gemini 3.5</span>
+  </a>
+  <a href="2026_05_31.html" class="issue-link">
+    <span class="issue-date">2026年5月31日</span>
+    <span class="issue-label">Managed Agents / Qwen3 Coder / Canva AI 2.0</span>
+  </a>
+  <a href="2026_05_27.html" class="issue-link">
+    <span class="issue-date">2026年5月27日</span>
+    <span class="issue-label">Google I/O / Gemini 3.5 / SubQ</span>
+  </a>
+  <a href="2026_05_12.html" class="issue-link">
+    <span class="issue-date">2026年5月12日</span>
+    <span class="issue-label">GPT-5.5 / dreaming / iOS 27</span>
+  </a>
+  <!-- ISSUES_LIST_END -->
+
+</aside>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<div class="main">
+  <header>
+    <h1>AI ニュースまとめ</h1>
+    <p>2026年6月8日〜15日 ／ エンジニア・クリエイター向けピックアップ 10 本</p>
+  </header>
+
+  <!-- 1 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">01</div>
+      <div class="card-header-text">
+        <h2>Apple WWDC 2026: Siri AI 刷新と iOS 27 ― Claude・Gemini が Siri に統合へ</h2>
+        <div class="meta">
+          <span class="date">Jun 8, 2026</span>
+          <span class="tag tag-model">新モデル</span>
+          <span class="tag tag-creative">プラットフォーム</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Apple が WWDC 2026 で次世代 <strong>Apple Intelligence</strong> と <strong>Siri AI</strong> を発表。
+      Siri が従来のコマンド応答型から文脈理解・長期対話型へ根本刷新され、
+      「詳細なプランを尋ねる」「ブレストを往復する」「ドキュメントへフィードバック」が可能になった。
+      iOS 27 では <em>Extensions</em> フレームワーク経由でサードパーティ AI（Google Gemini・Anthropic Claude など）を
+      Siri や Writing Tools に割り当てられる仕組みも正式発表。
+      Apple Foundation Models の第 2 版（音声・テキスト・画像対応）も同時公開された。
+    </p>
+    <div class="highlight">エンジニア的注目点: Extensions フレームワーク経由のモデル配布は新しいアプリ流通モデルになりうる。Claude API を持つ開発者は iOS 27 向け Extensions の設計を今から検討しておく価値がある。</div>
+    <a class="source" href="https://techcrunch.com/2026/06/09/wwdc-2026-everything-announced-on-siri-ai-os-27-apple-intelligence-and-more/" target="_blank">→ TechCrunch で読む</a>
+  </div>
+
+  <!-- 2 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">02</div>
+      <div class="card-header-text">
+        <h2>Google Gemma 4 12B リリース ― ネイティブ音声入力対応・16GB RAM で動作</h2>
+        <div class="meta">
+          <span class="date">Jun 3, 2026</span>
+          <span class="tag tag-model">新モデル</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Google が <strong>Gemma 4 12B</strong> を公開。
+      エッジ向け E4B（4B）と大型 MoE（26B）の間を埋める密結合 12B モデルで、
+      <strong>16GB の RAM（または VRAM）に収まり</strong>、M3 Max 搭載 MacBook でも動作する。
+      Gemma シリーズ初の<strong>ネイティブ音声入力</strong>対応が最大の特徴で、
+      音声コマンド・文字起こし・音声質問応答を単一モデルで処理できる。
+    </p>
+    <div class="highlight">エンジニア的注目点: 16GB に収まることでラップトップ完結のローカル推論が現実的に。Ollama / llama.cpp 経由のデプロイが既に報告されており、APIコスト削減を狙うユースケースに有力候補。</div>
+    <a class="source" href="https://llm-stats.com/llm-updates" target="_blank">→ LLM Stats で確認する</a>
+  </div>
+
+  <!-- 3 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">03</div>
+      <div class="card-header-text">
+        <h2>Moonshot AI の Kimi K2.7-Code ― 推論トークン 30% 削減の新コーディングモデル</h2>
+        <div class="meta">
+          <span class="date">Jun 12, 2026</span>
+          <span class="tag tag-model">新モデル</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Moonshot AI が <strong>Kimi K2.7-Code</strong> をリリース。
+      前世代の K2.6 と比較して<strong>推論トークン使用量を約 30% 削減</strong>しながら同等以上の精度を維持。
+      Modified MIT ライセンスで公開されており、商用利用も条件付きで可能。
+      同日には MiniMax M2.5 Highspeed、M2.7 Highspeed、M2.7 も公開されており、
+      6 月 12 日は 2026 年最大のオープンモデル一斉リリース日となった。
+    </p>
+    <div class="highlight">エンジニア的注目点: コーディングエージェントのコストはトークン量に直結する。30% 削減はエージェント稼働時間・費用の大幅圧縮につながるため、商用利用前提での評価を推奨。</div>
+    <a class="source" href="https://aiflashreport.com/model-releases.html" target="_blank">→ AI Flash Report で確認する</a>
+  </div>
+
+  <!-- 4 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">04</div>
+      <div class="card-header-text">
+        <h2>Inception Mercury 2 ― 拡散モデルで 1,000 トークン/秒超、Claude Haiku の 5 倍速</h2>
+        <div class="meta">
+          <span class="date">2026年前半</span>
+          <span class="tag tag-model">新モデル</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Inception Labs が <strong>Mercury 2</strong> を公開。
+      従来の自己回帰 LLM と異なり<strong>拡散（Diffusion）アーキテクチャ</strong>を採用し、
+      回答を「粗い下書き → 並列精緻化」のプロセスで生成することで
+      <strong>1,000 トークン/秒超</strong>を達成（標準 GPU 上）。
+      速度最適化モデルの代表格である Claude Haiku・GPT-5 Mini と比較して <strong>5倍以上高速</strong>で、
+      コストも大幅に低い。128K コンテキスト、ツールユース、JSON スキーマ出力に対応し
+      OpenAI 互換 API で提供。
+    </p>
+    <div class="highlight">エンジニア的注目点: 大量のリアルタイム処理（チャットボット・ストリーミング翻訳など）でレイテンシが律速になっている場面で差別化要因になりうる。AWS Bedrock 統合も近日対応予定。</div>
+    <a class="source" href="https://thenewstack.io/inception-labs-mercury-2-diffusion/" target="_blank">→ The New Stack で読む</a>
+  </div>
+
+  <!-- 5 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">05</div>
+      <div class="card-header-text">
+        <h2>NVIDIA Nemotron 3 Ultra 550B リリース ― 企業向け大規模 MoE モデル</h2>
+        <div class="meta">
+          <span class="date">Jun 4, 2026</span>
+          <span class="tag tag-model">新モデル</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      NVIDIA が <strong>Nemotron 3 Ultra 550B A55B</strong> を公開。
+      MoE（Mixture of Experts）構成で総パラメータ 550B、有効パラメータ 55B。
+      NVIDIA のエンタープライズ向け AI プラットフォームとの統合を想定しており、
+      NeMo Curator でのファインチューニング・データ合成用途を主なターゲットとしている。
+      前世代の Nemotron-4 340B から大幅にスケールアップしながら、
+      推論コストを MoE 構造で抑制する設計。
+    </p>
+    <div class="highlight">エンジニア的注目点: NVIDIA GPU インフラ上でのオンプレミス LLM 運用を検討している組織にとって、NIM（NVIDIA Inference Microservice）経由のデプロイが最短ルート。</div>
+    <a class="source" href="https://llmgateway.io/timeline" target="_blank">→ LLM Gateway タイムラインで確認する</a>
+  </div>
+
+  <!-- 6 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">06</div>
+      <div class="card-header-text">
+        <h2>GitHub Copilot が AI Credits 制へ移行 ― 6月1日から全プラン使用量課金</h2>
+        <div class="meta">
+          <span class="date">Jun 1, 2026</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      GitHub が 6 月 1 日付で全 Copilot プランを <strong>AI Credits ベースの使用量課金</strong>に移行。
+      サブスクライバーは月次の利用枠が付与され、超過分は実際の使用量に応じて請求される仕組みに変わった。
+      Claude Code・Cursor が $20/月の定額プランを維持している中、
+      Copilot のコスト構造が大きく変わったことでツール選択の比較軸が増えた形。
+      チームの使用パターンによっては Copilot の月次コストが従来比で増減する可能性がある。
+    </p>
+    <div class="highlight">エンジニア的注目点: 組織の Copilot 利用状況を今月中にレビューし、AI Credits の消費ペースを把握しておくことを推奨。想定外の課金が発生しやすい移行期。</div>
+    <a class="source" href="https://www.cosmicjs.com/blog/claude-code-vs-github-copilot-vs-cursor-which-ai-coding-agent-should-you-use-2026" target="_blank">→ Cosmic JS 比較記事で読む</a>
+  </div>
+
+  <!-- 7 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">07</div>
+      <div class="card-header-text">
+        <h2>Veo 3.1 が首位 ― 2026年6月版 AI 動画生成モデルランキング更新</h2>
+        <div class="meta">
+          <span class="date">Jun 2026</span>
+          <span class="tag tag-creative">クリエイティブ</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      複数の AI メディアが 2026 年 6 月版の AI 動画生成モデルランキングを更新。
+      <strong>Veo 3.1</strong>（Google）、<strong>Kling 3.0</strong>（Kuaishou）、<strong>Seedance 2.0</strong>（ByteDance）、
+      Runway Gen-4.5、Sora 2 の順でトップ 5 を形成。
+      Veo 3.1 はリアリズム・制御性・処理速度の総合評価で首位を維持。
+      Pika Labs は独自の「スタイル転送モード」（任意画像の視覚スタイルを動画に適用）で差別化を図る。
+      AI 動画が実験段階を脱し、<strong>シネマグレードのコンテンツ生成</strong>が現実的になってきた。
+    </p>
+    <div class="highlight">エンジニア的注目点: Veo 3.1 と Kling 3.0 はそれぞれ API 提供中。プロダクトへの動画生成機能組み込みを検討するなら、両 API の料金体系と生成品質を比較評価する段階に来ている。</div>
+    <a class="source" href="https://www.buildmvpfast.com/articles/best-llms-2026-guide/video-generation-ai" target="_blank">→ BuildMVPFast ランキングで確認する</a>
+  </div>
+
+  <!-- 8 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">08</div>
+      <div class="card-header-text">
+        <h2>Claude Code GitHub Action に高深刻度の脆弱性 ― Anthropic が緊急パッチ</h2>
+        <div class="meta">
+          <span class="date">Jun 11, 2026</span>
+          <span class="tag tag-security">セキュリティ</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Anthropic が <strong>Claude Code GitHub Action</strong> の高深刻度の脆弱性に対して緊急パッチを配布。
+      同日公表のセキュリティブログ「ThreatsDay Bulletin」では、
+      攻撃者が悪意ある PR 説明に隠しプロンプトを埋め込み、
+      CI/CD 上で動作する AI エージェントを通じてシークレットへアクセスするシナリオが実証されている。
+      類似の手法は GitHub Copilot（CVE-2025-53773、CVSS 9.6）でも確認されており、
+      AI 統合 CI パイプライン全体に対するプロンプトインジェクション攻撃が体系化されつつある。
+    </p>
+    <div class="highlight">エンジニア的注目点: Claude Code GitHub Action を使用している場合は即時アップデート必須。PR 本文・コメントを AI エージェントに直接渡す設計は全面的に見直しが必要。信頼できない入力はサニタイズまたはスコープを明示的に制限すること。</div>
+    <a class="source" href="https://www.rescana.com/post/threatsday-bulletin-june-2026-miasma-supply-chain-worm-leak-claude-code-github-action-vulnerability-ai-agent-phishing-to" target="_blank">→ Rescana ThreatsDay Bulletin で読む</a>
+  </div>
+
+  <!-- 9 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">09</div>
+      <div class="card-header-text">
+        <h2>Miasma サプライチェーンワーム流出 ― GitHub 開発者アカウント経由で拡散</h2>
+        <div class="meta">
+          <span class="date">Jun 10, 2026</span>
+          <span class="tag tag-security">セキュリティ</span>
+          <span class="tag tag-agent">エージェント</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      クレデンシャル窃取型攻撃フレームワーク <strong>Miasma</strong> が、
+      侵害された開発者 GitHub アカウント経由でリークされたことが 6 月 10 日に判明。
+      Miasma はオープンソースプロジェクトのコントリビューターを標的に、
+      悪意ある依存パッケージを介して CI 環境の環境変数・シークレットを抜き取る仕組みを持つ。
+      AI コーディングエージェントが CI 環境での実行権限を持つケースが増えていることも、
+      被害が拡大しやすい背景として挙げられている。
+    </p>
+    <div class="highlight">エンジニア的注目点: 依存パッケージのハッシュ固定（lockfile のコミット必須化）と、CI 環境でのシークレット最小権限設計が急務。AI エージェントに CI 上での広範な権限を与えている場合はスコープを即時見直すこと。</div>
+    <a class="source" href="https://www.rescana.com/post/threatsday-bulletin-june-2026-miasma-supply-chain-worm-leak-claude-code-github-action-vulnerability-ai-agent-phishing-to" target="_blank">→ Rescana ThreatsDay Bulletin で読む</a>
+  </div>
+
+  <!-- 10 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">10</div>
+      <div class="card-header-text">
+        <h2>ホワイトハウスが AI セキュリティ大統領令に署名 ― フロンティアモデルと脆弱性管理を規制</h2>
+        <div class="meta">
+          <span class="date">Jun 2, 2026</span>
+          <span class="tag tag-security">セキュリティ</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      米ホワイトハウスが 6 月 2 日、<strong>AI セキュリティに関する大統領令</strong>に署名。
+      連邦機関に対して AI 活用のサイバー防御強化と、
+      新たな <strong>AI サイバーセキュリティクリアリングハウス</strong>の設立を指示する内容。
+      フロンティアモデルが人間を大幅に超える速度でサイバー脆弱性を発見・悪用する能力を持つことへの
+      対応が立法背景となっている。
+      今後、フロンティアモデルの開発・運用に関する新たなサイバーセキュリティ指令が順次発行される見通し。
+    </p>
+    <div class="highlight">エンジニア的注目点: 米国政府との取引がある企業は対応スケジュールの確認が必要。民間企業への直接規制は現時点では限定的だが、フロンティアモデルの脆弱性開示ルールが今後変わる可能性がある。</div>
+    <a class="source" href="https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/" target="_blank">→ ホワイトハウス公式発表を読む</a>
+  </div>
+
+  <footer>
+    <p>作成日: 2026年6月15日 ／ 情報収集: Web 検索（各記事のリンク先を必ず確認してください）</p>
+  </footer>
+</div>
+
+</body>
+</html>
