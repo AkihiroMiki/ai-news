@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI ニュース — 2026年6月22日号</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --sidebar-bg: #13151f;
+      --card: #1a1d27;
+      --border: #2a2d3e;
+      --accent: #6c63ff;
+      --accent2: #00c9a7;
+      --text: #e2e4f0;
+      --muted: #8b8fa8;
+      --sidebar-w: 220px;
+      --tag-eng: #1e3a5f;       --tag-eng-text: #60a5fa;
+      --tag-agent: #1e3a2f;     --tag-agent-text: #34d399;
+      --tag-model: #3a1e3a;     --tag-model-text: #c084fc;
+      --tag-security: #3a1e1e;  --tag-security-text: #f87171;
+      --tag-creative: #3a2e1e;  --tag-creative-text: #fb923c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      overflow-y: auto;
+      padding: 1.5rem 0;
+    }
+    .sidebar-logo {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+      padding: 0 1.2rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: 0.05em;
+    }
+    .sidebar-section {
+      padding: 1rem 1.2rem 0.4rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .issue-link {
+      display: block;
+      padding: 0.45rem 1.2rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: all 0.15s;
+      line-height: 1.4;
+    }
+    .issue-link:hover {
+      color: var(--text);
+      background: rgba(108,99,255,0.07);
+    }
+    .issue-link.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: rgba(108,99,255,0.08);
+    }
+    .issue-link .issue-date { display: block; font-size: 0.75rem; }
+    .issue-link .issue-label { display: block; font-size: 0.7rem; color: var(--muted); margin-top: 0.1rem; }
+
+    /* ── Main ── */
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      padding: 2rem 2rem 3rem;
+      max-width: 900px;
+    }
+    header { margin-bottom: 2.5rem; }
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    header p { color: var(--muted); margin-top: 0.4rem; font-size: 0.9rem; }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card-header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 0.75rem; }
+    .number {
+      font-size: 1.5rem; font-weight: 800; color: var(--accent);
+      flex-shrink: 0; min-width: 2rem; line-height: 1.3;
+    }
+    .card-header-text { flex: 1; }
+    .card h2 { font-size: 1.05rem; font-weight: 600; color: var(--text); }
+    .meta { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.3rem; flex-wrap: wrap; }
+    .date { font-size: 0.78rem; color: var(--muted); }
+    .tag {
+      font-size: 0.7rem; font-weight: 600;
+      padding: 0.15rem 0.55rem; border-radius: 999px;
+    }
+    .tag-eng      { background: var(--tag-eng);      color: var(--tag-eng-text); }
+    .tag-agent    { background: var(--tag-agent);    color: var(--tag-agent-text); }
+    .tag-model    { background: var(--tag-model);    color: var(--tag-model-text); }
+    .tag-security { background: var(--tag-security); color: var(--tag-security-text); }
+    .tag-creative { background: var(--tag-creative); color: var(--tag-creative-text); }
+    .card p { font-size: 0.91rem; color: #c4c7db; line-height: 1.75; }
+    .card a.source {
+      color: var(--accent); text-decoration: none;
+      font-size: 0.8rem; display: inline-block; margin-top: 0.75rem;
+    }
+    .card a.source:hover { text-decoration: underline; }
+    .highlight {
+      background: rgba(108,99,255,0.08);
+      border-left: 3px solid var(--accent);
+      padding: 0.4rem 0.75rem;
+      border-radius: 0 6px 6px 0;
+      margin-top: 0.75rem;
+      font-size: 0.86rem;
+      color: var(--accent2);
+      line-height: 1.6;
+    }
+    footer {
+      margin-top: 3rem; color: var(--muted);
+      font-size: 0.78rem; border-top: 1px solid var(--border); padding-top: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<aside class="sidebar">
+  <div class="sidebar-logo">⬡ AI Weekly</div>
+  <div class="sidebar-section">バックナンバー</div>
+
+  <!-- ISSUES_LIST_START -->
+  <a href="2026_06_22.html" class="issue-link active">
+    <span class="issue-date">2026年6月22日</span>
+    <span class="issue-label">Fable 5詳細 / GPT-5.6 / RAGポイズニング</span>
+  </a>
+  <a href="2026_06_15.html" class="issue-link">
+    <span class="issue-date">2026年6月15日</span>
+    <span class="issue-label">Gemma 4 / Siri AI / Mercury 2</span>
+  </a>
+  <a href="2026_06_14.html" class="issue-link">
+    <span class="issue-date">2026年6月14日</span>
+    <span class="issue-label">Fable 5 / OpenCode / Kimi K2.7</span>
+  </a>
+  <a href="2026_06_07.html" class="issue-link">
+    <span class="issue-date">2026年6月7日</span>
+    <span class="issue-label">Claude自己実装80% / Copilot課金 / Gemini 3.5</span>
+  </a>
+  <a href="2026_05_31.html" class="issue-link">
+    <span class="issue-date">2026年5月31日</span>
+    <span class="issue-label">Managed Agents / Qwen3 Coder / Canva AI 2.0</span>
+  </a>
+  <a href="2026_05_27.html" class="issue-link">
+    <span class="issue-date">2026年5月27日</span>
+    <span class="issue-label">Google I/O / Gemini 3.5 / SubQ</span>
+  </a>
+  <a href="2026_05_12.html" class="issue-link">
+    <span class="issue-date">2026年5月12日</span>
+    <span class="issue-label">GPT-5.5 / dreaming / iOS 27</span>
+  </a>
+  <!-- ISSUES_LIST_END -->
+
+</aside>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<div class="main">
+  <header>
+    <h1>AI ニュースまとめ</h1>
+    <p>2026年6月16日〜22日 ／ エンジニア・クリエイター向けピックアップ 10 本</p>
+  </header>
+
+  <!-- 1 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">01</div>
+      <div class="card-header-text">
+        <h2>Claude Fable 5 詳報 ― 数百万トークンを跨ぐ記憶と Dynamic Workflows で長期エージェントが実用域へ</h2>
+        <div class="meta">
+          <span class="date">Jun 9, 2026</span>
+          <span class="tag tag-model">新モデル</span>
+          <span class="tag tag-agent">エージェント</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Anthropic が <strong>Claude Fable 5</strong> と <strong>Claude Mythos 5</strong> の詳細を公開。
+      Fable 5 の最大の特徴は、長期タスクにわたって自分のノートを活用しながら出力を改善する
+      <strong>ファイルベースの永続メモリ</strong>で、
+      デッキ構築ゲーム「Slay the Spire」を使ったテストでは、Opus 4.8 に比べて
+      メモリが性能を <strong>3 倍以上</strong>引き上げた。
+      Claude Code には新機能 <strong>Dynamic Workflows</strong> が追加され、
+      大規模・長期スパンの問題を自律的に分解・実行できるようになった。
+      また、claude.ai では「思考の深さ」をユーザーが設定できるエフォートコントロールが導入された。
+      一部のデリケートなクエリには安全策として Opus 4.8 が応答する仕組みも組み込まれている。
+    </p>
+    <div class="highlight">エンジニア的注目点: Dynamic Workflows は大規模リファクタリングやマルチファイル移行など、これまでコンテキスト上限がボトルネックだったタスクに直結する機能。claude-fable-5 の API 利用料金と Opus 4.8 のトレードオフを評価するタイミングが来た。</div>
+    <a class="source" href="https://www.anthropic.com/news/claude-fable-5-mythos-5" target="_blank">→ Anthropic 公式発表を読む</a>
+  </div>
+
+  <!-- 2 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">02</div>
+      <div class="card-header-text">
+        <h2>Claude Opus 4.8 ― バグ見落とし率 4 分の 1 に改善、Fast Mode が 3 倍安価に</h2>
+        <div class="meta">
+          <span class="date">May 28, 2026</span>
+          <span class="tag tag-model">新モデル</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Anthropic が <strong>Claude Opus 4.8</strong> を正式リリース。
+      前世代の Opus 4.7 比でコーディング・エージェント・推論・実用的な知識作業が全般的に向上した。
+      最も目立つ改善は「誠実性」で、<strong>自身が書いたコードの欠陥を見逃す確率が約 4 分の 1</strong> に低下した。
+      高速出力を実現する <strong>Fast Mode</strong> はコストが前世代比 3 分の 1</strong> となり、実用性が大きく上がった。
+      API・Amazon Bedrock・Vertex AI ではデフォルトで <strong>100 万トークンのコンテキストウィンドウ</strong>、
+      最大出力 128K トークンに対応。
+    </p>
+    <div class="highlight">エンジニア的注目点: Fast Mode のコスト削減でレスポンス速度と品質のトレードオフが改善。コーディングエージェントのバックボーンモデルを Opus 4.7 から 4.8 に切り替える際、Fast Mode のコストを改めて試算する価値がある。</div>
+    <a class="source" href="https://www.anthropic.com/news/claude-opus-4-8" target="_blank">→ Anthropic 公式発表を読む</a>
+  </div>
+
+  <!-- 3 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">03</div>
+      <div class="card-header-text">
+        <h2>GPT-5.6 は 6 月末リリース濃厚 ― Codex ログのコードネームが複数確認</h2>
+        <div class="meta">
+          <span class="date">Jun 2026</span>
+          <span class="tag tag-model">新モデル</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      OpenAI の <strong>GPT-5.6</strong> について、Codex バックエンドのルーティングログに
+      「iris-alpha」「ember-alpha」「kindle-alpha」などのコードネームが 5 月中旬から確認されており、
+      6 月末の公開が有力視されている。
+      OpenAI からの公式発表はまだないが、期待される主な改良点は
+      最大 <strong>150 万トークンのコンテキストウィンドウ</strong>、
+      GPT-5.5 比さらに 10〜15% のトークン効率改善、
+      複雑なプロンプトなしに本番品質のフロントエンド UI を生成する能力、
+      そしてより強力なエージェントコーディング性能。
+      6 月はすでに GPT-5.6・Gemini 3.5 Pro・Claude Opus 4.8 が出揃う「過去最密の AI リリース月」と評されている。
+    </p>
+    <div class="highlight">エンジニア的注目点: コンテキスト 150 万トークンが実現すると大規模コードベース全体をプロンプトに入れた操作が現実的になる。GPT-5.5 以降の API 乗り換えを検討しているチームは GPT-5.6 の仕様確定を待ってから判断するのが賢明。</div>
+    <a class="source" href="https://aiweekly.co/alerts/openai-plans-june-gpt-56-as-meaningful-improvement" target="_blank">→ AI Weekly で詳細を読む</a>
+  </div>
+
+  <!-- 4 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">04</div>
+      <div class="card-header-text">
+        <h2>Gemini 3.5 Pro は GPT-5.5・Opus 4.8 に後れ ― Google の 6 月リリースに暗雲</h2>
+        <div class="meta">
+          <span class="date">Jun 2026</span>
+          <span class="tag tag-model">新モデル</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      5 月 19 日の Google I/O で「来月リリース」と告知された <strong>Gemini 3.5 Pro</strong> について、
+      早期評価を行った複数のリサーチャーが
+      OpenAI GPT-5.5 および Anthropic Claude Opus 4.8 に主要な性能指標で劣ると報告している。
+      Gemini 3.5 Flash は速度と性能のバランスで高評価を得る一方、
+      Pro 版の競争力に疑問符が付いた形。
+      Google としては WWDC に続いて Gemini ブランドのポジショニングが問われる局面で、
+      リリース前の大幅な調整が入る可能性もある。
+    </p>
+    <div class="highlight">エンジニア的注目点: Gemini 3.5 Flash は今も最速クラスの選択肢で実用価値は高い。Pro に期待していた開発者は公式ベンチマーク公開まで採用判断を保留するのが無難。Vertex AI 経由の Gemini Fleet を使っている場合は Flash で代替できるか確認しておくとよい。</div>
+    <a class="source" href="https://www.essamamdani.com/blog/june-2026-ai-model-flood-gpt-gemini-claude" target="_blank">→ 詳細分析を読む</a>
+  </div>
+
+  <!-- 5 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">05</div>
+      <div class="card-header-text">
+        <h2>Anthropic「2026 Agentic Coding Trends Report」公開 ― エージェントは自律チームメイトの段階へ</h2>
+        <div class="meta">
+          <span class="date">Jun 2026</span>
+          <span class="tag tag-agent">エージェント</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </p>
+    </div>
+    <p>
+      Anthropic が <strong>2026 Agentic Coding Trends Report</strong> を公開。
+      2026 年の AI コーディングは「補完フェーズ」から「エージェントエンジニアリングフェーズ」へ移行したと分析。
+      開発者は 1 行の補完を求めるのではなく、Issue・テスト・マイグレーション・リファクタリングを丸ごとエージェントに委任する。
+      最高生産性を引き出している開発者の典型的なセットアップは
+      <strong>Cursor Pro（日常編集）+ Claude Code Pro（大規模エージェントタスク）</strong>の二刀流で、月額 40 ドル。
+      長期実行型の自律ワークフローが 2026 年最大の変化として挙げられている。
+    </p>
+    <div class="highlight">エンジニア的注目点: 「タスク単位の委任」設計が開発フローの主流になりつつある。チームの作業単位をプロンプト化できるかどうかがエージェント活用の実効性を左右する。ドキュメント化とタスク定義の粒度設計が次の生産性向上施策になりうる。</div>
+    <a class="source" href="https://resources.anthropic.com/hubfs/2026%20Agentic%20Coding%20Trends%20Report.pdf" target="_blank">→ レポートを読む（PDF）</a>
+  </div>
+
+  <!-- 6 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">06</div>
+      <div class="card-header-text">
+        <h2>AI コーディングエージェントランキング更新 ― Codex CLI が Terminal-Bench 2.1 で首位、Claude Code が 0.3pt 差で 2 位</h2>
+        <div class="meta">
+          <span class="date">Jun 2026</span>
+          <span class="tag tag-eng">開発者向け</span>
+          <span class="tag tag-agent">エージェント</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      複数のリサーチグループが <strong>Terminal-Bench 2.1</strong> を用いた AI コーディングエージェントの最新ランキングを公開。
+      <strong>Codex CLI on GPT-5.5</strong>（83.4%）と <strong>Claude Code on Fable 5</strong>（83.1%）がほぼ横並びでトップ 2 を形成し、
+      3 位の <strong>Gemini CLI on Gemini 3.1 Pro</strong>（70.7%）に約 12pt 差をつけた。
+      Gemini CLI は無料枠が最大（60 req/min、1,000 req/day）で学習・PoC 目的には引き続き優位。
+      オートコンプリート型（Cursor Tab・Copilot inline）とエージェント型の使い分けが定着しており、
+      前者はサブ秒レイテンシ・現ファイル完結、後者は数分〜数時間の長時間タスクと棲み分けられている。
+    </p>
+    <div class="highlight">エンジニア的注目点: GPT-5.6 リリース後にランキングが再び動く可能性が高い。今の評価結果は「Fable 5 vs GPT-5.5」という条件での数字であることを留意して採用判断を行うこと。</div>
+    <a class="source" href="https://www.morphllm.com/best-ai-coding-agents-2026" target="_blank">→ ランキング詳細を見る</a>
+  </div>
+
+  <!-- 7 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">07</div>
+      <div class="card-header-text">
+        <h2>Adobe Firefly に「Creative Agent」登場 ― 会話型指示で Creative Cloud 横断のマルチステップ処理を自動化</h2>
+        <div class="meta">
+          <span class="date">Apr 2026</span>
+          <span class="tag tag-creative">クリエイティブ</span>
+          <span class="tag tag-agent">エージェント</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Adobe が <strong>Firefly AI Assistant</strong>（Creative Agent）を発表。
+      「この画像をリサイズして Web 用に書き出し、Photoshop でレタッチして Premiere に渡して」
+      といった<strong>複数アプリを横断する多段処理</strong>を、会話型の自然言語指示で実行できる。
+      従来の Firefly は各ツール内で閉じた機能だったが、Creative Agent はオーケストレーターとして
+      Photoshop・Illustrator・Premiere・After Effects を串刺しにして操作する設計に転換。
+      Canva AI 2.0 との機能競合が本格化するとともに、
+      クリエイター向けエージェント市場が一気に動き出した形。
+    </p>
+    <div class="highlight">エンジニア的注目点: Creative Cloud の API を活用したカスタムワークフロー自動化がより現実的になった。デザイン・映像制作のパイプライン設計をしている場合、Firefly Creative Agent の API 提供タイミングを確認しておく価値がある。</div>
+    <a class="source" href="https://news.adobe.com/news/2026/04/adobe-new-creative-agent" target="_blank">→ Adobe ニュースルームで読む</a>
+  </div>
+
+  <!-- 8 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">08</div>
+      <div class="card-header-text">
+        <h2>RAG ポイズニングが 2026 年の重大攻撃ベクターに ― 検索コーパスへの悪意ある文書注入</h2>
+        <div class="meta">
+          <span class="date">Jun 2026</span>
+          <span class="tag tag-security">セキュリティ</span>
+          <span class="tag tag-agent">エージェント</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      複数のセキュリティリサーチが 2026 年に急浮上した攻撃手法として
+      <strong>RAG ポイズニング（Retrieval-Augmented Generation Poisoning）</strong>を挙げている。
+      攻撃者がベクターデータベースや検索コーパスに悪意ある文書を混入させ、
+      LLM が検索結果を信頼するという前提を悪用して有害な応答を生成させる手法で、
+      プロンプトインジェクションより検知が難しい点が問題視されている。
+      2026 年のセキュリティ監査では AI システムの 73% がプロンプトインジェクションへの露出を持ち、
+      直接型が 45%、間接型が 55% 以上を占め、間接型の成功率が 20〜30% 高いとされる。
+    </p>
+    <div class="highlight">エンジニア的注目点: RAG を使ったシステムでは「検索結果の信頼性」が前提となっているケースが多い。入力文書の検証・クリーニングパイプライン、コーパスへの書き込み権限の最小化、および異常応答の検出を設計段階から組み込むことが急務。</div>
+    <a class="source" href="https://blog.alexewerlof.com/p/owasp-top-10-ai-llm-agents" target="_blank">→ OWASP Top 10 AI/LLM Agents 2026 を読む</a>
+  </div>
+
+  <!-- 9 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">09</div>
+      <div class="card-header-text">
+        <h2>CVE-2026-27740: LLM 出力の未サニタイズが Stored XSS に ― AI 生成コンテンツの出力検証が必須に</h2>
+        <div class="meta">
+          <span class="date">Jun 2026</span>
+          <span class="tag tag-security">セキュリティ</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      <strong>CVE-2026-27740</strong>（PointGuard AI が公開）は、Discourse の特定バージョンで
+      LLM の出力をそのまま HTML に挿入したことが原因の <strong>Stored XSS</strong> 脆弱性。
+      AI が生成した Markdown やリッチテキストを表示するコンポーネントで
+      出力サニタイズが抜けていたことが直接の原因で、
+      悪意ある入力によって LLM に XSS ペイロードを含む文章を生成させてストアさせる経路が実証された。
+      2026 年のデータでは、AI ツールは XSS を防げないケースが <strong>86%</strong> に上り、
+      AI 生成コードには人間記述コードの <strong>2.5 倍</strong>の CVSS 7.0 以上の脆弱性が含まれるとされる。
+    </p>
+    <div class="highlight">エンジニア的注目点: AI の出力はユーザー入力と同じ「信頼できないデータ」として扱うこと。LLM 応答を DOM に挿入する際の DOMPurify 等によるサニタイズ、Content Security Policy の設定、そして AI 生成コードへのセキュリティレビューの適用が基本対策。</div>
+    <a class="source" href="https://www.pointguardai.com/ai-security-incidents/llm-output-triggers-stored-xss-in-discourse-cve-2026-27740" target="_blank">→ PointGuard AI で詳細を読む</a>
+  </div>
+
+  <!-- 10 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">10</div>
+      <div class="card-header-text">
+        <h2>Anthropic の Claude が Q1 2026 末に年率換算 300 億ドル突破 ― 1 四半期で 80 倍成長</h2>
+        <div class="meta">
+          <span class="date">Jun 2026</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      Anthropic の CEO が公開インタビューで、
+      <strong>Claude の年率換算売上高が 2026 年 Q1 末時点で 300 億ドルに達した</strong>と明かした。
+      単一四半期での 80 倍の年率成長という異例のペースで、
+      AI ネイティブ SaaS 企業における最速級の売上拡大として注目されている。
+      新モデルリリースのたびに毎時 2 億ドル以上の推定売上という数字も報告されており、
+      モデルの品質向上とコスト低下のサイクルが急速な採用加速につながっていることが背景にある。
+      2026 年のモデルリリース頻度は「約 2 日に 1 本」とされており、市場全体の競争も加速している。
+    </p>
+    <div class="highlight">エンジニア的注目点: これだけの成長速度は API プロバイダーとしての Anthropic のインフラ投資・レート制限・価格戦略に直接影響する。大規模利用を計画しているチームは Anthropic の Enterprise 契約やレート上限の最新状況を定期的に確認することを推奨。</div>
+    <a class="source" href="https://augusto.digital/insights/blogs/monthly-llm-news-june-2026/" target="_blank">→ Monthly LLM News June 2026 で読む</a>
+  </div>
+
+  <footer>
+    <p>作成日: 2026年6月22日 ／ 情報収集: Web 検索（各記事のリンク先を必ず確認してください）</p>
+  </footer>
+</div>
+
+</body>
+</html>
