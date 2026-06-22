@@ -157,7 +157,7 @@
   <!-- ISSUES_LIST_START -->
   <a href="2026_06_22.html" class="issue-link active">
     <span class="issue-date">2026年6月22日</span>
-    <span class="issue-label">Fable 5詳細 / GPT-5.6 / RAGポイズニング</span>
+    <span class="issue-label">Grok Video 1.5 / Perplexity Brain / GPT-5.6</span>
   </a>
   <a href="2026_06_15.html" class="issue-link">
     <span class="issue-date">2026年6月15日</span>
@@ -199,27 +199,24 @@
     <div class="card-header">
       <div class="number">01</div>
       <div class="card-header-text">
-        <h2>Claude Fable 5 詳報 ― 数百万トークンを跨ぐ記憶と Dynamic Workflows で長期エージェントが実用域へ</h2>
+        <h2>xAI Grok Imagine Video 1.5 GA ― I2V アリーナ首位、Sora 2 Pro の 86% 安</h2>
         <div class="meta">
-          <span class="date">Jun 9, 2026</span>
+          <span class="date">Jun 16, 2026</span>
+          <span class="tag tag-creative">クリエイティブ</span>
           <span class="tag tag-model">新モデル</span>
-          <span class="tag tag-agent">エージェント</span>
         </div>
       </div>
     </div>
     <p>
-      Anthropic が <strong>Claude Fable 5</strong> と <strong>Claude Mythos 5</strong> の詳細を公開。
-      Fable 5 の最大の特徴は、長期タスクにわたって自分のノートを活用しながら出力を改善する
-      <strong>ファイルベースの永続メモリ</strong>で、
-      デッキ構築ゲーム「Slay the Spire」を使ったテストでは、Opus 4.8 に比べて
-      メモリが性能を <strong>3 倍以上</strong>引き上げた。
-      Claude Code には新機能 <strong>Dynamic Workflows</strong> が追加され、
-      大規模・長期スパンの問題を自律的に分解・実行できるようになった。
-      また、claude.ai では「思考の深さ」をユーザーが設定できるエフォートコントロールが導入された。
-      一部のデリケートなクエリには安全策として Opus 4.8 が応答する仕組みも組み込まれている。
+      xAI が <strong>Grok Imagine Video 1.5</strong> を 6 月 16 日に正式 GA（一般提供）へ移行。
+      Image-to-Video Arena の Elo ランキングで首位に立ち、
+      API 価格は <strong>720p で $4.20/分</strong>（Sora 2 Pro の $30/分に対して 86% 安）。
+      主な改善点はサウンド（音響・音声を映像と同一パスで生成）、モーション（クリップ全体での物理的一貫性向上）、速度（6秒・720p を約 25 秒で生成、前世代比 37% 高速）の 3 点。
+      Grok.com・iOS・Android アプリと API の全チャネルで利用可能になった。
+      また、プロジェクト単位で複数エージェントを並列起動する新ワークフロー機能も同時リリース。
     </p>
-    <div class="highlight">エンジニア的注目点: Dynamic Workflows は大規模リファクタリングやマルチファイル移行など、これまでコンテキスト上限がボトルネックだったタスクに直結する機能。claude-fable-5 の API 利用料金と Opus 4.8 のトレードオフを評価するタイミングが来た。</div>
-    <a class="source" href="https://www.anthropic.com/news/claude-fable-5-mythos-5" target="_blank">→ Anthropic 公式発表を読む</a>
+    <div class="highlight">エンジニア的注目点: Sora 2 Pro と同等クラスの品質で 1/7 のコストは動画生成機能のプロダクト組み込みを現実的な選択肢に変える。$4.20/分という単価で自社サービスの動画生成 API コストを試算し直す価値がある。</div>
+    <a class="source" href="https://x.ai/news/grok-imagine-video-1-5" target="_blank">→ xAI 公式発表を読む</a>
   </div>
 
   <!-- 2 -->
@@ -227,24 +224,25 @@
     <div class="card-header">
       <div class="number">02</div>
       <div class="card-header-text">
-        <h2>Claude Opus 4.8 ― バグ見落とし率 4 分の 1 に改善、Fast Mode が 3 倍安価に</h2>
+        <h2>Perplexity が「Brain」を発表 ― AI エージェントが一晩かけて自分の記憶を更新する仕組み</h2>
         <div class="meta">
-          <span class="date">May 28, 2026</span>
-          <span class="tag tag-model">新モデル</span>
-          <span class="tag tag-eng">開発者向け</span>
+          <span class="date">Jun 18, 2026</span>
+          <span class="tag tag-agent">エージェント</span>
         </div>
       </div>
     </div>
     <p>
-      Anthropic が <strong>Claude Opus 4.8</strong> を正式リリース。
-      前世代の Opus 4.7 比でコーディング・エージェント・推論・実用的な知識作業が全般的に向上した。
-      最も目立つ改善は「誠実性」で、<strong>自身が書いたコードの欠陥を見逃す確率が約 4 分の 1</strong> に低下した。
-      高速出力を実現する <strong>Fast Mode</strong> はコストが前世代比 3 分の 1</strong> となり、実用性が大きく上がった。
-      API・Amazon Bedrock・Vertex AI ではデフォルトで <strong>100 万トークンのコンテキストウィンドウ</strong>、
-      最大出力 128K トークンに対応。
+      Perplexity が Computer エージェント向けの自己改善型メモリシステム <strong>Brain</strong> を発表。
+      セッション・コネクター結果・ドキュメント変更・ユーザーの修正指示を元に
+      <strong>夜間バッチで LLM Wiki を自動更新</strong>する設計で、
+      エージェントが「何がうまくいったか・何が失敗したか」を次のセッションに持ち越せる。
+      文脈依存タスクで回答正確率 <strong>+25%</strong>、再現率 <strong>+16%</strong>、
+      コスト <strong>-13%</strong> の改善を確認。
+      ユーザーはメモリの内容を閲覧・削除でき、各メモリのソース（セッション・ファイル・コネクター）が明示される。
+      Perplexity Max サブスクライバー（$200/月）向けのリサーチプレビューで提供開始。
     </p>
-    <div class="highlight">エンジニア的注目点: Fast Mode のコスト削減でレスポンス速度と品質のトレードオフが改善。コーディングエージェントのバックボーンモデルを Opus 4.7 から 4.8 に切り替える際、Fast Mode のコストを改めて試算する価値がある。</div>
-    <a class="source" href="https://www.anthropic.com/news/claude-opus-4-8" target="_blank">→ Anthropic 公式発表を読む</a>
+    <div class="highlight">エンジニア的注目点: 「一晩でメモリを育てる」設計は長期タスクエージェントの新しいアーキテクチャパターン。RAG のコーパス更新をバックグラウンドで行う仕組みとして参考になる。自社エージェントへの応用を検討するなら Brain の公開ブログが設計参考になる。</div>
+    <a class="source" href="https://www.perplexity.ai/hub/blog/self-improving-memory-for-agents" target="_blank">→ Perplexity 公式ブログを読む</a>
   </div>
 
   <!-- 3 -->
@@ -252,26 +250,24 @@
     <div class="card-header">
       <div class="number">03</div>
       <div class="card-header-text">
-        <h2>GPT-5.6 は 6 月末リリース濃厚 ― Codex ログのコードネームが複数確認</h2>
+        <h2>OpenAI LifeSciBench 公開 ― PhD 173 人が設計した 750 問の生命科学ベンチマーク、AI は 3 問に 1 問しか通過しない</h2>
         <div class="meta">
-          <span class="date">Jun 2026</span>
+          <span class="date">Jun 17, 2026</span>
           <span class="tag tag-model">新モデル</span>
+          <span class="tag tag-eng">開発者向け</span>
         </div>
       </div>
     </div>
     <p>
-      OpenAI の <strong>GPT-5.6</strong> について、Codex バックエンドのルーティングログに
-      「iris-alpha」「ember-alpha」「kindle-alpha」などのコードネームが 5 月中旬から確認されており、
-      6 月末の公開が有力視されている。
-      OpenAI からの公式発表はまだないが、期待される主な改良点は
-      最大 <strong>150 万トークンのコンテキストウィンドウ</strong>、
-      GPT-5.5 比さらに 10〜15% のトークン効率改善、
-      複雑なプロンプトなしに本番品質のフロントエンド UI を生成する能力、
-      そしてより強力なエージェントコーディング性能。
-      6 月はすでに GPT-5.6・Gemini 3.5 Pro・Claude Opus 4.8 が出揃う「過去最密の AI リリース月」と評されている。
+      OpenAI が <strong>LifeSciBench</strong> を 6 月 17 日に公開。
+      バイオテクノロジー・製薬分野の PhD 173 人が設計・レビューした 750 タスクで構成され、
+      実際の研究者が日常的に行う「データ付き実験設計・根拠の扱い・科学的コミュニケーション」を問う。
+      自社モデル <strong>GPT-Rosalind</strong> はテキストのみのタスクで 45.1% を通過する一方、
+      データファイルが添付されるタスクでは <strong>28.1% まで 17pt 低下</strong>する。
+      AI は「きれいな教科書問題」には強いが、実験データを含む現場の仕事では依然として弱いことが示された。
     </p>
-    <div class="highlight">エンジニア的注目点: コンテキスト 150 万トークンが実現すると大規模コードベース全体をプロンプトに入れた操作が現実的になる。GPT-5.5 以降の API 乗り換えを検討しているチームは GPT-5.6 の仕様確定を待ってから判断するのが賢明。</div>
-    <a class="source" href="https://aiweekly.co/alerts/openai-plans-june-gpt-56-as-meaningful-improvement" target="_blank">→ AI Weekly で詳細を読む</a>
+    <div class="highlight">エンジニア的注目点: LifeSciBench は研究支援 AI の性能評価に使える実用的な外部ベンチマーク。医療・製薬領域で LLM を組み込む場合、このベンチマークスコアを選定指標の一つに加えることを検討する価値がある。データファイル付きタスクの弱さはマルチモーダル入力の前処理設計に直結する。</div>
+    <a class="source" href="https://www.marktechpost.com/2026/06/17/openai-releases-lifescibench-a-750-task-benchmark-grading-ai-models-on-real-life-science-research-with-expert-written-rubric/" target="_blank">→ MarkTechPost で読む</a>
   </div>
 
   <!-- 4 -->
@@ -279,24 +275,23 @@
     <div class="card-header">
       <div class="number">04</div>
       <div class="card-header-text">
-        <h2>Gemini 3.5 Pro は GPT-5.5・Opus 4.8 に後れ ― Google の 6 月リリースに暗雲</h2>
+        <h2>OpenAI × Molecule.one ― GPT-Rosalind を使った「ほぼ自律の AI 化学者」が薬剤合成反応を改善</h2>
         <div class="meta">
-          <span class="date">Jun 2026</span>
-          <span class="tag tag-model">新モデル</span>
+          <span class="date">Jun 17, 2026</span>
+          <span class="tag tag-agent">エージェント</span>
         </div>
       </div>
     </div>
     <p>
-      5 月 19 日の Google I/O で「来月リリース」と告知された <strong>Gemini 3.5 Pro</strong> について、
-      早期評価を行った複数のリサーチャーが
-      OpenAI GPT-5.5 および Anthropic Claude Opus 4.8 に主要な性能指標で劣ると報告している。
-      Gemini 3.5 Flash は速度と性能のバランスで高評価を得る一方、
-      Pro 版の競争力に疑問符が付いた形。
-      Google としては WWDC に続いて Gemini ブランドのポジショニングが問われる局面で、
-      リリース前の大幅な調整が入る可能性もある。
+      OpenAI と Molecule.one が共同で、<strong>GPT-Rosalind（GPT-5.4 ベース）</strong>を用いた
+      準自律型 AI 化学者の実験結果を発表。
+      薬剤製造の鍵となる反応経路の改善に AI が実質的に貢献し、
+      医薬化学研究の一部フェーズで人間の研究者に匹敵する提案を行えることが示された。
+      「AI が単独で研究を完結させる」段階ではないが、
+      仮説生成・文献参照・実験設計の支援において研究サイクルを数週間から数日に短縮できた事例として注目されている。
     </p>
-    <div class="highlight">エンジニア的注目点: Gemini 3.5 Flash は今も最速クラスの選択肢で実用価値は高い。Pro に期待していた開発者は公式ベンチマーク公開まで採用判断を保留するのが無難。Vertex AI 経由の Gemini Fleet を使っている場合は Flash で代替できるか確認しておくとよい。</div>
-    <a class="source" href="https://www.essamamdani.com/blog/june-2026-ai-model-flood-gpt-gemini-claude" target="_blank">→ 詳細分析を読む</a>
+    <div class="highlight">エンジニア的注目点: 化学・バイオのドメインに閉じた話ではなく、「長い専門知識ループをエージェントで短絡する」設計パターンの実証として見るべき事例。ドメイン特化のフォールバック付きエージェント設計の参考になる。</div>
+    <a class="source" href="https://openai.com/index/introducing-gpt-rosalind/" target="_blank">→ OpenAI 公式ページで読む</a>
   </div>
 
   <!-- 5 -->
@@ -304,25 +299,26 @@
     <div class="card-header">
       <div class="number">05</div>
       <div class="card-header-text">
-        <h2>Anthropic「2026 Agentic Coding Trends Report」公開 ― エージェントは自律チームメイトの段階へ</h2>
+        <h2>GPT-5.6 は Polymarket で 80〜89% の確率で 6 月末リリース ― 1.5M トークン・10〜15% コスト削減が軸</h2>
         <div class="meta">
-          <span class="date">Jun 2026</span>
-          <span class="tag tag-agent">エージェント</span>
-          <span class="tag tag-eng">開発者向け</span>
+          <span class="date">Jun 16〜22, 2026</span>
+          <span class="tag tag-model">新モデル</span>
         </div>
       </div>
-    </p>
     </div>
     <p>
-      Anthropic が <strong>2026 Agentic Coding Trends Report</strong> を公開。
-      2026 年の AI コーディングは「補完フェーズ」から「エージェントエンジニアリングフェーズ」へ移行したと分析。
-      開発者は 1 行の補完を求めるのではなく、Issue・テスト・マイグレーション・リファクタリングを丸ごとエージェントに委任する。
-      最高生産性を引き出している開発者の典型的なセットアップは
-      <strong>Cursor Pro（日常編集）+ Claude Code Pro（大規模エージェントタスク）</strong>の二刀流で、月額 40 ドル。
-      長期実行型の自律ワークフローが 2026 年最大の変化として挙げられている。
+      OpenAI の次世代モデル <strong>GPT-5.6</strong> について、
+      Polymarket・Manifold Markets の予測市場が 6 月 30 日までの公開確率を <strong>80〜89%</strong> と評価している。
+      根拠は Codex バックエンドログに見つかった複数のコードネーム（iris-alpha・ember-alpha・kindle-alpha）と、
+      ChatGPT Pro ユーザーが報告した GPT-5.5 比 43% 広いコンテキスト挙動。
+      期待される主な改善は最大 <strong>150 万トークンコンテキスト</strong>、
+      GPT-5.5 比 <strong>トークン効率 10〜15% 改善</strong>、
+      プロンプトなしに本番品質のフロントエンドを生成するコーディング能力、
+      より高度なマルチステップエージェント実行。
+      OpenAI の公式発表はまだない。
     </p>
-    <div class="highlight">エンジニア的注目点: 「タスク単位の委任」設計が開発フローの主流になりつつある。チームの作業単位をプロンプト化できるかどうかがエージェント活用の実効性を左右する。ドキュメント化とタスク定義の粒度設計が次の生産性向上施策になりうる。</div>
-    <a class="source" href="https://resources.anthropic.com/hubfs/2026%20Agentic%20Coding%20Trends%20Report.pdf" target="_blank">→ レポートを読む（PDF）</a>
+    <div class="highlight">エンジニア的注目点: 150 万トークンが正式化されると大規模コードベース全体を一括でコンテキストに入れた操作が現実的になる。GPT-5.5 で動いているエージェントパイプラインを 5.6 へ移行するコスト試算を今のうちに準備しておきたい。</div>
+    <a class="source" href="https://aiweekly.co/alerts/openai-plans-june-gpt-56-as-meaningful-improvement" target="_blank">→ AI Weekly で詳細を読む</a>
   </div>
 
   <!-- 6 -->
@@ -330,24 +326,25 @@
     <div class="card-header">
       <div class="number">06</div>
       <div class="card-header-text">
-        <h2>AI コーディングエージェントランキング更新 ― Codex CLI が Terminal-Bench 2.1 で首位、Claude Code が 0.3pt 差で 2 位</h2>
+        <h2>Claude Code v2.1.179 ― 途中切断時の部分応答保持、/config コマンドで設定変更が対話的に</h2>
         <div class="meta">
-          <span class="date">Jun 2026</span>
+          <span class="date">Jun 16, 2026</span>
           <span class="tag tag-eng">開発者向け</span>
-          <span class="tag tag-agent">エージェント</span>
         </div>
       </div>
     </div>
     <p>
-      複数のリサーチグループが <strong>Terminal-Bench 2.1</strong> を用いた AI コーディングエージェントの最新ランキングを公開。
-      <strong>Codex CLI on GPT-5.5</strong>（83.4%）と <strong>Claude Code on Fable 5</strong>（83.1%）がほぼ横並びでトップ 2 を形成し、
-      3 位の <strong>Gemini CLI on Gemini 3.1 Pro</strong>（70.7%）に約 12pt 差をつけた。
-      Gemini CLI は無料枠が最大（60 req/min、1,000 req/day）で学習・PoC 目的には引き続き優位。
-      オートコンプリート型（Cursor Tab・Copilot inline）とエージェント型の使い分けが定着しており、
-      前者はサブ秒レイテンシ・現ファイル完結、後者は数分〜数時間の長時間タスクと棲み分けられている。
+      Anthropic が Claude Code <strong>v2.1.179</strong> をリリース。
+      ストリーミング中に接続が切断された際に部分レスポンスを保持するようになり、
+      「raw error が画面に残る」問題が解消された。
+      スピナーが「running tool」で止まるバグも修正。
+      新機能として <strong>/config key=value</strong> 構文が追加され、
+      任意の設定をプロンプトから直接変更できるようになった。
+      CLAUDE_CLIENT_PRESENCE_FILE 環境変数でモバイルへのプッシュ通知を抑制する機能も追加。
+      WSL2 でのマウスホイールスクロール・サンドボックス・サブエージェント表示も修正済み。
     </p>
-    <div class="highlight">エンジニア的注目点: GPT-5.6 リリース後にランキングが再び動く可能性が高い。今の評価結果は「Fable 5 vs GPT-5.5」という条件での数字であることを留意して採用判断を行うこと。</div>
-    <a class="source" href="https://www.morphllm.com/best-ai-coding-agents-2026" target="_blank">→ ランキング詳細を見る</a>
+    <div class="highlight">エンジニア的注目点: 長時間エージェントタスク中の接続断は実運用でよく踏む問題だった。部分応答保持で途中から確認できるようになった点は CI/CD での自動実行や長期タスク委任の安定性に直結する改善。</div>
+    <a class="source" href="https://releasebot.io/updates/anthropic/claude-code" target="_blank">→ Releasebot で更新履歴を見る</a>
   </div>
 
   <!-- 7 -->
@@ -355,25 +352,23 @@
     <div class="card-header">
       <div class="number">07</div>
       <div class="card-header-text">
-        <h2>Adobe Firefly に「Creative Agent」登場 ― 会話型指示で Creative Cloud 横断のマルチステップ処理を自動化</h2>
+        <h2>OpenAI Partner Network 始動 ― $150M 投資、Accenture・BCG など 300,000 人のコンサル認定を目指す</h2>
         <div class="meta">
-          <span class="date">Apr 2026</span>
-          <span class="tag tag-creative">クリエイティブ</span>
-          <span class="tag tag-agent">エージェント</span>
+          <span class="date">Jun 14, 2026</span>
+          <span class="tag tag-eng">開発者向け</span>
         </div>
       </div>
     </div>
     <p>
-      Adobe が <strong>Firefly AI Assistant</strong>（Creative Agent）を発表。
-      「この画像をリサイズして Web 用に書き出し、Photoshop でレタッチして Premiere に渡して」
-      といった<strong>複数アプリを横断する多段処理</strong>を、会話型の自然言語指示で実行できる。
-      従来の Firefly は各ツール内で閉じた機能だったが、Creative Agent はオーケストレーターとして
-      Photoshop・Illustrator・Premiere・After Effects を串刺しにして操作する設計に転換。
-      Canva AI 2.0 との機能競合が本格化するとともに、
-      クリエイター向けエージェント市場が一気に動き出した形。
+      OpenAI が <strong>OpenAI Partner Network</strong> を立ち上げ。
+      Accenture・Bain・BCG・McKinsey・PwC などの大手コンサルティングファームを初期パートナーとして招き、
+      GPT-5.5・GPT-5.6 などのフロンティアモデルを企業導入する際の設計・実装・変革支援を担う体制を作る。
+      投資規模は <strong>$150M</strong>、2026 年末までに <strong>30 万人のコンサルタント認定</strong>を目標とする。
+      Claude Code が API 課金型の直接開発者向けに展開を続ける一方、
+      OpenAI はエンタープライズ展開の SIer チャネルを整備する方向性を明確にした形。
     </p>
-    <div class="highlight">エンジニア的注目点: Creative Cloud の API を活用したカスタムワークフロー自動化がより現実的になった。デザイン・映像制作のパイプライン設計をしている場合、Firefly Creative Agent の API 提供タイミングを確認しておく価値がある。</div>
-    <a class="source" href="https://news.adobe.com/news/2026/04/adobe-new-creative-agent" target="_blank">→ Adobe ニュースルームで読む</a>
+    <div class="highlight">エンジニア的注目点: 大手 SIer が OpenAI 認定を取得する動きは、エンタープライズ AI 調達の意思決定に影響する。自社のシステム刷新で SIer が提案する AI 基盤の選定に OpenAI が優位に立つ可能性がある。競合比較の視点を持つなら Anthropic の Enterprise 提案とあわせて確認を。</div>
+    <a class="source" href="https://agent-harness.ai/blog/daily-ai-agent-news-roundup-june-16-2026/" target="_blank">→ Agent Harness ニュースで読む</a>
   </div>
 
   <!-- 8 -->
@@ -381,25 +376,24 @@
     <div class="card-header">
       <div class="number">08</div>
       <div class="card-header-text">
-        <h2>RAG ポイズニングが 2026 年の重大攻撃ベクターに ― 検索コーパスへの悪意ある文書注入</h2>
+        <h2>ServiceNow × Cognizant ― エンタープライズ AI エージェントの相互運用基盤が本格始動</h2>
         <div class="meta">
-          <span class="date">Jun 2026</span>
-          <span class="tag tag-security">セキュリティ</span>
+          <span class="date">Jun 18, 2026</span>
           <span class="tag tag-agent">エージェント</span>
         </div>
       </div>
     </div>
     <p>
-      複数のセキュリティリサーチが 2026 年に急浮上した攻撃手法として
-      <strong>RAG ポイズニング（Retrieval-Augmented Generation Poisoning）</strong>を挙げている。
-      攻撃者がベクターデータベースや検索コーパスに悪意ある文書を混入させ、
-      LLM が検索結果を信頼するという前提を悪用して有害な応答を生成させる手法で、
-      プロンプトインジェクションより検知が難しい点が問題視されている。
-      2026 年のセキュリティ監査では AI システムの 73% がプロンプトインジェクションへの露出を持ち、
-      直接型が 45%、間接型が 55% 以上を占め、間接型の成功率が 20〜30% 高いとされる。
+      Cognizant が ServiceNow AI エージェントと <strong>Cognizant Neuro AI プラットフォーム</strong>の
+      相互運用を 6 月 18 日にリリース。
+      Neuro AI を「オーケストレーション制御層」として機能させ、
+      ServiceNow ネイティブエージェントと他社エンタープライズシステムのエージェントを
+      同一のワークフロー上で束ねて実行できる仕組みを実現した。
+      「全社で AI エージェントを統制しながら並行稼働させる」という大企業の要求に応える構成で、
+      ServiceNow を中核 ITSM として使っている組織への直接の影響が大きい。
     </p>
-    <div class="highlight">エンジニア的注目点: RAG を使ったシステムでは「検索結果の信頼性」が前提となっているケースが多い。入力文書の検証・クリーニングパイプライン、コーパスへの書き込み権限の最小化、および異常応答の検出を設計段階から組み込むことが急務。</div>
-    <a class="source" href="https://blog.alexewerlof.com/p/owasp-top-10-ai-llm-agents" target="_blank">→ OWASP Top 10 AI/LLM Agents 2026 を読む</a>
+    <div class="highlight">エンジニア的注目点: 複数ベンダーの AI エージェントが混在するエンタープライズ環境でのオーケストレーション設計は今後の IT アーキテクチャの主要課題。Neuro AI のような制御層を自社でどう設計するか、あるいは外部プラットフォームを使うかの判断軸を検討しておく価値がある。</div>
+    <a class="source" href="https://agent-harness.ai/blog/daily-ai-agent-news-roundup-june-16-2026/" target="_blank">→ Agent Harness ニュースで読む</a>
   </div>
 
   <!-- 9 -->
@@ -407,25 +401,24 @@
     <div class="card-header">
       <div class="number">09</div>
       <div class="card-header-text">
-        <h2>CVE-2026-27740: LLM 出力の未サニタイズが Stored XSS に ― AI 生成コンテンツの出力検証が必須に</h2>
+        <h2>AWS FinOps Agent プレビュー ― コスト質問に答え・最適化提案・Jira チケット起票まで自律処理</h2>
         <div class="meta">
-          <span class="date">Jun 2026</span>
-          <span class="tag tag-security">セキュリティ</span>
+          <span class="date">Jun 15〜16, 2026</span>
+          <span class="tag tag-agent">エージェント</span>
           <span class="tag tag-eng">開発者向け</span>
         </div>
       </div>
     </div>
     <p>
-      <strong>CVE-2026-27740</strong>（PointGuard AI が公開）は、Discourse の特定バージョンで
-      LLM の出力をそのまま HTML に挿入したことが原因の <strong>Stored XSS</strong> 脆弱性。
-      AI が生成した Markdown やリッチテキストを表示するコンポーネントで
-      出力サニタイズが抜けていたことが直接の原因で、
-      悪意ある入力によって LLM に XSS ペイロードを含む文章を生成させてストアさせる経路が実証された。
-      2026 年のデータでは、AI ツールは XSS を防げないケースが <strong>86%</strong> に上り、
-      AI 生成コードには人間記述コードの <strong>2.5 倍</strong>の CVSS 7.0 以上の脆弱性が含まれるとされる。
+      AWS が <strong>FinOps Agent</strong> のプレビューを公開。
+      「先月どのサービスが一番コストかかった？」「この EC2 最適化できる？」といった質問に自然言語で応答し、
+      コスト異常の調査、最適化提案の提示、さらに <strong>Jira チケットの自動起票</strong>まで一連の処理を行うエージェント。
+      従来は Cost Explorer でデータを引き出し、分析してチケットを起票するフローを人が担っていたが、
+      その一連を AI エージェントに委任できる設計。
+      AWS Bedrock 上で動作し、既存の AWS ロール・権限体系と統合される。
     </p>
-    <div class="highlight">エンジニア的注目点: AI の出力はユーザー入力と同じ「信頼できないデータ」として扱うこと。LLM 応答を DOM に挿入する際の DOMPurify 等によるサニタイズ、Content Security Policy の設定、そして AI 生成コードへのセキュリティレビューの適用が基本対策。</div>
-    <a class="source" href="https://www.pointguardai.com/ai-security-incidents/llm-output-triggers-stored-xss-in-discourse-cve-2026-27740" target="_blank">→ PointGuard AI で詳細を読む</a>
+    <div class="highlight">エンジニア的注目点: クラウド費用の管理は「誰がやるかわからず後回し」になりがちな業務。FinOps Agent のようなドメイン特化エージェントが Bedrock 上で動くことで、AWS ロール管理のノウハウがあれば追加実装なしに運用できる。大規模 AWS 利用組織は早期プレビュー参加を検討する価値がある。</div>
+    <a class="source" href="https://agent-harness.ai/blog/daily-ai-agent-news-roundup-june-16-2026/" target="_blank">→ Agent Harness ニュースで読む</a>
   </div>
 
   <!-- 10 -->
@@ -433,24 +426,23 @@
     <div class="card-header">
       <div class="number">10</div>
       <div class="card-header-text">
-        <h2>Anthropic の Claude が Q1 2026 末に年率換算 300 億ドル突破 ― 1 四半期で 80 倍成長</h2>
+        <h2>Zhipu AI、GLM 5.2 を 6 月 17 日リリース ― 中国オープンモデル群が週単位でアップデートを続ける</h2>
         <div class="meta">
-          <span class="date">Jun 2026</span>
-          <span class="tag tag-eng">開発者向け</span>
+          <span class="date">Jun 17, 2026</span>
+          <span class="tag tag-model">新モデル</span>
         </div>
       </div>
     </div>
     <p>
-      Anthropic の CEO が公開インタビューで、
-      <strong>Claude の年率換算売上高が 2026 年 Q1 末時点で 300 億ドルに達した</strong>と明かした。
-      単一四半期での 80 倍の年率成長という異例のペースで、
-      AI ネイティブ SaaS 企業における最速級の売上拡大として注目されている。
-      新モデルリリースのたびに毎時 2 億ドル以上の推定売上という数字も報告されており、
-      モデルの品質向上とコスト低下のサイクルが急速な採用加速につながっていることが背景にある。
-      2026 年のモデルリリース頻度は「約 2 日に 1 本」とされており、市場全体の競争も加速している。
+      中国 AI 企業 Zhipu AI が <strong>GLM 5.2</strong> を 6 月 17 日にリリース。
+      GLM-5 系列の継続アップデートで、推論・コーディング・多言語対応の改善が中心。
+      6 月後半の中国モデルリリースはこれだけにとどまらず、
+      Qwen 3.6（Alibaba）・DeepSeek V4-Pro・Hunyuan Large 3（Tencent）・ERNIE 5.1（Baidu）・Doubao Pro（ByteDance）が
+      同一の 2 週間ウィンドウ内に集中して出ており、
+      中国フロンティアモデル群が欧米のトップモデルから <strong>数ポイント以内の差</strong>に迫っている状況が続いている。
     </p>
-    <div class="highlight">エンジニア的注目点: これだけの成長速度は API プロバイダーとしての Anthropic のインフラ投資・レート制限・価格戦略に直接影響する。大規模利用を計画しているチームは Anthropic の Enterprise 契約やレート上限の最新状況を定期的に確認することを推奨。</div>
-    <a class="source" href="https://augusto.digital/insights/blogs/monthly-llm-news-june-2026/" target="_blank">→ Monthly LLM News June 2026 で読む</a>
+    <div class="highlight">エンジニア的注目点: 中国オープンモデルの週次アップデートは API コスト・ライセンス・データレジデンシーの観点でも注目に値する。DeepSeek V4-Pro は Apache 2.0 ライセンスで商用利用しやすく、ローカルデプロイ検討の候補リストに入れておく価値がある。</div>
+    <a class="source" href="https://presenc.ai/research/june-2026-llm-release-roundup" target="_blank">→ Presenc AI リリースまとめを読む</a>
   </div>
 
   <footer>
