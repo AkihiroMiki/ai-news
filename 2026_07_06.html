@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI ニュース — 2026年7月6日号</title>
+  <script src="https://unpkg.com/budoux/bundle/budoux-ja.min.js"></script>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --sidebar-bg: #13151f;
+      --card: #1a1d27;
+      --border: #2a2d3e;
+      --accent: #6c63ff;
+      --accent2: #00c9a7;
+      --text: #e2e4f0;
+      --muted: #8b8fa8;
+      --sidebar-w: 220px;
+      --tag-eng: #1e3a5f;       --tag-eng-text: #60a5fa;
+      --tag-agent: #1e3a2f;     --tag-agent-text: #34d399;
+      --tag-model: #3a1e3a;     --tag-model-text: #c084fc;
+      --tag-security: #3a1e1e;  --tag-security-text: #f87171;
+      --tag-creative: #3a2e1e;  --tag-creative-text: #fb923c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      overflow-y: auto;
+      padding: 1.5rem 0;
+    }
+    .sidebar-logo {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+      padding: 0 1.2rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: 0.05em;
+    }
+    .sidebar-section {
+      padding: 1rem 1.2rem 0.4rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .issue-link {
+      display: block;
+      padding: 0.45rem 1.2rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: all 0.15s;
+      line-height: 1.4;
+    }
+    .issue-link:hover {
+      color: var(--text);
+      background: rgba(108,99,255,0.07);
+    }
+    .issue-link.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: rgba(108,99,255,0.08);
+    }
+    .issue-link .issue-date { display: block; font-size: 0.75rem; }
+    .issue-link .issue-label { display: block; font-size: 0.7rem; color: var(--muted); margin-top: 0.1rem; }
+
+    /* ── Main ── */
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      padding: 2rem 2rem 3rem;
+      max-width: 900px;
+    }
+    header { margin-bottom: 2.5rem; }
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    header p { color: var(--muted); margin-top: 0.4rem; font-size: 0.9rem; }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card-header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 0.75rem; }
+    .number {
+      font-size: 1.5rem; font-weight: 800; color: var(--accent);
+      flex-shrink: 0; min-width: 2rem; line-height: 1.3;
+    }
+    .card-header-text { flex: 1; }
+    .card h2 { font-size: 1.05rem; font-weight: 600; color: var(--text); }
+    .meta { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.3rem; flex-wrap: wrap; }
+    .date { font-size: 0.78rem; color: var(--muted); }
+    .tag {
+      font-size: 0.7rem; font-weight: 600;
+      padding: 0.15rem 0.55rem; border-radius: 999px;
+    }
+    .tag-eng      { background: var(--tag-eng);      color: var(--tag-eng-text); }
+    .tag-agent    { background: var(--tag-agent);    color: var(--tag-agent-text); }
+    .tag-model    { background: var(--tag-model);    color: var(--tag-model-text); }
+    .tag-security { background: var(--tag-security); color: var(--tag-security-text); }
+    .tag-creative { background: var(--tag-creative); color: var(--tag-creative-text); }
+    .card p { font-size: 0.91rem; color: #c4c7db; line-height: 1.75; }
+    .card a.source {
+      color: var(--accent); text-decoration: none;
+      font-size: 0.8rem; display: inline-block; margin-top: 0.75rem;
+    }
+    .card a.source:hover { text-decoration: underline; }
+    .highlight {
+      background: rgba(108,99,255,0.08);
+      border-left: 3px solid var(--accent);
+      padding: 0.4rem 0.75rem;
+      border-radius: 0 6px 6px 0;
+      margin-top: 0.75rem;
+      font-size: 0.86rem;
+      color: var(--accent2);
+      line-height: 1.6;
+    }
+    footer {
+      margin-top: 3rem; color: var(--muted);
+      font-size: 0.78rem; border-top: 1px solid var(--border); padding-top: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<aside class="sidebar">
+  <div class="sidebar-logo">&#11041; AI Weekly</div>
+  <div class="sidebar-section">バックナンバー</div>
+
+  <!-- ISSUES_LIST_START -->
+  <a href="2026_07_06.html" class="issue-link active">
+    <span class="issue-date">2026年7月6日</span>
+    <span class="issue-label">Sonnet 5 / Robotaxi / 中国AI規制</span>
+  </a>
+  <a href="2026_06_29.html" class="issue-link">
+    <span class="issue-date">2026年6月29日</span>
+    <span class="issue-label">Seed 2.1 Pro / Claude Design / GPT-5.5-Cyber</span>
+  </a>
+  <a href="2026_06_22.html" class="issue-link">
+    <span class="issue-date">2026年6月22日</span>
+    <span class="issue-label">Grok Video 1.5 / Perplexity Brain / GPT-5.6</span>
+  </a>
+  <a href="2026_06_15.html" class="issue-link">
+    <span class="issue-date">2026年6月15日</span>
+    <span class="issue-label">Gemma 4 / Siri AI / Mercury 2</span>
+  </a>
+  <a href="2026_06_14.html" class="issue-link">
+    <span class="issue-date">2026年6月14日</span>
+    <span class="issue-label">Fable 5 / OpenCode / Kimi K2.7</span>
+  </a>
+  <a href="2026_06_07.html" class="issue-link">
+    <span class="issue-date">2026年6月7日</span>
+    <span class="issue-label">Claude自己実装80% / Copilot課金 / Gemini 3.5</span>
+  </a>
+  <a href="2026_05_31.html" class="issue-link">
+    <span class="issue-date">2026年5月31日</span>
+    <span class="issue-label">Managed Agents / Qwen3 Coder / Canva AI 2.0</span>
+  </a>
+  <a href="2026_05_27.html" class="issue-link">
+    <span class="issue-date">2026年5月27日</span>
+    <span class="issue-label">Google I/O / Gemini 3.5 / SubQ</span>
+  </a>
+  <a href="2026_05_12.html" class="issue-link">
+    <span class="issue-date">2026年5月12日</span>
+    <span class="issue-label">GPT-5.5 / dreaming / iOS 27</span>
+  </a>
+  <!-- ISSUES_LIST_END -->
+
+</aside>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<div class="main">
+  <header>
+    <h1>AI ニュースまとめ</h1>
+    <p><budoux-ja>2026年6月30日〜7月6日 ／ エンジニア・クリエイター向けピックアップ 10 本</budoux-ja></p>
+  </header>
+
+  <!-- 1 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">01</div>
+      <div class="card-header-text">
+        <h2><budoux-ja>Claude Sonnet 5 リリース ― エージェント性能が Opus 4.8 に迫る、8月末まで $2/$10 の導入価格</budoux-ja></h2>
+        <div class="meta">
+          <span class="date">Jun 30, 2026</span>
+          <span class="tag tag-model">新モデル</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      <budoux-ja>Anthropic が <strong>Claude Sonnet 5</strong> を 6 月 30 日にリリース。Free・Pro プランのデフォルトモデルが 7 月 1 日から Sonnet 4.6 → Sonnet 5 に切り替わった。最大の特徴はエージェント性能の向上で、ブラウザ・ターミナル操作や複数ステップのタスク自動実行が従来より安定し、Sonnet 4.6 が完了できなかった複雑なタスクをこなせるという。多くのベンチマークで Opus 4.8 に肉薄する性能を示しつつ、Terminal-Bench 2.1 では Opus 4.8 (74.6%) を上回る 80.4% を記録。8 月 31 日までの導入価格は入力 $2/MTok・出力 $10/MTok で、9 月以降は $3/$15 の標準価格へ移行する。</budoux-ja>
+    </p>
+    <div class="highlight"><budoux-ja>エンジニア的注目点: 従来 Opus クラスが必要だったエージェントワークフローを Sonnet 価格帯で組める可能性がある。8 月末までの導入価格期間中にパイプラインの置き換え評価を走らせるのが現実的な判断。出力自己チェック機能の強化により、エラーリカバリーの実装コストが下がる点も見逃せない。</budoux-ja></div>
+    <a class="source" href="https://www.anthropic.com/news/claude-sonnet-5" target="_blank">→ Anthropic 公式発表を読む</a>
+  </div>
+
+  <!-- 2 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">02</div>
+      <div class="card-header-text">
+        <h2><budoux-ja>DeepSeek V4-Pro-Max が SWE-bench 80.6% ― オープンウェイトモデル最高スコアで Gemini 3.1 Pro と並ぶ</budoux-ja></h2>
+        <div class="meta">
+          <span class="date">Jun–Jul 2026</span>
+          <span class="tag tag-model">新モデル</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      <budoux-ja><strong>DeepSeek V4-Pro-Max</strong> が SWE-bench Verified で <strong>80.6%</strong> を記録し、オープンウェイトモデル単独トップ（全体 8 位）に。Gemini 3.1 Pro と同スコアで、MiniMax M3 に 0.1pt、Qwen3.7 Max に 0.2pt 差をつけた。アーキテクチャは 1.6T パラメータの MoE で有効パラメータは 49B、コンテキスト長は 100 万トークン。出力 API 単価は $0.87/MTok と報告されており、クローズドモデルとのコスト差は依然として大きい。なお、クローズドフロンティアでは Claude Fable 5 が 95.0% でトップに立っている。</budoux-ja>
+    </p>
+    <div class="highlight"><budoux-ja>エンジニア的注目点: オープンウェイトの 80.6% は「使えるレベル」の実用閾値に乗ったと見てよい。自社インフラで動かしたいチームにとって、SWE-bench スコアとライセンス条件を並べた比較検討が現実的になった。ただし V4-Pro-Max をフルで自前デプロイするには相応の GPU リソースが必要で、API 利用との費用対効果は試算が必要。</budoux-ja></div>
+    <a class="source" href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro" target="_blank">→ Hugging Face モデルページを見る</a>
+  </div>
+
+  <!-- 3 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">03</div>
+      <div class="card-header-text">
+        <h2><budoux-ja>Grok 4.5 が SpaceX・Tesla でプライベートベータ開始 ― 1.5T V9 モデル、Cursor データを追加学習</budoux-ja></h2>
+        <div class="meta">
+          <span class="date">Jul 4, 2026 (coverage)</span>
+          <span class="tag tag-model">新モデル</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      <budoux-ja>xAI の <strong>Grok 4.5</strong> が SpaceX と Tesla の内部でプライベートベータを開始。モデルは 1.5 兆パラメータの V9 基盤モデルを使い、Cursor のコーディングデータを補足学習に加えている。内部評価では Opus 4.8 に迫るか超えると主張しているが、独立した第三者ベンチマークは未公開。現時点で公開 API はなく、リリース日も未発表。xAI の月次リリースペースから、7 月中の公開ベータ移行が想定される。</budoux-ja>
+    </p>
+    <div class="highlight"><budoux-ja>エンジニア的注目点: Cursor のコーディングデータを明示的に追加学習した点が特徴で、コード補完・リファクタリング系タスクへの特化が狙いと読める。公開後にベンチマークの独立検証が出るまで過度な期待は禁物だが、xAI の月次ペースを踏まえると早めに検証環境を準備しておく価値はある。</budoux-ja></div>
+    <a class="source" href="https://www.timesofai.com/news/xai-launches-grok-4-5-private-beta/" target="_blank">→ Times of AI の報道を読む</a>
+  </div>
+
+  <!-- 4 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">04</div>
+      <div class="card-header-text">
+        <h2><budoux-ja>Google が Nano Banana 2 Lite と Gemini Omni Flash を API 公開 ― 画像生成 $0.034/K・動画のネイティブ編集</budoux-ja></h2>
+        <div class="meta">
+          <span class="date">Late Jun 2026</span>
+          <span class="tag tag-creative">クリエイティブ</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      <budoux-ja>Google が 2 つのメディア生成モデルを開発者向け API で公開。<strong>Nano Banana 2 Lite</strong> はテキスト→画像を 4 秒で生成、単価 <strong>$0.034/K 画像</strong>で「高スループット・大量生成向け」と位置付けられている。<strong>Gemini Omni Flash</strong> はネイティブマルチモーダルの動画生成・編集モデルで、テキスト・画像・動画を組み合わせたインプットから高品質動画を生成・会話的に編集できる。Google AI Studio と Gemini API でパブリックプレビューとして提供開始。</budoux-ja>
+    </p>
+    <div class="highlight"><budoux-ja>エンジニア的注目点: 画像 $0.034/K は大量バッチ処理のコスト試算に大きく影響する。EC サムネイル・SNS バナーの自動生成など反復ユースケースで競合サービスとのコスト比較が現実的になった。Gemini Omni Flash はプログラマブルな動画編集 API として、Runway の競合に位置する。</budoux-ja></div>
+    <a class="source" href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-omni-flash-nano-banana-2-lite/" target="_blank">→ Google 公式ブログを読む</a>
+  </div>
+
+  <!-- 5 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">05</div>
+      <div class="card-header-text">
+        <h2><budoux-ja>Tesla Robotaxi がマイアミで監視員なし自律走行を開始 ― カメラのみ FSD がフロリダの豪雨環境で試される</budoux-ja></h2>
+        <div class="meta">
+          <span class="date">Jul 3, 2026</span>
+          <span class="tag tag-agent">エージェント</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      <budoux-ja>Tesla が 7 月 3 日、マイアミで Robotaxi サービスを正式開始。Texas・California に続く 3 都市目で、運転手も安全監視員も乗せない完全無人での市街地走行を開始した。現在の運行エリアは西マイアミデイド郡（West Miami・Doral・Coral Gables）を中心とした約 10〜14 平方マイルのジオフェンス内に限定されている。車両は Model Y で、FSD ソフトウェアはカメラのみ（LiDAR なし）で動作。フロリダは米国有数の豪雨地域であり、カメラ専用システムの悪天候耐性が最大の評価ポイントとなっている。</budoux-ja>
+    </p>
+    <div class="highlight"><budoux-ja>エンジニア的注目点: カメラのみの FSD が「豪雨×夜間」という過酷な条件でどこまで機能するかは、自動運転業界の設計選択論争（カメラ vs LiDAR）に対する実データになる。Tesla が公開するインシデントレートが、今後の規制策定にも影響しうる。</budoux-ja></div>
+    <a class="source" href="https://www.techtimes.com/articles/319711/20260704/tesla-robotaxi-arrives-miami-floridas-rain-hardest-test-yet-camera-only-fsd.htm" target="_blank">→ TechTimes の報道を読む</a>
+  </div>
+
+  <!-- 6 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">06</div>
+      <div class="card-header-text">
+        <h2><budoux-ja>中国の擬人化AI規制が 7/15 施行: ByteDance・Alibaba が AI 相手役機能を停止</budoux-ja></h2>
+        <div class="meta">
+          <span class="date">Jul 6, 2026</span>
+          <span class="tag tag-security">セキュリティ</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      <budoux-ja>中国のサイバースペース管理局など 5 機関が共同発布した「AI 擬人化インタラクションサービス管理暫定措置」が 7 月 15 日に施行される。規制は「人格・思考パターン・コミュニケーションスタイルを模倣して継続的な感情的インタラクションを提供する AI サービス」を対象とし、アンチ依存システム・利用通知・即時離脱機能の組み込みを義務付けている。<strong>ByteDance の Doubao</strong> と <strong>Alibaba の Qwen</strong> はユーザー作成の AI エージェント機能を 7 月 10〜15 日までに停止。Qwen は停止後の会話履歴に 10 月 15 日まで読み取り専用でアクセス可能としている。カスタマーサービスボットや教育・業務ツールは対象外。</budoux-ja>
+    </p>
+    <div class="highlight"><budoux-ja>エンジニア的注目点: 「感情的インタラクション」という定義の曖昧さが将来の規制拡大リスクを内包している。中国市場向けに AI コンパニオン・キャラクター系機能を開発・提供している企業にとって、アーキテクチャ上の対応コストが読みにくい状況。日本を含む他国での類似規制の先例になりうる。</budoux-ja></div>
+    <a class="source" href="https://technode.com/2026/07/06/bytedances-doubao-and-alibabas-qwen-to-shut-down-ai-agent-features-on-july-15/" target="_blank">→ TechNode の詳報を読む</a>
+  </div>
+
+  <!-- 7 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">07</div>
+      <div class="card-header-text">
+        <h2><budoux-ja>Hopsworks 5.0 ― Claude Code 組み込みの ML 統合基盤、コーディングエージェントで断片化ツールを一本化</budoux-ja></h2>
+        <div class="meta">
+          <span class="date">Jun 30, 2026</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      <budoux-ja><strong>Hopsworks 5.0</strong> が一般公開。最大の変更点は、プラットフォーム内に <strong>Claude Code と Codex を組み込んだコーディングエージェント&ターミナル</strong> を内蔵したこと。Feature Pipeline・Training Pipeline・Inference Pipeline・Streamlit アプリ・分析ダッシュボードをエージェントが横断して実装・保守できる環境を一つのプラットフォームで提供する。新 UI は主要操作のレイテンシを 50% 削減。SQL クエリは Trino、ダッシュボードは Apache Superset、外部データは DLTHub 経由でスケジュール取り込みと外部テーブルマウントを選択可能になった。</budoux-ja>
+    </p>
+    <div class="highlight"><budoux-ja>エンジニア的注目点: Claude Code が ML 基盤プラットフォームに組み込まれた事例は実験フェーズから本番運用フェーズへの移行を示している。データパイプラインの実装をエージェントに委ねる選択肢が具体的なプロダクトとして出てきたことで、MLOps チームの役割分担の議論が加速しそう。</budoux-ja></div>
+    <a class="source" href="https://www.globenewswire.com/news-release/2026/06/30/3319457/0/en/releasing-hopsworks-5-0-introducing-the-coding-data-and-ai-stack.html" target="_blank">→ GlobeNewswire の発表を読む</a>
+  </div>
+
+  <!-- 8 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">08</div>
+      <div class="card-header-text">
+        <h2><budoux-ja>MCP が月間 9700 万 SDK DL を突破、RC 仕様は 7 月 28 日公開へ ― ステートレス化で運用性が向上</budoux-ja></h2>
+        <div class="meta">
+          <span class="date">Jul 2026</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      <budoux-ja>Model Context Protocol の月間 SDK ダウンロード数が <strong>9700 万件</strong>に到達。現在 RC（リリース候補）仕様が公開されており、最終仕様は <strong>7 月 28 日</strong>に公開予定。RC の主な変更点は「<strong>プロトコル層のステートレス化</strong>」で、クライアントとサーバー間の接続契約を明確にすることで可観測性・スケーリング・バージョン管理の難易度を下げる設計になっている。現行の MCP 実装との後方互換性については最終仕様で詳細が明らかになる見込み。</budoux-ja>
+    </p>
+    <div class="highlight"><budoux-ja>エンジニア的注目点: MCP を本番採用している・検討しているチームは 7/28 の最終仕様を待ってからアーキテクチャを確定させた方が安全。ステートレス化はサーバー側の実装コストを下げる一方で、セッション状態の管理をアプリ層に移す必要が生じる場合があり、既存実装の改修コストの見積もりが必要。</budoux-ja></div>
+    <a class="source" href="https://aaif.io/blog/mcp-is-growing-up/" target="_blank">→ AAIF の MCP 分析を読む</a>
+  </div>
+
+  <!-- 9 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">09</div>
+      <div class="card-header-text">
+        <h2><budoux-ja>Meituan が LongCat-2.0 を MIT ライセンスで公開 ― 中国フードデリバリー大手の実務投入モデルがオープンソース化</budoux-ja></h2>
+        <div class="meta">
+          <span class="date">Jun 29, 2026</span>
+          <span class="tag tag-model">新モデル</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      <budoux-ja>中国最大のフードデリバリー・ローカルサービスプラットフォームの美団（Meituan）が <strong>LongCat-2.0</strong> を MIT ライセンスで公開。LongCat は Meituan の実サービスで長期間使用されてきた社内モデルで、ロングコンテキスト処理・複雑な推論・実務タスクへの適応性が特徴とされている。MIT ライセンスでの公開は商用利用・改変・再配布を無制限に認めるもので、中国大手プラットフォーマーによるオープンソース戦略の一環と見られる。</budoux-ja>
+    </p>
+    <div class="highlight"><budoux-ja>エンジニア的注目点: Meituan 規模の実サービスで検証済みのモデルが MIT で入手できるのは実用面で意味がある。中国語・複雑な検索・レコメンド系タスクに強い可能性が高く、日本語対応の検証とライセンス上の問題がないかの確認を済ませてからベンチマークに組み込む価値がある。</budoux-ja></div>
+    <a class="source" href="https://llm-stats.com/ai-news" target="_blank">→ LLM Stats でモデル情報を確認する</a>
+  </div>
+
+  <!-- 10 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">10</div>
+      <div class="card-header-text">
+        <h2><budoux-ja>企業の AI エージェント投資が $2060 億規模に ― 「仕事ができない」評価との乖離が続く</budoux-ja></h2>
+        <div class="meta">
+          <span class="date">Jun 30, 2026</span>
+          <span class="tag tag-agent">エージェント</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      <budoux-ja>IDC の調査によると、2026 年の企業における AI エージェントソフトウェア支出が <strong>$2060 億</strong>規模に達する見通しとなっている。一方で実務評価での「まだ実際の仕事に使えない」という声は依然として多く、投資額と実用化の間のギャップが業界の話題となっている。主な課題として指摘されているのは、エラーリカバリーの不安定さ・長時間タスクでのコンテキスト喪失・組織既存システムとの統合コストの 3 点。投資の大半は AI エージェントを前提とした基盤刷新（データ統合・API 整備）に向かっているとされる。</budoux-ja>
+    </p>
+    <div class="highlight"><budoux-ja>エンジニア的注目点: $2060 億の多くが「エージェントが動く環境を作るための投資」であるという解釈が現実的で、モデル単体の評価より統合インフラの設計が実用化の鍵になっている。社内で AI エージェント導入を検討する際は、既存システムとの API 整備コストを先に試算する方が ROI 計算が現実的になる。</budoux-ja></div>
+    <a class="source" href="https://asanify.com/blog/news/ai-agent-software-spending-june-30-2026/" target="_blank">→ Asanify の分析を読む</a>
+  </div>
+
+  <footer>
+    <budoux-ja>AI ニュースまとめ 2026年7月6日号 ／ 対象期間: 2026年6月30日〜7月6日 ／ エンジニア・クリエイター向けピックアップ</budoux-ja>
+  </footer>
+</div>
+
+</body>
+</html>
