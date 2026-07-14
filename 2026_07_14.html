@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI ニュース — 2026年7月14日号</title>
+  <script src="https://unpkg.com/budoux/bundle/budoux-ja.min.js"></script>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --sidebar-bg: #13151f;
+      --card: #1a1d27;
+      --border: #2a2d3e;
+      --accent: #6c63ff;
+      --accent2: #00c9a7;
+      --text: #e2e4f0;
+      --muted: #8b8fa8;
+      --sidebar-w: 220px;
+      --tag-eng: #1e3a5f;       --tag-eng-text: #60a5fa;
+      --tag-agent: #1e3a2f;     --tag-agent-text: #34d399;
+      --tag-model: #3a1e3a;     --tag-model-text: #c084fc;
+      --tag-security: #3a1e1e;  --tag-security-text: #f87171;
+      --tag-creative: #3a2e1e;  --tag-creative-text: #fb923c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      overflow-y: auto;
+      padding: 1.5rem 0;
+    }
+    .sidebar-logo {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+      padding: 0 1.2rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: 0.05em;
+    }
+    .sidebar-section {
+      padding: 1rem 1.2rem 0.4rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .issue-link {
+      display: block;
+      padding: 0.45rem 1.2rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-left: 3px solid transparent;
+      transition: all 0.15s;
+      line-height: 1.4;
+    }
+    .issue-link:hover {
+      color: var(--text);
+      background: rgba(108,99,255,0.07);
+    }
+    .issue-link.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: rgba(108,99,255,0.08);
+    }
+    .issue-link .issue-date { display: block; font-size: 0.75rem; }
+    .issue-link .issue-label { display: block; font-size: 0.7rem; color: var(--muted); margin-top: 0.1rem; }
+
+    /* ── Main ── */
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      padding: 2rem 2rem 3rem;
+      max-width: 900px;
+    }
+    header { margin-bottom: 2.5rem; }
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    header p { color: var(--muted); margin-top: 0.4rem; font-size: 0.9rem; }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card-header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 0.75rem; }
+    .number {
+      font-size: 1.5rem; font-weight: 800; color: var(--accent);
+      flex-shrink: 0; min-width: 2rem; line-height: 1.3;
+    }
+    .card-header-text { flex: 1; }
+    .card h2 { font-size: 1.05rem; font-weight: 600; color: var(--text); }
+    .meta { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.3rem; flex-wrap: wrap; }
+    .date { font-size: 0.78rem; color: var(--muted); }
+    .tag {
+      font-size: 0.7rem; font-weight: 600;
+      padding: 0.15rem 0.55rem; border-radius: 999px;
+    }
+    .tag-eng      { background: var(--tag-eng);      color: var(--tag-eng-text); }
+    .tag-agent    { background: var(--tag-agent);    color: var(--tag-agent-text); }
+    .tag-model    { background: var(--tag-model);    color: var(--tag-model-text); }
+    .tag-security { background: var(--tag-security); color: var(--tag-security-text); }
+    .tag-creative { background: var(--tag-creative); color: var(--tag-creative-text); }
+    .card p { font-size: 0.91rem; color: #c4c7db; line-height: 1.75; }
+    .card a.source {
+      color: var(--accent); text-decoration: none;
+      font-size: 0.8rem; display: inline-block; margin-top: 0.75rem;
+    }
+    .card a.source:hover { text-decoration: underline; }
+    .highlight {
+      background: rgba(108,99,255,0.08);
+      border-left: 3px solid var(--accent);
+      padding: 0.4rem 0.75rem;
+      border-radius: 0 6px 6px 0;
+      margin-top: 0.75rem;
+      font-size: 0.86rem;
+      color: var(--accent2);
+      line-height: 1.6;
+    }
+    footer {
+      margin-top: 3rem; color: var(--muted);
+      font-size: 0.78rem; border-top: 1px solid var(--border); padding-top: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<aside class="sidebar">
+  <div class="sidebar-logo">&#11041; AI Weekly</div>
+  <div class="sidebar-section">バックナンバー</div>
+
+  <!-- ISSUES_LIST_START -->
+  <a href="2026_07_14.html" class="issue-link active">
+    <span class="issue-date">2026年7月14日</span>
+    <span class="issue-label">GPT-5.6 / Muse Spark / GhostApproval</span>
+  </a>
+  <a href="2026_07_06.html" class="issue-link">
+    <span class="issue-date">2026年7月6日</span>
+    <span class="issue-label">Sonnet 5 / Robotaxi / 中国AI規制</span>
+  </a>
+  <a href="2026_06_29.html" class="issue-link">
+    <span class="issue-date">2026年6月29日</span>
+    <span class="issue-label">Seed 2.1 Pro / Claude Design / GPT-5.5-Cyber</span>
+  </a>
+  <a href="2026_06_22.html" class="issue-link">
+    <span class="issue-date">2026年6月22日</span>
+    <span class="issue-label">Grok Video 1.5 / Perplexity Brain / GPT-5.6</span>
+  </a>
+  <a href="2026_06_15.html" class="issue-link">
+    <span class="issue-date">2026年6月15日</span>
+    <span class="issue-label">Gemma 4 / Siri AI / Mercury 2</span>
+  </a>
+  <a href="2026_06_14.html" class="issue-link">
+    <span class="issue-date">2026年6月14日</span>
+    <span class="issue-label">Fable 5 / OpenCode / Kimi K2.7</span>
+  </a>
+  <a href="2026_06_07.html" class="issue-link">
+    <span class="issue-date">2026年6月7日</span>
+    <span class="issue-label">Claude自己実装80% / Copilot課金 / Gemini 3.5</span>
+  </a>
+  <a href="2026_05_31.html" class="issue-link">
+    <span class="issue-date">2026年5月31日</span>
+    <span class="issue-label">Managed Agents / Qwen3 Coder / Canva AI 2.0</span>
+  </a>
+  <a href="2026_05_27.html" class="issue-link">
+    <span class="issue-date">2026年5月27日</span>
+    <span class="issue-label">Google I/O / Gemini 3.5 / SubQ</span>
+  </a>
+  <a href="2026_05_12.html" class="issue-link">
+    <span class="issue-date">2026年5月12日</span>
+    <span class="issue-label">GPT-5.5 / dreaming / iOS 27</span>
+  </a>
+  <!-- ISSUES_LIST_END -->
+
+</aside>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<div class="main">
+  <header>
+    <h1>AI ニュースまとめ</h1>
+    <p><budoux-ja>2026年7月7日〜14日 ／ エンジニア・クリエイター向けピックアップ 10 本</budoux-ja></p>
+  </header>
+
+  <!-- 1 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">01</div>
+      <div class="card-header-text">
+        <h2><budoux-ja>OpenAI が GPT-5.6 家族（Sol / Terra / Luna）と ChatGPT Work を公開 ― 3 層価格体系と「ultra」マルチエージェント設定</budoux-ja></h2>
+        <div class="meta">
+          <span class="date">Jul 9, 2026</span>
+          <span class="tag tag-model">新モデル</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      <budoux-ja>OpenAI が <strong>GPT-5.6</strong> を 3 つのティアで同日公開。<strong>Sol</strong> はフラッグシップで大規模コードベースや長時間エージェント向け（$5/$30 per MTok）、<strong>Terra</strong> はオールラウンドのデフォルト（$2.50/$15）、<strong>Luna</strong> は小タスク向けの最安値モデル（$1/$6）。同時に <strong>ChatGPT Work</strong> エージェントを発表。複数エージェントを並列ストリームで協調させる「ultra」設定を搭載し、単なる回答生成でなく「仕事を丸ごと引き受ける」設計を謳っている。プロンプトキャッシュは明示的なブレークポイント指定と 30 分の最低キャッシュ保持に対応し、予測可能性が向上した。パブリックロールアウトは 6 月 26 日に政府承認の 20 組織向け限定プレビューを経て、7 月 9 日に一般公開へ移行した。</budoux-ja>
+    </p>
+    <div class="highlight"><budoux-ja>エンジニア的注目点: Terra の $2.50/$15 は Sonnet 5 の導入価格（$2/$10）とほぼ同価格帯で、二択の比較評価が現実的になった。ultra 設定は Agent SDK でどう叩けるかが実装者の関心事。キャッシュブレークポイントは長文プロンプトのコスト最適化に直結するため、プロンプト設計の見直し余地がある。</budoux-ja></div>
+    <a class="source" href="https://openai.com/index/gpt-5-6/" target="_blank">→ OpenAI 公式発表を読む</a>
+  </div>
+
+  <!-- 2 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">02</div>
+      <div class="card-header-text">
+        <h2><budoux-ja>Meta が Muse Spark 1.1 と Meta Model API を公開 ― 初の有料 API、1M トークンコンテキストの自律エージェントモデル</budoux-ja></h2>
+        <div class="meta">
+          <span class="date">Jul 9, 2026</span>
+          <span class="tag tag-model">新モデル</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      <budoux-ja>Meta Superintelligence Labs が <strong>Muse Spark 1.1</strong> を発表し、同時に <strong>Meta Model API</strong> のパブリックプレビューを開始した。Meta が有料 API を提供するのはこれが初めてで、Llama のオープンウェイト路線とは異なるクローズドモデルとして位置付けられる。コンテキスト長は <strong>1M トークン</strong>で、長時間タスク中の能動的なコンテキスト管理（重要ステップを保持しながら自律的に圧縮）が特徴。マルチエージェントオーケストレーターとしてもサブエージェントとしても機能し、コンピューター操作・ツール使用・コーディングで大きく向上している。価格は $1.25/$4.25 per MTok、新規 $20 クレジット付き。GPT-5.5 および Opus 4.8 とのエージェント評価で競合すると主張。</budoux-ja>
+    </p>
+    <div class="highlight"><budoux-ja>エンジニア的注目点: Meta が有料 API に踏み込んだことで OpenAI・Anthropic・xAI との直接競争に参入した。1M トークンの自律コンテキスト管理は長時間バッチ処理の実装コストを下げる可能性があり、$1.25/$4.25 という価格は同等性能のモデルと比較して競争力がある。ただしベンチマークは自社評価のみなので、独立検証を待ってから本採用判断をする方が安全。</budoux-ja></div>
+    <a class="source" href="https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/" target="_blank">→ Meta AI 公式ブログを読む</a>
+  </div>
+
+  <!-- 3 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">03</div>
+      <div class="card-header-text">
+        <h2><budoux-ja>Grok 4.5 が一般公開 ― SpaceX・Tesla のプライベートベータを経て API 提供開始</budoux-ja></h2>
+        <div class="meta">
+          <span class="date">Jul 8, 2026</span>
+          <span class="tag tag-model">新モデル</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      <budoux-ja>xAI の <strong>Grok 4.5</strong> が 7 月 8 日に一般公開された。SpaceX・Tesla での内部プライベートベータ（前号で報告）を経てのリリースで、1.5 兆パラメータの V9 基盤モデルに Cursor のコーディングデータを追加学習させた構成。内部評価では Opus 4.8 と同等以上のコーディング性能を主張している。API は X Premium+ 加入者および xAI API 経由で提供開始。独立した第三者によるコーディングベンチマーク（SWE-bench など）の検証結果は今週時点でまだ出ていない。</budoux-ja>
+    </p>
+    <div class="highlight"><budoux-ja>エンジニア的注目点: Cursor のコーディングデータを明示的に追加学習した設計は、コード補完・リファクタリング系タスクへの特化を示唆している。同週に GPT-5.6 と Meta Muse Spark が出たタイミングでの公開となり、第三者ベンチマークが揃い次第、3 モデルの比較評価表を作るのが実務判断の近道。</budoux-ja></div>
+    <a class="source" href="https://llm-stats.com/ai-news" target="_blank">→ LLM Stats でモデル情報を確認する</a>
+  </div>
+
+  <!-- 4 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">04</div>
+      <div class="card-header-text">
+        <h2><budoux-ja>Friendly Fire と GhostApproval ― AI コーディングエージェントの信頼境界を破る 2 つの PoC が同日公開</budoux-ja></h2>
+        <div class="meta">
+          <span class="date">Jul 8–9, 2026</span>
+          <span class="tag tag-security">セキュリティ</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      <budoux-ja>7 月 8〜9 日、AI コーディングエージェントを狙う概念実証（PoC）が 2 件同時期に公開された。<strong>Friendly Fire</strong>（AI Now Institute）は、README などの通常ファイルに潜ませたプロンプトインジェクションにより、Claude Code（auto モード）と OpenAI Codex に悪意あるバイナリを実行させることに成功。信頼できないサードパーティ製コードの「セキュリティレビュー」という正当な作業を起点に攻撃が成立する。<strong>GhostApproval</strong>（Wiz Research）はシンボリックリンクの未チェックを利用した攻撃で、ユーザーには無害なファイルへの書き込み確認を表示しつつ、実際にはシステムの重要ファイルに書き込む。Claude Code では「エージェントの内部推論は正しい書き込み先を把握していたが、ユーザーへの確認プロンプトは別のファイル名を表示していた」という乖離が報告されている。Claude Code・Amazon Q Developer・Cursor・Augment・Windsurf で動作確認済み。</budoux-ja>
+    </p>
+    <div class="highlight"><budoux-ja>エンジニア的注目点: 両攻撃に共通するのは「信頼境界の設計ミス」で、エージェントが自律実行する範囲を最小化していない限り、承認プロンプトは実質的なセキュリティ防御にならない。外部リポジトリを触らせるワークフローには即時見直しが必要。auto モードで未知のコードをレビューさせる運用は当面停止が推奨される。</budoux-ja></div>
+    <a class="source" href="https://cybersecuritynews.com/ghostapproval-vulnerability/" target="_blank">→ GhostApproval の詳報を読む</a>
+  </div>
+
+  <!-- 5 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">05</div>
+      <div class="card-header-text">
+        <h2><budoux-ja>Claude Code がデフォルト権限モードを Manual に変更 ― CLI・VS Code・JetBrains 拡張を含む全プラットフォームで適用</budoux-ja></h2>
+        <div class="meta">
+          <span class="date">Jul 2026</span>
+          <span class="tag tag-security">セキュリティ</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      <budoux-ja>Anthropic が Claude Code のアップデートを配布し、デフォルトの権限モードを <strong>Manual</strong>（全操作に都度確認が必要）に変更した。適用範囲は CLI・help 出力・VS Code 拡張・JetBrains プラグインの全プラットフォーム。従来はより広い権限を持つモードがデフォルトだったが、今回の変更によりエージェントによるファイル変更・コマンド実行・ネットワークアクセスにユーザーの明示的な承認が求められるようになる。Friendly Fire および GhostApproval の PoC 公開と同週に実施されたアップデートで、自律実行の安全設計を見直す動きとして注目される。</budoux-ja>
+    </p>
+    <div class="highlight"><budoux-ja>エンジニア的注目点: 既存の自動化スクリプトや CI パイプラインで Claude Code を auto モードで呼んでいる場合は、Manual モードへの移行で確認フローが挟まるようになり、動作変更が生じる。--permission-mode bypass 等のフラグで明示的に自動実行を有効化する必要があるが、それ自体が攻撃対象になりうる点を踏まえてアーキテクチャを見直す好機。</budoux-ja></div>
+    <a class="source" href="https://www.nxcode.io/resources/news/friendly-fire-rogue-agent-ai-coding-security-2026" target="_blank">→ NxCode のセキュリティ分析を読む</a>
+  </div>
+
+  <!-- 6 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">06</div>
+      <div class="card-header-text">
+        <h2><budoux-ja>Fable 5 が全プラン有料化 ― 7 月 8 日から全サブスクライバーに利用クレジットが必須に</budoux-ja></h2>
+        <div class="meta">
+          <span class="date">Jul 8, 2026</span>
+          <span class="tag tag-eng">開発者向け</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      <budoux-ja>7 月 8 日より、Anthropic の最上位モデル <strong>Claude Fable 5</strong>（旧称 Claude 3.7 Sonnet 系の後継）へのアクセスに全サブスクライバー層で利用クレジットが必須となった。これまで Pro プランなど一部プランでは無制限アクセスが提供されていたが、今回の変更により Fable 5 の使用はトークン消費に基づくクレジット消費に統一される。Anthropic は「モデルの計算コストに応じた公平な利用管理」としている。API 経由のアクセスは従来通りトークン課金のまま変更なし。</budoux-ja>
+    </p>
+    <div class="highlight"><budoux-ja>エンジニア的注目点: Fable 5 を多用している開発者・クリエイターにとっては月額費用の見直しが必要になる場面がある。コーディングエージェント用途で Fable 5 を選んでいた場合、今週公開された GPT-5.6 Sol や Grok 4.5 の性能比較結果が出てから、コストパフォーマンス最適なモデルに切り替えるかどうかを判断する流れが現実的。</budoux-ja></div>
+    <a class="source" href="https://llm-stats.com/llm-updates" target="_blank">→ LLM Updates で最新モデル動向を確認する</a>
+  </div>
+
+  <!-- 7 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">07</div>
+      <div class="card-header-text">
+        <h2><budoux-ja>Trump AI 大統領令の 8/1 実施期限が迫る ― フロンティアモデルの「分類済みベンチマーク」と政府事前アクセス枠組みが始動</budoux-ja></h2>
+        <div class="meta">
+          <span class="date">Jul 8, 2026</span>
+          <span class="tag tag-security">セキュリティ</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      <budoux-ja>6 月 2 日にトランプ大統領が署名した大統領令 14409「AI イノベーションとセキュリティの促進」の主要条項が 8 月 1 日を実施期限として動き出している。中心となるのは <strong>NSA 主導の分類済みベンチマーク</strong>の整備で、フロンティアモデルのサイバー能力を評価し「対象フロンティアモデル」に該当するかどうかを分類する。該当するモデルの開発者は、一般公開の最大 30 日前に政府機関への事前アクセスを任意で提供できる枠組みが設けられる。強制ライセンス・事前承認・許可制の導入は明示的に否定されており、あくまで自発的な協力スキームとして設計されている。</budoux-ja>
+    </p>
+    <div class="highlight"><budoux-ja>エンジニア的注目点: 「任意」とはいえ、政府との関係構築を優先する大手 AI 企業（OpenAI・Anthropic・xAI）にとっては事実上の対応圧力になる。分類済みベンチマークの基準が明らかになれば、何がフロンティアモデルとして扱われるかの境界線が見えてくる。国内でも AI 規制議論の参照点になりうる。</budoux-ja></div>
+    <a class="source" href="https://www.ibm.com/think/news/trump-white-house-executive-order-classified-benchmark-advanced-ai-models" target="_blank">→ IBM Think の分析を読む</a>
+  </div>
+
+  <!-- 8 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">08</div>
+      <div class="card-header-text">
+        <h2><budoux-ja>aion-labs が Aion-3.0 と Aion-3.0-Mini を公開 ― 推論特化のオープンモデル新世代</budoux-ja></h2>
+        <div class="meta">
+          <span class="date">Jul 7, 2026</span>
+          <span class="tag tag-model">新モデル</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      <budoux-ja>aion-labs が <strong>Aion-3.0</strong> および軽量版の <strong>Aion-3.0-Mini</strong> を 7 月 7 日に公開した。Aion シリーズは推論（reasoning）タスクへの特化を設計軸とするオープンモデル群で、数学・コード・科学分野での長ステップ推論に強みを持つ。Aion-3.0 はフルサイズで自前インフラへのデプロイを想定したスケール、Mini は API 利用・エッジデプロイ向けの小型版として提供されている。Hugging Face からダウンロード可能で、ライセンス条件は商用利用を一定範囲で許可している。独立ベンチマークでの位置付けは今週時点でまだ集積中。</budoux-ja>
+    </p>
+    <div class="highlight"><budoux-ja>エンジニア的注目点: 推論特化モデルを自前インフラで動かしたいチームにとって、Aion-3.0 は DeepSeek V4-Pro-Max の代替候補として評価する価値がある。Mini は推論精度よりレイテンシ・コストを優先するユースケース（問い合わせ分類・軽量 RAG など）向けの選択肢として注目。ライセンスを事前に確認してからベンチマークに組み込む手順を踏む方が後工程が楽。</budoux-ja></div>
+    <a class="source" href="https://llmgateway.io/timeline" target="_blank">→ LLM Gateway のリリースタイムラインを確認する</a>
+  </div>
+
+  <!-- 9 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">09</div>
+      <div class="card-header-text">
+        <h2><budoux-ja>Akeneo が Agentic Ziggy を発表 ― 製品クラウド内でデータモデリング・エンリッチメント・品質チェックを協調するエージェント層</budoux-ja></h2>
+        <div class="meta">
+          <span class="date">Jul 8, 2026</span>
+          <span class="tag tag-agent">エージェント</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      <budoux-ja>製品情報管理（PIM）ソフトウェアの Akeneo が <strong>Agentic Ziggy</strong> を発表。Akeneo Product Cloud 内に組み込まれたオーケストレーション層で、データモデリング・スキーママッピング・商品情報エンリッチメント・継続的品質チェックを担う専門エージェント群を調整する。エンドユーザーが操作する UI はそのままで、バックグラウンドでエージェントが商品データのメンテナンスを継続的に行う設計。EC・小売・製造業など商品カタログ管理を大量に行う業種を主な対象にしている。</budoux-ja>
+    </p>
+    <div class="highlight"><budoux-ja>エンジニア的注目点: PIM のような「データの継続的品質管理」は人手での維持コストが高く、エージェントが最も価値を発揮しやすいユースケースのひとつ。Ziggy のアーキテクチャが公開されれば、同種の「専門エージェント群をオーケストレーターが束ねる」設計の参考実装として使える可能性がある。業種特化 SaaS へのエージェント統合の先行事例として追跡する価値がある。</budoux-ja></div>
+    <a class="source" href="https://blog.mean.ceo/latest-ai-announcements-news-july-2026/" target="_blank">→ AI Announcements July 2026 まとめを読む</a>
+  </div>
+
+  <!-- 10 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="number">10</div>
+      <div class="card-header-text">
+        <h2><budoux-ja>Peraton が Peraton[x] を発表 ― 政府・高リスク業務向けエンタープライズエージェント AI プラットフォーム</budoux-ja></h2>
+        <div class="meta">
+          <span class="date">Jul 7, 2026</span>
+          <span class="tag tag-agent">エージェント</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      <budoux-ja>国防・情報機関向け IT サービス企業の Peraton が <strong>Peraton[x]</strong> を発表した。政府機関・防衛・高リスク業務を対象としたエンタープライズエージェント AI プラットフォームで、セキュアな環境でのエージェント実行・監査ログ・アクセス制御・コンプライアンス対応を統合する。政府向けという特性上、クラウドではなく on-premise または政府認定クラウド（GovCloud）環境での運用が想定されており、FedRAMP・NIST 準拠の設計となっている。AI エージェントの政府機関採用が加速する中で、民間エージェントプラットフォームとは異なるセキュリティ要件への対応例として注目される。</budoux-ja>
+    </p>
+    <div class="highlight"><budoux-ja>エンジニア的注目点: 政府・規制産業向けエージェント基盤の設計要件（監査ログの粒度・承認フロー・アクセス制御）は民間用途でも参考になる。エージェントが「何をしたか」の記録を完全に残す設計は、セキュリティ事故後の原因追跡にも必要で、Peraton[x] のアーキテクチャ詳細が公開されれば観察する価値がある。</budoux-ja></div>
+    <a class="source" href="https://aiagentstore.ai/ai-agent-news/2026-july" target="_blank">→ AI Agent News July 2026 を読む</a>
+  </div>
+
+  <footer>
+    <budoux-ja>AI ニュースまとめ 2026年7月14日号 ／ 対象期間: 2026年7月7日〜14日 ／ エンジニア・クリエイター向けピックアップ</budoux-ja>
+  </footer>
+</div>
+
+</body>
+</html>
