@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI ニュース — 2026年7月14日号</title>
+<title>AI ニュース — 2026年7月21日号</title>
 <script src="https://unpkg.com/budoux/bundle/budoux-ja.min.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -362,7 +362,7 @@ canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     <div class="logo-dot"></div>
     AI NEWS
   </a>
-  <span class="issue-date" id="issueDate">2026年7月14日号</span>
+  <span class="issue-date" id="issueDate">2026年7月21日号</span>
   <div class="header-center">
     <div class="counter" id="counter">01 / 10</div>
     <div class="total-hint">今週のAIニュース 全10本</div>
@@ -543,93 +543,93 @@ canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 </div>
 
 <script>
-const STORAGE_KEY = 'ai-news-20260714';
+const STORAGE_KEY = 'ai-news-20260721';
 
 const news = [
   {
     tag: '新モデル', cls: 'tag-model',
-    url: 'https://openai.com/index/gpt-5-6/',
-    title: 'OpenAI、GPT-5.6 家族（Sol / Terra / Luna）と ChatGPT Work を公開。3層価格体系と「ultra」マルチエージェント設定',
-    summary: 'Sol はフラッグシップ（$5/$30 per MTok）、Terra はオールラウンドのデフォルト（$2.50/$15）、Luna は小タスク向け最安値（$1/$6）。ChatGPT Work エージェントは複数エージェントを並列ストリームで協調させる「ultra」設定を搭載し、プロンプトキャッシュは30分の最低保持に対応した。',
-    highlight: 'Terra の $2.50/$15 は Sonnet 5 の導入価格とほぼ同価格帯で比較評価が現実的になった。ultra 設定は Agent SDK でどう叩けるかが実装者の関心事。'
+    url: 'https://simonwillison.net/2026/Jul/16/kimi-k3/',
+    title: 'Moonshot AI が Kimi K3 を公開。2.8兆パラメータ・1M トークンコンテキスト、世界初の公開3Tクラスモデルを標榜',
+    summary: '7月16〜17日にリリース。ネイティブビジョン対応、1Mトークンコンテキストを標準搭載。自社ベンチマークでは Claude Fable 5 に FrontierSWE で5.4点差、GPT-5.6 Sol に Terminal Bench 2.1 で0.5点差。オープンウェイト版は7月27日に Hugging Face で公開予定。',
+    highlight: 'オープン対クローズドの差が「1世代」まで縮まった週。7/27にウェイトが出たら自前インフラ評価をすぐ走らせる準備をしておきたい。コンテキスト1Mは追加料金なしで使える点も注目。'
   },
   {
     tag: '新モデル', cls: 'tag-model',
-    url: 'https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/',
-    title: 'Meta が Muse Spark 1.1 と Meta Model API を公開。初の有料 API、1M トークンコンテキストの自律エージェントモデル',
-    summary: 'Meta が有料 API を提供するのはこれが初めて。コンテキスト長は 1M トークンで、長時間タスク中の能動的なコンテキスト管理が特徴。マルチエージェントオーケストレーターとしてもサブエージェントとしても機能し、価格は $1.25/$4.25 per MTok。',
-    highlight: '1M トークン自律コンテキスト管理は長時間バッチ処理の実装コストを下げる可能性。ただしベンチマークは自社評価のみなので独立検証を待ってから本採用判断を。'
-  },
-  {
-    tag: '新モデル', cls: 'tag-model',
-    url: 'https://llm-stats.com/ai-news',
-    title: 'Grok 4.5 が一般公開。SpaceX・Tesla のプライベートベータを経て API 提供開始',
-    summary: '1.5 兆パラメータの V9 基盤モデルに Cursor のコーディングデータを追加学習させた構成。内部評価では Opus 4.8 と同等以上のコーディング性能を主張。X Premium+ 加入者および xAI API 経由で提供開始。',
-    highlight: '同週に GPT-5.6 と Meta Muse Spark が出たタイミングでの公開。第三者ベンチマークが揃い次第、3モデルの比較評価表を作るのが実務判断の近道。'
+    url: 'https://www.explainx.ai/blog/inkling-thinking-machines-open-weights-july-2026',
+    title: 'Mira Murati の Thinking Machines が Inkling を公開。975B総パラメータ・41B有効、Apache 2.0 で即日ウェイト公開',
+    summary: '元 OpenAI CTO の Mira Murati が立ち上げた研究所の最初のフロンティア級モデル。MoE 構成（256ルーティング専門家＋2共有）、1Mトークンコンテキスト、スライディングウィンドウ＋グローバルアテンション混在。7月15日に Hugging Face でウェイト即時公開。',
+    highlight: 'Apache 2.0 は商用利用・派生制限なし。41B有効パラメータは A100×8台構成で推論できる規模。同日の Kimi K3 と合わせ、オープンフロンティアが一気に2モデル増えた週。'
   },
   {
     tag: 'セキュリティ', cls: 'tag-security',
-    url: 'https://cybersecuritynews.com/ghostapproval-vulnerability/',
-    title: 'Friendly Fire と GhostApproval。AIコーディングエージェントの信頼境界を破る 2 つの PoC が同日公開',
-    summary: 'Friendly Fire はプロンプトインジェクションで Claude Code・Codex に悪意あるバイナリを実行させる。GhostApproval はシンボリックリンクの未チェックを利用し、ユーザーへの確認表示とは別のファイルへ書き込む。Claude Code・Cursor・Windsurf で動作確認済み。',
-    highlight: '外部リポジトリを触らせるワークフローには即時見直しが必要。auto モードで未知コードをレビューさせる運用は当面停止が推奨される。'
-  },
-  {
-    tag: 'セキュリティ', cls: 'tag-security',
-    url: 'https://www.nxcode.io/resources/news/friendly-fire-rogue-agent-ai-coding-security-2026',
-    title: 'Claude Code がデフォルト権限モードを Manual に変更。CLI・VS Code・JetBrains 拡張を含む全プラットフォームで適用',
-    summary: 'これまで広い権限を持つモードがデフォルトだったが、今回の変更でファイル変更・コマンド実行・ネットワークアクセスにユーザーの明示的な承認が必要になる。Friendly Fire および GhostApproval の PoC 公開と同週に実施。',
-    highlight: '既存の CI パイプラインで auto モードを使っている場合は確認フローが挟まるようになる。--permission-mode bypass で明示的に有効化できるが、それ自体が攻撃対象になりうる点を踏まえてアーキテクチャを見直す好機。'
+    url: 'https://techcrunch.com/2026/07/20/hugging-face-confirms-breach-affected-internal-datasets-and-credentials-urges-users-to-take-action/',
+    title: 'Hugging Face が自律 AI エージェントによるインフラ侵入を公表。内部データセット・クレデンシャルに不正アクセス',
+    summary: 'データ処理パイプラインのリモートコードローダーとテンプレートインジェクション 2経路を悪用した自律エージェントフレームワークが攻撃。数万のアクションを短命サンドボックス群で分散実行。公開モデル・データセット・Spacesへの改ざんは確認されず。防御側も LLM トリアージシステムで1.7万件の攻撃イベントを自動分析した。',
+    highlight: 'AI エージェントが攻守両面に使われた最初の公式インシデント開示。本番稼働のデータパイプラインを持つチームは「テンプレートインジェクション」と「データセット由来のコード実行パス」を今すぐ監査すべき。'
   },
   {
     tag: '開発者向け', cls: 'tag-eng',
-    url: 'https://llm-stats.com/llm-updates',
-    title: 'Fable 5 が全プラン有料化。7月8日から全サブスクライバーに利用クレジットが必須に',
-    summary: 'これまで Pro プランなど一部では無制限アクセスが提供されていたが、トークン消費に基づくクレジット消費に統一された。API 経由のアクセスは従来通りトークン課金のまま変更なし。',
-    highlight: 'Fable 5 を多用している開発者は月額費用の見直しが必要。今週公開の GPT-5.6 Sol・Grok 4.5 の比較結果が出てからコストパフォーマンス最適なモデルに切り替えるかを判断する流れが現実的。'
+    url: 'https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/',
+    title: 'Google が NotebookLM を Gemini Notebook にリネーム。コード実行追加、3000万ユーザー・60万組織が利用中',
+    summary: '7月16日に発表。「language model」をブランド名から廃止し Gemini ブランドへ統合。ノートブック内でのコード直接実行（Pro ユーザーに順次展開）と Gemini アプリ・Google 検索とのクロスサービス同期を追加。単独プロダクトの位置付けは維持。',
+    highlight: 'コード実行対応でノートブックが「読む」から「動かす」ツールへ変わる。長文 PDF と実データを同一セッションに置いてコードで分析するワークフローが使いやすくなった。Pro プランがあれば試せる。'
+  },
+  {
+    tag: '開発者向け', cls: 'tag-eng',
+    url: 'https://artificialanalysis.ai/articles/mimo-v2-pro-everything-you-need-to-know',
+    title: 'NVIDIA が Nemotron 3 Embed シリーズを公開。RTEB 多言語リーダーボード1位、3種類の商用利用可能な埋め込みモデル',
+    summary: '旗艦の Nemotron-Embed-8B-BF16 が RTEB 多言語リーダーボードで総合首位。NVFP4・INT8 の 1B 軽量版2種はコスト・レイテンシ優先デプロイ向け。同日、Microsoft も BitNet Embedding（0.6B・270M）を公開し、量子化推論での埋め込みモデル競争が本格化。',
+    highlight: 'RAG の基盤埋め込みを「とりあえず ada」から見直す好機。RTEB に多言語比較表があるので定量的な選定根拠が作れる。NVFP4版は推論コストが大幅に下がる。'
   },
   {
     tag: 'セキュリティ', cls: 'tag-security',
-    url: 'https://www.ibm.com/think/news/trump-white-house-executive-order-classified-benchmark-advanced-ai-models',
-    title: 'Trump AI 大統領令の 8/1 実施期限が迫る。フロンティアモデルの「分類済みベンチマーク」と政府事前アクセス枠組みが始動',
-    summary: 'NSA 主導の分類済みベンチマークでフロンティアモデルのサイバー能力を評価し、該当モデルの開発者は一般公開30日前に政府への事前アクセスを任意提供できる枠組みが設けられる。強制ライセンス・事前承認の導入は明示的に否定。',
-    highlight: '「任意」とはいえ大手 AI 企業にとっては事実上の対応圧力になる。分類済みベンチマークの基準が明らかになれば、何がフロンティアモデルとして扱われるかの境界線が見えてくる。'
+    url: 'https://www.esecurityplanet.com/weekly-roundup/ai-driven-attacks-critical-exploits-and-global-breaches-define-this-week-in-july-2026-in-cybersecurity/',
+    title: 'xAI の Grok Build CLI がユーザーリポジトリ全体を無断アップロード。SSH 鍵・パスワードマネージャ DB まで流出',
+    summary: 'AI安全研究者 Cereblab が発見。xAI のコーディング CLI「Grok Build」がホームディレクトリ全体（Git ヒストリー含む）を Google Cloud Storage バケットに無断送信。SSH 鍵やパスワードマネージャのデータベースファイルが含まれていたケースも確認された。',
+    highlight: 'AI コーディング CLI に「どのファイルまで送信するか」の明示的な制御設定がなければ使わない原則を再確認すべき。Grok Build 利用者は SSH 鍵の即時ローテーションを推奨。競合 CLIも同様のリスクを確認する価値がある。'
+  },
+  {
+    tag: '開発者向け', cls: 'tag-eng',
+    url: 'https://www.crescendo.ai/news/latest-ai-news-and-updates',
+    title: '1Password が Claude のブラウザ統合を発表。AI にパスワードを見せずに多ステップ認証タスクを実行する「ゼロ露出」設計',
+    summary: '旅行予約・アカウント管理などの多ステップウェブタスクで、AI には実際のパスワードを渡さず、1Password がセキュアチャネル経由で認証情報をページへ直接注入する仕組み。Claude が認証情報を参照できる状態を設計上排除し、ログや会話履歴への漏洩を防ぐ。',
+    highlight: 'AIエージェントに資格情報を持たせない「ゼロ露出アーキテクチャ」の実装例として参考になる。マルチステップウェブタスクを組む場合、この設計を自前実装の参考にできる。'
+  },
+  {
+    tag: 'セキュリティ', cls: 'tag-security',
+    url: 'https://dataconomy.com/2026/07/17/google-renames-notebooklm-to-gemini-notebook/',
+    title: '中国「擬人化 AI サービス」規制が7月15日に施行。感情依存・なりすましへの義務的制限、15歳未満のロールプレイ AI は禁止',
+    summary: 'AI が人間であると偽ること、ユーザーとの感情的依存関係を意図的に形成すること、「精神的伴侶」型サービスの無制限展開などを規制。15歳未満へのロールプレイ AI サービスは禁止。中国国内 AI 企業はサービス設計の見直しを迫られている。',
+    highlight: '表向きは中国国内規制だが、感情依存誘導の禁止は欧米でも議論が始まる可能性がある。コンパニオン系・ロールプレイ系 AI プロダクトを開発するなら早めに自社ポリシーを明文化しておく価値がある。'
+  },
+  {
+    tag: '開発者向け', cls: 'tag-eng',
+    url: 'https://aiweekly.co/',
+    title: 'Anthropic が Project Glasswing の初期成果を公表。未公開モデル Claude Mythos Preview がオープンソースの脆弱性を自律修正',
+    summary: 'クリティカルインフラのソフトウェアをAIで保護するイニシアチブ「Project Glasswing」の最初のアップデート。未公開の Claude Mythos Preview を使い、広く使われるオープンソースの脆弱性を自動発見・修正するパイプラインを構築。実際のバグ修正 PR が複数マージされたと報告。',
+    highlight: 'Anthropic が「次世代の未公開モデル」を実運用セキュリティパイプラインに投入している点が注目。AI 生成のセキュリティパッチが OSS に取り込まれる時代が来た。'
   },
   {
     tag: '新モデル', cls: 'tag-model',
     url: 'https://llmgateway.io/timeline',
-    title: 'aion-labs が Aion-3.0 と Aion-3.0-Mini を公開。推論特化のオープンモデル新世代',
-    summary: '数学・コード・科学分野での長ステップ推論に強みを持つオープンモデル群。Aion-3.0 はフルサイズで自前インフラへのデプロイを想定、Mini は API 利用・エッジデプロイ向け。Hugging Face からダウンロード可能で商用利用を一定範囲で許可。',
-    highlight: 'DeepSeek V4-Pro-Max の代替候補として自前インフラで評価する価値がある。Mini は推論精度よりレイテンシ・コストを優先するユースケース（問い合わせ分類・軽量 RAG など）向け。'
-  },
-  {
-    tag: 'エージェント', cls: 'tag-agent',
-    url: 'https://blog.mean.ceo/latest-ai-announcements-news-july-2026/',
-    title: 'Akeneo が Agentic Ziggy を発表。製品クラウド内でデータモデリング・エンリッチメント・品質チェックを協調するエージェント層',
-    summary: '製品情報管理（PIM）ソフトウェアの Akeneo が、データモデリング・スキーママッピング・商品情報エンリッチメント・継続的品質チェックを担う専門エージェント群を調整するオーケストレーション層を発表。バックグラウンドで商品データのメンテナンスを継続的に行う設計。',
-    highlight: '「データの継続的品質管理」はエージェントが最も価値を発揮しやすいユースケース。専門エージェント群をオーケストレーターが束ねる設計の参考実装として追跡する価値がある。'
-  },
-  {
-    tag: 'エージェント', cls: 'tag-agent',
-    url: 'https://aiagentstore.ai/ai-agent-news/2026-july',
-    title: 'Peraton が Peraton[x] を発表。政府・高リスク業務向けエンタープライズエージェント AI プラットフォーム',
-    summary: '国防・情報機関向け IT 企業 Peraton が、セキュアな環境でのエージェント実行・監査ログ・アクセス制御・コンプライアンス対応を統合したプラットフォームを発表。FedRAMP・NIST 準拠の on-premise または GovCloud 運用を想定。',
-    highlight: '政府向け設計のエージェント基盤（監査ログの粒度・承認フロー・アクセス制御）は民間用途でも参考になる。エージェントが「何をしたか」の記録を完全に残す設計は、セキュリティ事故後の原因追跡に不可欠。'
+    title: 'Microsoft が BitNet Embedding（0.6B・270M）を公開。量子化1ビット重みでエッジ推論向け埋め込みに参入',
+    summary: '7月15日にリリース。1ビット量子化（BitNet アーキテクチャ）を埋め込みモデルに応用し、CPU 中心のエッジデバイスでも高速推論が可能な設計。0.6B と 270M の2サイズを Hugging Face で公開。従来の float16 モデルに比べメモリフットプリントを大幅削減。',
+    highlight: 'エッジデバイス・低スペック環境での RAG を諦めていた用途が現実的になる。BitNet の埋め込み応用はまだ実績が少ないので、自前データでの精度検証は必須。'
   },
 ];
 
 const backnumbers = [
-  { label:'2026年7月21日号', file:'2026_07_21.html', current:false,  headline:'Kimi K3 / Inkling / HuggingFace侵入' },
-  { label:'2026年7月14日号', file:'2026_07_14.html', current:true,  headline:'GPT-5.6 / Muse Spark / GhostApproval' },
-  { label:'2026年7月6日号', file:'2026_07_06.html', current:false,  headline:'Sonnet 5 / Robotaxi / 中国AI規制' },
-  { label:'2026年6月29日号', file:'2026_06_29.html', current:false,  headline:'Seed 2.1 Pro / Claude Design / GPT-5.5-Cyber' },
-  { label:'2026年6月22日号', file:'2026_06_22.html', current:false,  headline:'Grok Video 1.5 / Perplexity Brain / GPT-5.6' },
-  { label:'2026年6月15日号', file:'2026_06_15.html', current:false,  headline:'Gemma 4 / Siri AI / Mercury 2' },
-  { label:'2026年6月14日号', file:'2026_06_14.html', current:false,  headline:'Fable 5 / OpenCode / Kimi K2.7' },
-  { label:'2026年6月7日号', file:'2026_06_07.html', current:false,  headline:'Claude自己実装80% / Copilot課金 / Gemini 3.5' },
-  { label:'2026年5月31日号', file:'2026_05_31.html', current:false,  headline:'Managed Agents / Qwen3 Coder / Canva AI 2.0' },
-  { label:'2026年5月27日号', file:'2026_05_27.html', current:false,  headline:'Google I/O / Gemini 3.5 / SubQ' },
-  { label:'2026年5月12日号', file:'2026_05_12.html', current:false,  headline:'GPT-5.5 / dreaming / iOS 27' },
+  { label:'2026年7月21日号', file:'2026_07_21.html', current:true,  headline:'Kimi K3 / Inkling / HuggingFace侵入' },
+  { label:'2026年7月14日号', file:'2026_07_14.html', current:false, headline:'GPT-5.6 / Muse Spark / GhostApproval' },
+  { label:'2026年7月6日号',  file:'2026_07_06.html', current:false, headline:'Sonnet 5 / Robotaxi / 中国AI規制' },
+  { label:'2026年6月29日号', file:'2026_06_29.html', current:false, headline:'Seed 2.1 Pro / Claude Design / GPT-5.5-Cyber' },
+  { label:'2026年6月22日号', file:'2026_06_22.html', current:false, headline:'Grok Video 1.5 / Perplexity Brain / GPT-5.6' },
+  { label:'2026年6月15日号', file:'2026_06_15.html', current:false, headline:'Gemma 4 / Siri AI / Mercury 2' },
+  { label:'2026年6月14日号', file:'2026_06_14.html', current:false, headline:'Fable 5 / OpenCode / Kimi K2.7' },
+  { label:'2026年6月7日号',  file:'2026_06_07.html', current:false, headline:'Claude自己実装80% / Copilot課金 / Gemini 3.5' },
+  { label:'2026年5月31日号', file:'2026_05_31.html', current:false, headline:'Managed Agents / Qwen3 Coder / Canva AI 2.0' },
+  { label:'2026年5月27日号', file:'2026_05_27.html', current:false, headline:'Google I/O / Gemini 3.5 / SubQ' },
+  { label:'2026年5月12日号', file:'2026_05_12.html', current:false, headline:'GPT-5.5 / dreaming / iOS 27' },
 ];
 
 let current = 0, animating = false;
