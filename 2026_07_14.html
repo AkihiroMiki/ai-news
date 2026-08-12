@@ -142,8 +142,47 @@ canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 .news-area {
   position: fixed; top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 20; width: 600px;
-  display: flex; align-items: stretch; gap: 16px;
+  z-index: 20;
+  width: 100vw;
+  height: min(620px, calc(100dvh - 100px));
+  perspective: 1400px;
+  display: block;
+}
+.carousel-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+.card-slide {
+  position: absolute;
+  width: 580px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.5s ease;
+}
+.card-slide.active {
+  transform: translateX(-50%) translateZ(0) scale(1) rotateY(0deg);
+  opacity: 1;
+  pointer-events: all;
+  z-index: 10;
+}
+.card-slide.prev {
+  transform: translateX(calc(-50% - 520px)) translateZ(-120px) scale(0.82) rotateY(18deg);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 5;
+}
+.card-slide.next {
+  transform: translateX(calc(-50% + 520px)) translateZ(-120px) scale(0.82) rotateY(-18deg);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 5;
+}
+.card-slide.hidden {
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* ── Bubble ── */
@@ -200,13 +239,6 @@ canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 }
 .bubble-tail { display: none; }
 
-/* ── News card ── */
-.news-card { transition: opacity 0.3s ease, transform 0.3s ease; }
-.news-card.exit-prev { opacity: 0; transform: translateY(-16px); }
-.news-card.exit-next { opacity: 0; transform: translateY(16px); }
-.news-card.enter-from-next { opacity: 0; transform: translateY(16px); }
-.news-card.enter-from-prev { opacity: 0; transform: translateY(-16px); }
-
 .tag {
   display: inline-flex; align-items: center; gap: 5px;
   padding: 3px 12px; border-radius: 999px;
@@ -261,40 +293,39 @@ canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 .share-btn:hover { background: rgba(108,99,255,0.1); color: #a89fff; border-color: rgba(108,99,255,0.4); }
 .share-btn.copied { color: #34d399; border-color: rgba(52,211,153,0.4); }
 
-/* Read dots on vbar */
-.vbar-dot.read { background: rgba(108,99,255,0.5); }
-
-/* ── Vertical progress bar ── */
-.vbar {
-  width: 20px; display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  padding: 8px 0; flex-shrink: 0;
+/* ── Carousel navigation ── */
+.nav-arrow {
+  position: fixed; top: 50%; z-index: 30;
+  transform: translateY(-50%);
+  width: 52px; height: 52px; border-radius: 50%;
+  background: rgba(108,99,255,0.15);
+  border: 1px solid rgba(108,99,255,0.4);
+  color: #a89fff; font-size: 1.4rem; cursor: pointer;
+  transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
 }
-.vbar-track {
-  width: 3px; flex: 1; background: rgba(108,99,255,0.12);
-  border-radius: 2px; position: relative; max-height: 260px;
+.nav-arrow:hover { background: rgba(108,99,255,0.35); color: #fff; }
+.nav-arrow:disabled { opacity: 0.25; cursor: default; }
+.nav-prev { left: 24px; }
+.nav-next { right: 24px; }
+.dot-nav {
+  position: fixed; bottom: 28px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  display: flex; gap: 10px; align-items: center;
 }
-.vbar-thumb {
-  position: absolute; left: 0; right: 0;
-  background: linear-gradient(180deg, #6c63ff, #00c9a7);
-  border-radius: 2px; box-shadow: 0 0 6px rgba(108,99,255,0.6);
-  transition: top 0.35s cubic-bezier(0.4,0,0.2,1), height 0.35s cubic-bezier(0.4,0,0.2,1);
+.dot-nav-item {
+  width: 8px; height: 8px; padding: 0; border-radius: 50%;
+  background: rgba(108,99,255,0.25);
+  cursor: pointer; transition: all 0.25s;
+  border: none;
 }
-.vbar-dots { display: flex; flex-direction: column; gap: 5px; margin-top: 10px; }
-.vbar-dot {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: rgba(108,99,255,0.18); cursor: pointer;
-  transition: all 0.25s; flex-shrink: 0;
+.dot-nav-item.active {
+  width: 24px; border-radius: 4px;
+  background: linear-gradient(90deg, #6c63ff, #00c9a7);
 }
-.vbar-dot.active { background: #6c63ff; box-shadow: 0 0 6px #6c63ff; transform: scale(1.3); }
-
-/* ── Scroll hint ── */
-.scroll-hint {
-  text-align: center; font-size: 0.7rem;
-  color: rgba(139,143,168,0.4); margin-top: 0.9rem; position: relative; z-index: 1;
-  animation: hintPulse 2.5s ease-in-out infinite;
-}
-@keyframes hintPulse { 0%,100%{opacity:.4;transform:translateY(0)} 50%{opacity:.9;transform:translateY(3px)} }
+.dot-nav-item.read { background: rgba(108,99,255,0.5); }
+.dot-nav-item.active.read { background: linear-gradient(90deg, #6c63ff, #00c9a7); }
 
 /* ── Resume toast ── */
 .resume-toast {
@@ -317,16 +348,20 @@ canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
   .char-earth { bottom: 10px; left: 20px; }
   .char-robot { bottom: -30px; right: 20px; }
   .char-ghost { top: 55px; left: 100px; }
-  .news-area { width: 520px; }
+  .card-slide.prev { transform: translateX(calc(-50% - 420px)) translateZ(-120px) scale(0.82) rotateY(18deg); }
+  .card-slide.next { transform: translateX(calc(-50% + 420px)) translateZ(-120px) scale(0.82) rotateY(-18deg); }
 }
 @media (max-width: 900px) {
   .char-ghost { display: none; }
-  .news-area { width: min(500px, calc(100vw - 80px)); }
+  .card-slide { width: min(500px, calc(100vw - 96px)); }
+  .card-slide.prev { transform: translateX(calc(-50% - 72vw)) translateZ(-120px) scale(0.82) rotateY(18deg); }
+  .card-slide.next { transform: translateX(calc(-50% + 72vw)) translateZ(-120px) scale(0.82) rotateY(-18deg); }
   .char-earth svg { width: 120px; height: 120px; }
   .char-robot svg { width: 110px; height: 140px; }
 }
 @media (max-width: 600px) {
-  .news-area { width: calc(100vw - 32px); top: 48%; }
+  .news-area { top: 48%; height: min(620px, calc(100dvh - 120px)); }
+  .card-slide { width: calc(100vw - 32px); }
   .char-earth { bottom: 0; left: 8px; }
   .char-robot { bottom: -30px; right: 8px; }
   .char-earth svg { width: 85px; height: 85px; }
@@ -336,6 +371,10 @@ canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
   .logo { font-size: 1.1rem; letter-spacing: 0.12em; }
   .issue-date { display: none; }
   .drawer { width: 280px; right: -280px; }
+  .nav-arrow { width: 42px; height: 42px; top: auto; bottom: 18px; transform: none; }
+  .nav-prev { left: 16px; }
+  .nav-next { right: 16px; }
+  .dot-nav { bottom: 35px; gap: 8px; }
 }
 </style>
 </head>
@@ -350,11 +389,11 @@ canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     <div class="onboard-rows">
       <div class="onboard-row">
         <div class="onboard-icon">🖱️</div>
-        <p><strong>PC</strong>：スクロールまたは ↑ ↓ キーでニュースを切り替え</p>
+        <p><strong>PC</strong>：左右ボタンまたは ← → キーでニュースを切り替え</p>
       </div>
       <div class="onboard-row">
         <div class="onboard-icon">👆</div>
-        <p><strong>スマホ</strong>：上下スワイプで切り替え</p>
+        <p><strong>スマホ</strong>：左右スワイプで切り替え</p>
       </div>
       <div class="onboard-row">
         <div class="onboard-icon">🔗</div>
@@ -518,39 +557,10 @@ canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 </div>
 
 <!-- News area -->
-<div class="news-area" id="newsArea">
-  <div class="bubble-wrap">
-    <div class="bubble-frame">
-    <div class="bubble-border-anim"></div>
-    <div class="bubble">
-      <div class="corner tl"></div><div class="corner tr"></div>
-      <div class="corner bl"></div><div class="corner br"></div>
-      <div class="scanline"></div>
-      <div class="inner-glow"></div>
-      <div class="bubble-inner">
-        <div class="news-card" id="newsCard">
-          <span class="tag" id="newsTag">model</span>
-          <a class="news-link" id="newsLink" href="#" target="_blank" rel="noopener">
-            <h2 class="news-title"><budoux-ja id="newsTitle">Loading...</budoux-ja></h2>
-            <span class="news-link-hint">元記事を読む</span>
-          </a>
-          <p class="news-summary"><budoux-ja id="newsSummary"></budoux-ja></p>
-          <div class="news-highlight"><budoux-ja id="newsHighlight"></budoux-ja></div>
-          <div class="share-row">
-            <button class="share-btn" id="shareBtn">このニュースをシェア</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div><!-- /.bubble-frame -->
-    <div class="bubble-tail"></div>
-    <div class="scroll-hint" id="scrollHint">↓ スクロールで次のニュース</div>
-  </div>
-  <div class="vbar">
-    <div class="vbar-track"><div class="vbar-thumb" id="vbarThumb"></div></div>
-    <div class="vbar-dots" id="vbarDots"></div>
-  </div>
-</div>
+<div class="news-area" id="newsArea"></div>
+<button class="nav-arrow nav-prev" id="navPrev" aria-label="前のニュース">&#8592;</button>
+<button class="nav-arrow nav-next" id="navNext" aria-label="次のニュース">&#8594;</button>
+<div class="dot-nav" id="dotNav" aria-label="ニュースを選択"></div>
 
 <script>
 const STORAGE_KEY = 'ai-news-20260714';
@@ -681,108 +691,125 @@ function showResumeToast(idx) {
   toast.innerHTML = `前回の続き (${idx+1}番目) から再開しますか？ <button id="resumeYes">再開</button>`;
   document.body.appendChild(toast);
   document.getElementById('resumeYes').addEventListener('click', () => {
-    goTo(idx, true);
+    goTo(idx);
     toast.remove();
   });
   setTimeout(() => toast.remove(), 8000);
 }
 
-/* ── Vertical bar dots ── */
-const dotsEl = document.getElementById('vbarDots');
-news.forEach((_, i) => {
-  const d = document.createElement('div');
-  d.className = 'vbar-dot' + (i===0?' active':'') + (readSet.has(i)?' read':'');
-  d.addEventListener('click', () => goTo(i));
-  dotsEl.appendChild(d);
-});
+function buildCarousel() {
+  const track = document.createElement('div');
+  track.className = 'carousel-track';
+  track.id = 'carouselTrack';
 
-function updateVbar(i) {
-  const thumb = document.getElementById('vbarThumb');
-  const total = news.length;
-  const pct = i / (total - 1);
-  const trackH = document.querySelector('.vbar-track').offsetHeight;
-  const thumbH = Math.max(20, trackH / total);
-  thumb.style.top  = (pct * (trackH - thumbH)) + 'px';
-  thumb.style.height = thumbH + 'px';
-  document.querySelectorAll('.vbar-dot').forEach((d, j) => {
-    d.classList.toggle('active', j === i);
-    d.classList.toggle('read', readSet.has(j));
+  news.forEach((n, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'card-slide hidden';
+    slide.dataset.index = i;
+    slide.innerHTML = `
+      <div class="bubble-frame">
+        <div class="bubble-border-anim"></div>
+        <div class="bubble">
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+          <div class="scanline"></div>
+          <div class="inner-glow"></div>
+          <div class="bubble-inner">
+            <span class="tag ${n.cls}">${n.tag}</span>
+            <a class="news-link" href="${n.url}" target="_blank" rel="noopener">
+              <h2 class="news-title"><budoux-ja>${n.title}</budoux-ja></h2>
+              <span class="news-link-hint">元記事を読む</span>
+            </a>
+            <p class="news-summary"><budoux-ja>${n.summary}</budoux-ja></p>
+            <div class="news-highlight"><budoux-ja>${n.highlight}</budoux-ja></div>
+            <div class="share-row">
+              <button class="share-btn" data-index="${i}">このニュースをシェア</button>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    track.appendChild(slide);
+  });
+
+  const area = document.getElementById('newsArea');
+  area.innerHTML = '';
+  area.appendChild(track);
+}
+
+function buildDotNav() {
+  const nav = document.getElementById('dotNav');
+  news.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'dot-nav-item' + (readSet.has(i) ? ' read' : '');
+    dot.setAttribute('aria-label', `${i + 1}番目のニュース`);
+    dot.addEventListener('click', () => goTo(i));
+    nav.appendChild(dot);
   });
 }
 
-function renderNews(i) {
-  const n = news[i];
-  document.getElementById('newsTag').className = 'tag ' + n.cls;
-  document.getElementById('newsTag').textContent = n.tag;
-  document.getElementById('newsLink').href = n.url;
-  document.getElementById('newsTitle').textContent = n.title;
-  document.getElementById('newsSummary').textContent = n.summary;
-  document.getElementById('newsHighlight').textContent = n.highlight;
+function updateCarousel(idx) {
+  document.querySelectorAll('.card-slide').forEach((slide, i) => {
+    slide.className = 'card-slide';
+    if (i === idx) slide.classList.add('active');
+    else if (i === idx - 1) slide.classList.add('prev');
+    else if (i === idx + 1) slide.classList.add('next');
+    else slide.classList.add('hidden');
+  });
+
+  readSet.add(idx);
+  document.querySelectorAll('.dot-nav-item').forEach((dot, i) => {
+    dot.classList.toggle('active', i === idx);
+    dot.classList.toggle('read', readSet.has(i));
+    dot.setAttribute('aria-current', i === idx ? 'true' : 'false');
+  });
+
   document.getElementById('counter').textContent =
-    String(i+1).padStart(2,'0') + ' / ' + String(news.length).padStart(2,'0');
-  document.getElementById('scrollHint').textContent =
-    i === news.length-1 ? '↑ スクロールで前のニュース' : '↓ スクロールで次のニュース';
+    String(idx + 1).padStart(2,'0') + ' / ' + String(news.length).padStart(2,'0');
+  document.getElementById('navPrev').disabled = idx === 0;
+  document.getElementById('navNext').disabled = idx === news.length - 1;
 
-  readSet.add(i);
   localStorage.setItem(STORAGE_KEY + '-read', JSON.stringify([...readSet]));
-
-  updateVbar(i);
-  history.replaceState(null, '', '?item=' + i);
-  localStorage.setItem(STORAGE_KEY + '-pos', i);
+  history.replaceState(null, '', '?item=' + idx);
+  localStorage.setItem(STORAGE_KEY + '-pos', idx);
 }
 
-function goTo(next, instant) {
+function goTo(next) {
   if (animating || next < 0 || next >= news.length) return;
-  if (instant) { current = next; renderNews(current); return; }
   animating = true;
-  const card = document.getElementById('newsCard');
-  const dir = next > current;
-  card.classList.add(dir ? 'exit-prev' : 'exit-next');
-  setTimeout(() => {
-    current = next;
-    renderNews(current);
-    card.classList.remove('exit-prev','exit-next');
-    card.classList.add(dir ? 'enter-from-next' : 'enter-from-prev');
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      card.classList.remove('enter-from-next','enter-from-prev');
-      setTimeout(() => { animating = false; }, 320);
-    }));
-  }, 300);
+  current = next;
+  updateCarousel(current);
+  setTimeout(() => { animating = false; }, 520);
 }
 
 /* ── Input handlers ── */
-let lastWheel = 0;
-window.addEventListener('wheel', e => {
-  e.preventDefault();
-  const now = Date.now();
-  if (now - lastWheel < 700) return;
-  lastWheel = now;
-  goTo(current + (e.deltaY > 0 ? 1 : -1));
-}, { passive: false });
-
 window.addEventListener('keydown', e => {
-  if (e.key==='ArrowDown'||e.key==='ArrowRight') goTo(current+1);
-  if (e.key==='ArrowUp'||e.key==='ArrowLeft')   goTo(current-1);
+  if (e.key === 'ArrowRight') goTo(current + 1);
+  if (e.key === 'ArrowLeft') goTo(current - 1);
 });
 
-let touchStartY = 0;
-window.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, { passive: true });
+let touchStartX = 0;
+window.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
 window.addEventListener('touchend', e => {
-  const dy = touchStartY - e.changedTouches[0].clientY;
-  if (Math.abs(dy) > 40) goTo(current + (dy > 0 ? 1 : -1));
+  const dx = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(dx) > 50) goTo(current + (dx > 0 ? 1 : -1));
 });
+
+document.getElementById('navPrev').addEventListener('click', () => goTo(current - 1));
+document.getElementById('navNext').addEventListener('click', () => goTo(current + 1));
 
 /* ── Share button ── */
-document.getElementById('shareBtn').addEventListener('click', async () => {
-  const btn = document.getElementById('shareBtn');
-  const url = location.origin + location.pathname + '?item=' + current;
+document.getElementById('newsArea').addEventListener('click', async e => {
+  const btn = e.target.closest('.share-btn');
+  if (!btn) return;
+  const idx = parseInt(btn.dataset.index);
+  const url = location.origin + location.pathname + '?item=' + idx;
   try {
     await navigator.clipboard.writeText(url);
     btn.textContent = 'URLをコピーしました';
     btn.classList.add('copied');
     setTimeout(() => { btn.textContent = 'このニュースをシェア'; btn.classList.remove('copied'); }, 2000);
   } catch {
-    prompt('このURLをコピーしてシェアしてください', url);
+    prompt('URLをコピーしてシェアしてください', url);
   }
 });
 
@@ -814,7 +841,7 @@ backnumbers.forEach(bn => {
 const canvas = document.getElementById('stars');
 const ctx = canvas.getContext('2d');
 function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
-resize(); window.addEventListener('resize', () => { resize(); setTimeout(() => updateVbar(current), 50); });
+resize(); window.addEventListener('resize', resize);
 
 const starData = Array.from({length:200}, () => ({
   x:Math.random(), y:Math.random(),
@@ -855,9 +882,10 @@ requestAnimationFrame(draw);
 /* ── Init ── */
 const startIdx = !isNaN(urlItem) && urlItem >= 0 && urlItem < news.length ? urlItem
                : savedItem > 0 ? savedItem : 0;
-renderNews(startIdx);
+buildCarousel();
+buildDotNav();
+updateCarousel(startIdx);
 current = startIdx;
-setTimeout(() => updateVbar(startIdx), 100);
 
 if (savedItem > 0 && isNaN(urlItem) && !localStorage.getItem(seenKey + '-resumed')) {
   setTimeout(() => showResumeToast(savedItem), 1000);
