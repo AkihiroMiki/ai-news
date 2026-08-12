@@ -98,6 +98,41 @@ canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 .menu-btn.open span:nth-child(2) { opacity: 0; }
 .menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+.grid-btn {
+  background: none; border: none; cursor: pointer;
+  color: rgba(255,255,255,0.6); padding: 6px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 8px; transition: color 0.2s, background 0.2s;
+  margin-right: 4px; margin-left: auto;
+}
+.grid-btn:hover { color: #fff; background: rgba(255,255,255,0.08); }
+.grid-btn + .menu-btn { margin-left: 0; }
+.grid-overlay {
+  position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.75);
+  display: flex; align-items: flex-end; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+}
+.grid-overlay.open { opacity: 1; pointer-events: auto; }
+.grid-panel {
+  background: #13132a; border-radius: 20px 20px 0 0; width: 100%; max-width: 520px; max-height: 75dvh;
+  display: flex; flex-direction: column; transform: translateY(40px);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.grid-overlay.open .grid-panel { transform: translateY(0); }
+.grid-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px 12px; border-bottom: 0.5px solid rgba(255,255,255,0.08); flex-shrink: 0; }
+.grid-title { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.85); }
+.grid-close { background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.4); padding: 4px; display: flex; align-items: center; border-radius: 6px; transition: color 0.2s; }
+.grid-close:hover { color: #fff; }
+.grid-list { overflow-y: auto; padding: 12px 16px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; scrollbar-width: thin; scrollbar-color: rgba(108,99,255,0.3) transparent; }
+.grid-list::-webkit-scrollbar { width: 4px; }
+.grid-list::-webkit-scrollbar-thumb { background: rgba(108,99,255,0.25); border-radius: 999px; }
+.grid-card { background: rgba(255,255,255,0.05); border: 0.5px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 10px; cursor: pointer; transition: background 0.15s, border-color 0.15s; display: flex; flex-direction: column; gap: 6px; }
+.grid-card:hover, .grid-card:active { background: rgba(108,99,255,0.15); border-color: rgba(108,99,255,0.4); }
+.grid-card.current { border-color: rgba(108,99,255,0.6); background: rgba(108,99,255,0.12); }
+.grid-num { font-size: 10px; color: rgba(255,255,255,0.25); }
+.grid-card-title { font-size: 11px; color: rgba(255,255,255,0.8); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.grid-card-tag { font-size: 10px; padding: 2px 6px; border-radius: 4px; align-self: flex-start; }
+
 /* ── Backnumber drawer ── */
 .drawer-overlay {
   position: fixed; inset: 0; z-index: 90;
@@ -419,6 +454,11 @@ canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     <div class="counter" id="counter">01 / 10</div>
     <div class="total-hint">今週のAIニュース 全10本</div>
   </div>
+  <button class="grid-btn" id="gridBtn" aria-label="記事一覧" onclick="openGrid()">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+    </svg>
+  </button>
   <button class="menu-btn" id="menuBtn" aria-label="バックナンバー">
     <span></span><span></span><span></span>
   </button>
@@ -561,6 +601,9 @@ canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 
 <!-- News area -->
 <div class="news-area" id="newsArea"></div>
+<div id="gridOverlay" class="grid-overlay" aria-hidden="true">
+  <div class="grid-panel"><div class="grid-header"><span class="grid-title">記事一覧</span><button class="grid-close" onclick="closeGrid()" aria-label="閉じる"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="grid-list" id="gridList"></div></div>
+</div>
 <button class="nav-arrow nav-prev" id="navPrev" aria-label="前のニュース">&#8592;</button>
 <button class="nav-arrow nav-next" id="navNext" aria-label="次のニュース">&#8594;</button>
 <div class="dot-nav" id="dotNav" aria-label="ニュースを選択"></div>
@@ -881,6 +924,35 @@ function draw(t) {
   requestAnimationFrame(draw);
 }
 requestAnimationFrame(draw);
+
+function buildGrid() {
+  const list = document.getElementById('gridList');
+  if (!list || list.children.length > 0) return;
+  news.forEach((n, i) => {
+    const card = document.createElement('div');
+    card.className = 'grid-card' + (i === current ? ' current' : '');
+    card.dataset.index = i;
+    const tag = n.tag || '開発者向け';
+    card.innerHTML = `<span class="grid-num">${String(i + 1).padStart(2, '0')}</span><span class="grid-card-title">${n.title}</span><span class="grid-card-tag ${n.cls || 'tag-eng'}">${tag}</span>`;
+    card.addEventListener('click', () => { goTo(i); closeGrid(); });
+    list.appendChild(card);
+  });
+}
+
+function openGrid() {
+  buildGrid();
+  const overlay = document.getElementById('gridOverlay');
+  overlay.classList.add('open');
+  overlay.setAttribute('aria-hidden', 'false');
+  overlay.querySelectorAll('.grid-card').forEach((card, i) => card.classList.toggle('current', i === current));
+}
+function closeGrid() {
+  const overlay = document.getElementById('gridOverlay');
+  overlay.classList.remove('open');
+  overlay.setAttribute('aria-hidden', 'true');
+}
+document.getElementById('gridOverlay').addEventListener('click', function(e) { if (e.target === this) closeGrid(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeGrid(); });
 
 /* ── Init ── */
 const startIdx = !isNaN(urlItem) && urlItem >= 0 && urlItem < news.length ? urlItem
