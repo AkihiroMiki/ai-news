@@ -145,7 +145,20 @@
       margin-top: 3rem; color: var(--muted);
       font-size: 0.78rem; border-top: 1px solid var(--border); padding-top: 1.5rem;
     }
-  </style>
+.timeline-btn {
+  color: #c5c0f0;
+  text-decoration: none;
+  border: 1px solid rgba(108,99,255,.35);
+  background: rgba(108,99,255,.09);
+  padding: 8px 14px;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.timeline-btn:hover { background: rgba(108,99,255,.22); }
+</style>
 </head>
 <body>
 
@@ -155,6 +168,10 @@
   <div class="sidebar-section">バックナンバー</div>
 
   <!-- ISSUES_LIST_START -->
+  <a href="2026_08_17.html" class="issue-link">
+    <span class="issue-date">2026年8月17日</span>
+    <span class="issue-label">公開日検証待ち / 今週の収集状況</span>
+  </a>
   <a href="2026_08_12.html" class="issue-link">
     <span class="issue-date">2026年8月12日</span>
     <span class="issue-label">Muse Glimmer / DeepMind 再編 / Seedance 2.5</span>
@@ -216,6 +233,7 @@
   <header>
     <h1>AI ニュースまとめ</h1>
     <p>2026年5月5日〜12日 ／ エンジニア・クリエイター向けピックアップ 10 本</p>
+    <a href="timeline.html" class="timeline-btn">各社タイムライン →</a>
   </header>
 
   <!-- 1 -->

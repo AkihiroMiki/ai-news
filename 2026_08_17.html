@@ -431,6 +431,19 @@ canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
   .nav-prev { left: 10px; }
   .nav-next { right: 10px; }
 }
+.timeline-btn {
+  color: #c5c0f0;
+  text-decoration: none;
+  border: 1px solid rgba(108,99,255,.35);
+  background: rgba(108,99,255,.09);
+  padding: 8px 14px;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.timeline-btn:hover { background: rgba(108,99,255,.22); }
 </style>
 </head>
 <body>
@@ -476,6 +489,7 @@ canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     <button class="menu-btn" id="menuBtn" aria-label="バックナンバー">
       <span></span><span></span><span></span>
     </button>
+    <a href="timeline.html" class="timeline-btn">各社タイムライン →</a>
   </div>
 </header>
 

@@ -431,6 +431,19 @@ canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
   .nav-prev { left: 10px; }
   .nav-next { right: 10px; }
 }
+.timeline-btn {
+  color: #c5c0f0;
+  text-decoration: none;
+  border: 1px solid rgba(108,99,255,.35);
+  background: rgba(108,99,255,.09);
+  padding: 8px 14px;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.timeline-btn:hover { background: rgba(108,99,255,.22); }
 </style>
 </head>
 <body>
@@ -476,6 +489,7 @@ canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     <button class="menu-btn" id="menuBtn" aria-label="バックナンバー">
       <span></span><span></span><span></span>
     </button>
+    <a href="timeline.html" class="timeline-btn">各社タイムライン →</a>
   </div>
 </header>
 
@@ -700,19 +714,20 @@ const news = [
 ];
 
 const backnumbers = [
-  { label:'2026年8月12日号', file:'2026_08_12.html', current:false, headline:'Muse Glimmer / DeepMind 再編 / Seedance 2.5' },
-  { label:'2026年8月4日号',  file:'2026_08_04.html', current:false, headline:'DeepSeek V4 Flash / Copilot AI ワーム / パシング書簡' },
-  { label:'2026年7月21日号', file:'2026_07_21.html', current:false,  headline:'Kimi K3 / Inkling / HuggingFace侵入' },
-  { label:'2026年7月14日号', file:'2026_07_14.html', current:true,  headline:'GPT-5.6 / Muse Spark / GhostApproval' },
-  { label:'2026年7月6日号', file:'2026_07_06.html', current:false,  headline:'Sonnet 5 / Robotaxi / 中国AI規制' },
-  { label:'2026年6月29日号', file:'2026_06_29.html', current:false,  headline:'Seed 2.1 Pro / Claude Design / GPT-5.5-Cyber' },
-  { label:'2026年6月22日号', file:'2026_06_22.html', current:false,  headline:'Grok Video 1.5 / Perplexity Brain / GPT-5.6' },
-  { label:'2026年6月15日号', file:'2026_06_15.html', current:false,  headline:'Gemma 4 / Siri AI / Mercury 2' },
-  { label:'2026年6月14日号', file:'2026_06_14.html', current:false,  headline:'Fable 5 / OpenCode / Kimi K2.7' },
-  { label:'2026年6月7日号', file:'2026_06_07.html', current:false,  headline:'Claude自己実装80% / Copilot課金 / Gemini 3.5' },
-  { label:'2026年5月31日号', file:'2026_05_31.html', current:false,  headline:'Managed Agents / Qwen3 Coder / Canva AI 2.0' },
-  { label:'2026年5月27日号', file:'2026_05_27.html', current:false,  headline:'Google I/O / Gemini 3.5 / SubQ' },
-  { label:'2026年5月12日号', file:'2026_05_12.html', current:false,  headline:'GPT-5.5 / dreaming / iOS 27' },
+  { label:"2026年8月17日号", file:"2026_08_17.html", current:false, headline:"公開日検証待ち / 今週の収集状況" },
+  { label:"2026年8月12日号", file:"2026_08_12.html", current:false, headline:"Muse Glimmer / DeepMind 再編 / Seedance 2.5" },
+  { label:"2026年8月4日号", file:"2026_08_04.html", current:false, headline:"DeepSeek V4 Flash / Copilot AIワーム / パシング書簡" },
+  { label:"2026年7月21日号", file:"2026_07_21.html", current:false, headline:"Kimi K3 / Inkling / HuggingFace侵入" },
+  { label:"2026年7月14日号", file:"2026_07_14.html", current:true, headline:"GPT-5.6 / Muse Spark / GhostApproval" },
+  { label:"2026年7月6日号", file:"2026_07_06.html", current:false, headline:"Sonnet 5 / Robotaxi / 中国AI規制" },
+  { label:"2026年6月29日号", file:"2026_06_29.html", current:false, headline:"Seed 2.1 Pro / Claude Design / GPT-5.5-Cyber" },
+  { label:"2026年6月22日号", file:"2026_06_22.html", current:false, headline:"Grok Video 1.5 / Perplexity Brain / GPT-5.6" },
+  { label:"2026年6月15日号", file:"2026_06_15.html", current:false, headline:"Gemma 4 / Siri AI / Mercury 2" },
+  { label:"2026年6月14日号", file:"2026_06_14.html", current:false, headline:"Fable 5 / OpenCode / Kimi K2.7" },
+  { label:"2026年6月7日号", file:"2026_06_07.html", current:false, headline:"Claude自己実装80% / Copilot課金 / Gemini 3.5" },
+  { label:"2026年5月31日号", file:"2026_05_31.html", current:false, headline:"Managed Agents / Qwen3 Coder / Canva AI 2.0" },
+  { label:"2026年5月27日号", file:"2026_05_27.html", current:false, headline:"Google I/O / Gemini 3.5 / SubQ" },
+  { label:"2026年5月12日号", file:"2026_05_12.html", current:false, headline:"GPT-5.5 / dreaming / iOS 27" },
 ];
 
 let current = 0, animating = false;
