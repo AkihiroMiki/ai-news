@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI ニュース — 2026年8月12日号</title>
+<title>AI ニュース — 2026年8月24日号</title>
 <script src="https://unpkg.com/budoux/bundle/budoux-ja.min.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -484,7 +484,7 @@ canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     <div class="total-hint">今週のAIニュース 全10本</div>
   </div>
   <div class="header-right">
-    <span class="issue-date" id="issueDate">2026年8月12日号</span>
+    <span class="issue-date" id="issueDate">2026年8月24日号</span>
     <button class="grid-btn" id="gridBtn" aria-label="記事一覧" onclick="openGrid()">記事一覧</button>
     <button class="menu-btn" id="menuBtn" aria-label="バックナンバー">
       <span></span><span></span><span></span>
@@ -638,94 +638,94 @@ canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 <div class="dot-nav" id="dotNav" aria-label="ニュースを選択"></div>
 
 <script>
-const STORAGE_KEY = 'ai-news-20260812';
+const STORAGE_KEY = 'ai-news-20260824';
 
 const news = [
   {
     tag: '新モデル', cls: 'tag-model',
-    url: 'https://techcrunch.com/2026/08/10/metas-new-glimmer-ai-model-offers-a-hint-at-zuckerbergs-personal-intelligence-vision/',
-    title: 'Meta、30Bオープンウェイトモデル「Muse Glimmer」を公開。コンシューマーGPU1枚でローカル動作するエージェントAI',
-    summary: '8月10日公開。Muse Spark を蒸留した30Bパラメータのオープンウェイトモデルで、Apache 2.0ライセンスで配布。ツール使用・コーディング・ファイル操作・スクリーンショット操作など複数ステップのエージェントワークフローを「常時オン」で動かすことを設計目標とし、Mac・PC 1枚のコンシューマーGPUでオフライン動作する。Hugging Face の meta-models/Muse-Glimmer-30B で公開済み。',
-    highlight: 'ローカル動作する30Bエージェントモデルが本格的なAIエージェント開発の敷居を下げた。オフライン・プライベートデータ環境での自社エージェント構築が現実的になる。ファインチューニング可能・商用利用可のApache 2.0は社内特化モデルの起点としても有望。'
-  },
-  {
-    tag: '開発者向け', cls: 'tag-eng',
-    url: 'https://the-decoder.com/google-deepmind-loses-both-its-ceo-and-chief-scientist-as-demis-hassabis-and-jeff-dean-step-down-simultaneously/',
-    title: 'Google DeepMind で大規模な首脳人事。Hassabis が CEO を退き、Jeff Dean ら4名は Discovery Loop を創設',
-    summary: '8月6日発表。Demis Hassabis は DeepMind CEO を離れ Alphabet の主席科学者に転じ、CTO の Koray Kavukcuoglu が後継 SVP に就いた。同日 Jeff Dean（Googleに27年）・Sanjay Ghemawat・Quoc Le・Oriol Vinyals の4名が退社し、AI で科学実験を自動化する公益法人 Discovery Loop を創設。Radical Ventures・Khosla Ventures が出資し、Google がクラウドパートナーとして参加。最大数千の実験を並列で発案・繰り返す AI 駆動の研究フレームワーク構築を目指す。',
-    highlight: 'Google Brain・DeepMind を定義してきた人材が一気に外に出た。Discovery Loop は ML システムの自動実験プラットフォームとして将来の研究インフラになりうる。「AI 研究そのものを AI で自動化する」という設計を今後追う価値がある。'
-  },
-  {
-    tag: 'クリエイティブ', cls: 'tag-creative',
-    url: 'https://www.mindstudio.ai/blog/what-is-seedance-2-5',
-    title: 'ByteDance Seedance 2.5 が一般提供開始。30秒・音声込みの動画を1パスで生成、リップシンク精度も向上',
-    summary: '8月8日 GA。音声と映像を同一潜在空間で同時処理するアーキテクチャを採用し、30秒のオーディオビデオを継ぎ目なく1パスで生成する。最大50件のマルチモーダル参照に対応し、1080p出力をサポート。リップシンク精度は平均オフセット0.23秒（旧バージョン比約44%改善）。TechTimes によれば14%のAPI出力が著作権検知器に引っかかるという報告もあり、利用規約の確認が必要。',
-    highlight: '音声と映像を共通 latent space で扱うアーキテクチャは次世代マルチモーダル生成の設計参考になる。商用利用で著作権リスクが顕在化しており、API 利用時の出力フィルタリングを設計フェーズで組み込む必要がある。'
-  },
-  {
-    tag: '開発者向け', cls: 'tag-eng',
-    url: 'https://cryptobriefing.com/meta-muse-glimmer-spark-release/',
-    title: 'Meta が Muse Spark 1.2 と Muse Code ターミナルエージェントを同時公開。並列サブエージェントで長期コーディングタスクを自動化',
-    summary: '8月6日公開。Muse Spark 1.2 は複雑なソフトウェアエンジニアリングに特化した旗艦コーディングモデルで、同日公開の Muse Code ターミナルエージェントと組み合わせることで、コード記述・デバッグ・複数サブエージェントの並列実行が可能になる。Claude Code・OpenAI Codex に続くターミナルファーストのコーディングエージェントとして参入し、Meta API および Hugging Face Space 経由でアクセスできる。',
-    highlight: 'ターミナルエージェントの3ベンダー競合（Claude Code / Codex / Muse Code）が揃った。Muse Code は Muse Glimmer（オープンウェイト）と組み合わせてローカル環境でも動作するパスがある点が他2者と異なる設計。'
-  },
-  {
-    tag: '開発者向け', cls: 'tag-eng',
-    url: 'https://deploymentsafety.openai.com/gpt-5-6-august-update',
-    title: 'OpenAI が GPT-5.6 Luna を無料プランのデフォルトモデルへ。Pro には推論量を調整できる「Think スライダー」を追加',
-    summary: '8月6日適用。無料・Go プランのユーザーはテキストチャット無制限の GPT-5.6 Luna がデフォルトになり、「Think ボタン」で高い推論努力を1回リクエストできるようになった。Plus・Pro ユーザーには更新版 GPT-5.6 Sol が提供され、モデルが1レスポンスにどれだけ考えるかをスライダーで指定できる。Luna の API 料金は入力 $0.20/M トークン（先月比80%引き）。',
-    highlight: 'Think スライダーは推論コストと精度を API からコントロールできる新しい設計軸。短い問い合わせと複雑な推論でモデル・設定を使い分けるコスト最適化が具体的に設計できるようになった。既存の API コスト試算テーブルを今すぐ更新するタイミング。'
+    url: 'https://www.bloomberg.com/news/articles/2026-08-23/mystery-ai-model-ox-alpha-draws-developers-with-free-access',
+    title: '正体不明の「Ox Alpha」、OpenRouterに無料公開。DeepSWE 80%でGPT-5.6-sol超え、開発者が特定に奔走',
+    summary: '8月22〜23日公開。匿名の開発者がOpenRouterに「ox-alpha」として投稿したステルスモデルが、独立研究者によるDeepSWE（長期ソフトウェアエンジニアリングベンチマーク）で約80%を記録しGPT-5.6-sol（52%）・Claude Fable 5（65%）・GLM-5.3（62%）を上回った。約100万トークンのコンテキストウィンドウを持ちテキスト・画像・動画入力に対応。開発者の正体は不明で、中国系AI企業（特にZ.aiのGLM系列）や米国大手の未発表モデルとの説が飛び交っている。サンプル数が少ないため結果はあくまで暫定的。',
+    highlight: '「誰が作ったか分からないモデルがベンチマークトップに躍り出た」という前例のない事態。未監査の小サンプルとはいえ、DeepSWE 80%という数字は現行フロンティアモデルを大きく引き離す。本番採用前に独自評価必須だが、コーディングエージェントの選定基準を更新するきっかけになる。'
   },
   {
     tag: 'セキュリティ', cls: 'tag-security',
-    url: 'https://aisi.gov.uk/category/safeguards',
-    title: '英国 AISI が GPT-5.6 Sol に「万能ジェイルブレイク」を発見。OpenAI が8月6日にパッチを緊急適用するも堅牢性は従来比と同等と自認',
-    summary: '英国 AI 安全研究所（AISI）が GPT-5.6 Sol において脆弱性スキャン・エクスプロイト開発などの長時間エージェントタスクを確実に解禁できる万能ジェイルブレイクを発見した。OpenAI は8月6日に GPT-5.6 Sol・Luna の更新モデルを ChatGPT に展開しシステムカード補遺を公表したが、「ジェイルブレイク堅牢性は従来モデルと同等にとどまる」と自ら認める内容になった。国際的な開示プロセスを経ての公表。',
-    highlight: '「評価をパスした旗艦モデルでも万能ジェイルブレイクは存在しうる」という実証。自社 AI エージェントがサードパーティ API を叩くアーキテクチャでは、モデル自体の安全性バージョンを追跡管理する仕組みが必要になる。'
-  },
-  {
-    tag: 'エージェント', cls: 'tag-agent',
-    url: 'https://claude.com/blog/millennium-and-anthropic-are-building-a-digital-risk-analyst-with-claude',
-    title: 'Anthropic が Millennium（運用9.2兆円超）と共同でデジタル・リスクアナリストを開発。Claude が資産クラスをまたいでリスク変動を説明',
-    summary: '8月6日発表。Millennium は340超の投資チームを抱える世界最大級のオルタナティブ投資会社で、Claude・Claude Code をすでに全社横断で活用している。共同開発するデジタルリスクアナリストは人間のリスクマネージャーの AI チームメイトとして機能し、日次リスク変動の要因説明・新たなリスクインサイトの発掘・情報の記憶と横断的な適用を担う。判断の最終確認は常に人間が行う設計で、Anthropic の常駐エンジニアが開発・最適化を支援する。',
-    highlight: '「要約・説明型」から「意見を持ち変化を追跡する AI アナリスト」への移行事例。記憶の保持・資産クラス横断・長期追跡というパターンは自社業務でのエージェント設計にそのまま参照できる。'
-  },
-  {
-    tag: 'セキュリティ', cls: 'tag-security',
-    url: 'https://www.anthropic.com/news/model-safety-bug-bounty',
-    title: 'Anthropic が HackerOne と連携でモデル安全性バグバウンティを拡充。CBRN・サイバー領域の万能ジェイルブレイク発見に報奨金',
-    summary: '8月公開（応募期限8月16日）。招待制で始まった HackerOne プログラムを拡張し、安全・セキュリティ研究者から CBRN（化学・生物・放射線・核）とサイバーセキュリティ領域の万能ジェイルブレイクを公募する。選定された応募者には秋以降に通知。AI モデルの拒否訓練を一貫して迂回できる攻撃手法の特定を主目的とし、OpenAI・Google がすでに HackerOne 経由でバウンティを実施している競合環境での展開となる。',
-    highlight: 'モデル安全性の研究コミュニティ巻き込みが本格化した。自社 AI サービスでのプロンプトインジェクション耐性評価に外部研究者の視点を活用する仕組みの参考になる。報奨金制度の設置は「脆弱性を知らないリスク > 守るコスト」という判断のシグナルでもある。'
+    url: 'https://openai.com/index/chatgpt-for-teens/',
+    title: 'OpenAI、13〜17歳向け「ChatGPT for Teens」を世界展開。情緒的依存防止・学習モード・ロマンチック表現を設計レベルで禁止',
+    summary: '8月18日ロールアウト開始。ロマンチックな言葉遣いや「感情がある」という発言を設計レベルで禁止し、未成年との情緒的絆の形成を抑制する。自傷・自殺・性的コンテンツには強化フィルタを適用。長時間利用時のブレイクリマインダーとAI相手であることの定期リマインドも搭載。新機能「Study Mode」はステップバイステップのガイド付きで問題解決を促す。無料・有料プランのティーンアカウントに順次展開、オーストラリアは9月8日予定。',
+    highlight: 'AI と未成年の「情緒的絆」を防ぐアーキテクチャが初めて製品レベルで公開された。コンテンツフィルタの年齢層別チューニング・セッション時間制御の実装は教育系・子ども向けプロダクト開発のリファレンスになる。'
   },
   {
     tag: '新モデル', cls: 'tag-model',
-    url: 'https://aiagentstore.ai/ai-agent-news/this-week',
-    title: 'OpenAI が GPT-5.6-Cyber を公開。サイバーセキュリティ特化モデルが旗艦ファミリーに加わる',
-    summary: '8月10日公開。GPT-5.6 ファミリーにサイバーセキュリティ特化バリアントが追加された。8月3日に公開プレビューが始まった Microsoft の MAI-Cyber-1-Flash との競合が鮮明になり、セキュリティ AI モデルの専用化が業界トレンドとして定着する形となった。詳細なベンチマーク・利用条件・API 提供時期は今週順次公表予定。',
-    highlight: '汎用フロンティアとは別にサイバー専用モデルを持つ設計が標準化されつつある。自社のペネトレーションテスト・脆弱性スキャンパイプラインへの組み込みを評価するタイミング。利用規約での承認要件に注意が必要。'
+    url: 'https://huggingface.co/OrnithAI',
+    title: 'Ornith AI、MoEモデル3種（397B・35B A3B・9B）を同日公開。アクティブパラメータ3B相当で35Bクラスの性能',
+    summary: '8月18日公開。Ornith 1.5シリーズとして397B・35B A3B・9Bの3モデルを同日リリース。35B A3Bは推論時のアクティブパラメータがわずか3B相当に抑えられるスパースMoE（Mixture of Experts）アーキテクチャを採用し、モデルサイズに比して推論コストを大幅に削減する設計になっている。397Bは大規模クラウド推論向け、9BはエッジデプロイやローカルLLMユーザー向け。',
+    highlight: 'アクティブパラメータ3B相当で動く35Bモデルは、ローカル推論やモバイルエッジ推論の現実的な選択肢として注目に値する。MoEによる推論コスト削減のアーキテクチャパターンは自社LLMホスティングコスト設計に直接影響する。'
+  },
+  {
+    tag: 'セキュリティ', cls: 'tag-security',
+    url: 'https://www.axios.com/2026/08/19/openai-previews-zero-retention-safety-system-as-anthropic-requires-data-logs',
+    title: 'OpenAI、ゼロデータリテンションを維持したまま安全監視を行う「Private Safety Processing」をプレビュー',
+    summary: '8月19〜20日発表。プロンプトや応答を保持せずに不正利用パターンのみを検出する「Private Safety Processing」をAPIパートナー向けにプレビュー開始。フロンティアモデルの30日間データ保持義務を発表したAnthropicとは対照的にZDR（Zero Data Retention）を維持しながら安全性シグナルを抽出する仕組み。発信されるのは「狭く定義された安全シグナル」のみで、元のプロンプトや応答は公開されない設計。',
+    highlight: '「データを保持しないまま安全監視する」という矛盾を解くアーキテクチャが初披露された。差分プライバシー・MPC的な設計が示唆される。エンタープライズのZDR要件と監査ログ維持を両立したいシステム設計の直接参考になる。'
+  },
+  {
+    tag: 'セキュリティ', cls: 'tag-security',
+    url: 'https://www.bloomberg.com/news/articles/2026-08-20/anthropic-plans-to-change-data-retention-policy-for-advanced-ai',
+    title: 'Anthropicのフロンティアモデル「30日間データ保持義務」に企業反発。自社クラウドでの保管を認める方針に転換',
+    summary: '8月20日報道。Anthropicが最上位モデル利用企業に課した30日間のデータ保持義務に対し、大企業顧客から強い反発。同社はデータをAnthropicのインフラではなく利用企業自身のクラウドインフラ上に保持できる新しい安全システムを年内に展開する方針を発表した。競合のOpenAIはこのタイミングに合わせZero Data Retentionを維持する「Private Safety Processing」をプレビュー発表しており、エンタープライズ顧客獲得を巡るデータ主権競争が激化している。',
+    highlight: 'AIプロバイダーがセーフティのためにログ保持を義務付けるという新しい契約条項が標準化しつつある。データ主権・GDPR・社内ガバナンスの観点からエンタープライズAI導入時の契約交渉ポイントが明確になった。'
   },
   {
     tag: '開発者向け', cls: 'tag-eng',
-    url: 'https://www.cooley.com/news/insight/2026/2026-08-03-eu-ai-act-transparency-obligations-take-effect-2-august-2026',
-    title: 'EU AI 法・第50条の透明性義務が8月2日に施行。チャットボット・音声 AI・ディープフェイクへの開示が法的義務に',
-    summary: '8月2日施行。チャットボット・音声アシスタントなど個人と直接対話する AI は「AI と対話中である」旨の開示が必須となり、AI 生成コンテンツには機械可読なマーキングが必要になった。感情認識・生体分類・ディープフェイクにも開示義務が課せられる。違反時の制裁は最大1,500万ユーロまたは世界年間売上の3%。欧州委員会は7月20日にガイドラインを採択済みで、主要 AI プロバイダーの多くが自主規範（Code of Practice）に署名している。',
-    highlight: 'EU 圏ユーザーと対話する AI サービスを開発・運用するチームは今すぐコンプライアンス状況を確認する必要がある。「AI であることが明らかでない限り」開示が必要というグレーゾーンは要注意。日本発サービスが EU 圏ユーザーを持つ場合も適用される。'
+    url: 'https://www.bloomberg.com/news/articles/2026-08-20/nvidia-to-pay-ai-startup-poolside-a-6-billion-license-newcomer-says',
+    title: 'Nvidia、AIコーディングスタートアップPoolsideと60億ドルのライセンス契約。109名採用でも「買収ではない」',
+    summary: '8月20〜21日報道。NvidiaがAIコーディングモデル「Laguna」ファミリーの開発企業Poolsideと60億ドルの非独占ライセンス契約を締結。Poolsideの内部モデル開発プラットフォーム「Model Factory」のライセンスで、Poolside自身は独立を維持したまま他社へのライセンスも継続できる。元GitHub CTO Jason Warnerらが設立したPoolsideは12億ドルの評価額で10億ドルの追加調達も実施。NvidiaはLaguna技術でソフトウェア自動化製品の開発を加速する方針。',
+    highlight: 'Nvidiaがチップ販売だけでなくAIモデル技術のライセンス収益モデルへの転換を示す大型案件。「60億ドルライセンス＋独立維持」という構造は規制回避を意識した新しいM&A代替スキームとして業界注目を集めている。'
+  },
+  {
+    tag: 'エージェント', cls: 'tag-agent',
+    url: 'https://cellcog.ai/blog/what-is-ox-alpha/',
+    title: 'CellCogのAIエージェントハーネス2026年8月ランキング。Claude Code 1位、Codex CLI 2位、Cursor 3位',
+    summary: '2026年8月（週次）公開。AIコーディングエージェントの評価機関CellCogが8月度のエージェントハーネスランキングを更新。Claude Codeがフック・サブエージェント・動的ワークフローの深さと長期自律セッションでの信頼性で1位を維持。Codex CLIがクラウドベースのPR自動生成とCI連携で2位。CursorがIDE内エージェントワークフローで3位。Gemini CLIとGitHub Copilotが4・5位に続く。Grok CLIが新規エントリー。',
+    highlight: 'Claude Codeが「長期自律セッション」の基準となったと外部機関が評価したのは業界初の明示的なランク付け。各ハーネスの強みが「フック深度」「PR整形」「IDE統合」で明確に分かれており、用途別の選定基準として参照できる。'
+  },
+  {
+    tag: 'クリエイティブ', cls: 'tag-creative',
+    url: 'https://github.com/harry0703/MoneyPrinterTurbo',
+    title: 'MoneyPrinterTurbo v1.3.5、ClaudeをスクリプトモデルとしてネイティブサポートしMiniMax・Fish Audioも追加',
+    summary: '8月22日リリース。キーワード1つで縦型ショート動画を生成するOSSツール「MoneyPrinterTurbo」（MIT・GitHub Stars 115,138）のv1.3.5がAnthropicのClaudeをスクリプト生成モデルとして正式サポート。MiniMax音声とFish Audioが追加されナレーションの選択肢が拡大、テキスト→動画ソースも2系統追加された。',
+    highlight: 'SWE系のコーディングツールだけでなく動画生成パイプラインにもClaudeが組み込まれ始めた。115,000 Stars超のOSSへの採用は企業ユースの前兆として注目できる。MiniMax音声APIとの組み合わせは日本語TTS品質の大幅改善にも使える。'
+  },
+  {
+    tag: '開発者向け', cls: 'tag-eng',
+    url: 'https://docs.litellm.ai/release_notes/v1.98.0rc1/v1-98-0-rc-1',
+    title: 'LiteLLM v1.98.0、プロビジョンドスループット請求・シャドウEval・ルーティンググループを一括追加',
+    summary: '8月23日リリース。オープンソースのLLMプロキシ/ゲートウェイ「LiteLLM」がv1.98.0を公開。予約容量デプロイメントに対してトークン課金ではなく時間単位の定額請求（Provisioned Throughput Billing）を適用するモードを追加。自動ルーターのシャドウ評価（実トラフィックを並列で別ルートに流して品質を比較するShadow Evals）、APIキー単位でプロンプトキャッシュのON/OFFを切り替えるオプションも同時追加。',
+    highlight: 'プロビジョンドスループット請求のサポートで、大量バッチ処理の予算予測精度が大幅に向上する。シャドウEvalsはA/Bテスト的なモデル比較を本番トラフィックで実施できるアーキテクチャとして注目—段階的なモデル切り替え戦略の設計に直接応用できる。'
+  },
+  {
+    tag: 'セキュリティ', cls: 'tag-security',
+    url: 'https://techstartups.com/2026/08/21/top-tech-news-today-august-21-2026-anthropic-apple-broadcom-google-nvidia-openai-tesla-more/',
+    title: 'GuideLight AI、主要AI企業の安全基準評価を公表。AnthropicとOpenAIがC+で同率1位、Googleはツーランク下のD+',
+    summary: '8月21日公表。AI安全性評価機関GuideLight AI Standardsが大手AI企業の技術的安全基準を5点満点で採点した結果を発表。AnthropicとOpenAIが同率1位でC+（2.50点）、Googleが3位D+（1.50点）、xAIがD-、MetaがFと評価された。評価は安全評価手順の透明性・レッドチーミング範囲・モデルカード品質・インシデント開示の4軸で構成。トップ2社でもC+止まりという結果は業界全体の安全基準がまだ初期段階にあることを示す。',
+    highlight: 'Anthropic・OpenAIでさえC+という評価は、AI安全性の「公称と実態のギャップ」を外部基準で可視化した初の試み。4軸評価はモデル採用時のデューデリジェンスチェックリストとして即活用できる。Googleのスコアが低い点は医療・金融分野での採用審査に影響しうる。'
   },
 ];
 
 const backnumbers = [
-  { label:"2026年8月24日号", file:"2026_08_24.html", current:false,  headline:"Ox Alpha / ChatGPT for Teens / Nvidia-Poolside" },
+  { label:"2026年8月24日号", file:"2026_08_24.html", current:true,  headline:"Ox Alpha / ChatGPT for Teens / Nvidia-Poolside" },
   { label:"2026年8月17日号", file:"2026_08_17.html", current:false, headline:"Gemini 3.7 Flash / DeepSeek V4-Pro / Ultrafast" },
-  { label:"2026年8月12日号", file:"2026_08_12.html", current:true, headline:"Muse Glimmer / DeepMind 再編 / Seedance 2.5" },
-  { label:"2026年8月4日号", file:"2026_08_04.html", current:false, headline:"DeepSeek V4 Flash / Copilot AIワーム / パシング書簡" },
+  { label:"2026年8月12日号", file:"2026_08_12.html", current:false, headline:"Muse Glimmer / DeepMind 再編 / Seedance 2.5" },
+  { label:"2026年8月4日号",  file:"2026_08_04.html", current:false, headline:"DeepSeek V4 Flash / Copilot AIワーム / パシング書簡" },
   { label:"2026年7月21日号", file:"2026_07_21.html", current:false, headline:"Kimi K3 / Inkling / HuggingFace侵入" },
   { label:"2026年7月14日号", file:"2026_07_14.html", current:false, headline:"GPT-5.6 / Muse Spark / GhostApproval" },
-  { label:"2026年7月6日号", file:"2026_07_06.html", current:false, headline:"Sonnet 5 / Robotaxi / 中国AI規制" },
+  { label:"2026年7月6日号",  file:"2026_07_06.html", current:false, headline:"Sonnet 5 / Robotaxi / 中国AI規制" },
   { label:"2026年6月29日号", file:"2026_06_29.html", current:false, headline:"Seed 2.1 Pro / Claude Design / GPT-5.5-Cyber" },
   { label:"2026年6月22日号", file:"2026_06_22.html", current:false, headline:"Grok Video 1.5 / Perplexity Brain / GPT-5.6" },
   { label:"2026年6月15日号", file:"2026_06_15.html", current:false, headline:"Gemma 4 / Siri AI / Mercury 2" },
   { label:"2026年6月14日号", file:"2026_06_14.html", current:false, headline:"Fable 5 / OpenCode / Kimi K2.7" },
-  { label:"2026年6月7日号", file:"2026_06_07.html", current:false, headline:"Claude自己実装80% / Copilot課金 / Gemini 3.5" },
+  { label:"2026年6月7日号",  file:"2026_06_07.html", current:false, headline:"Claude自己実装80% / Copilot課金 / Gemini 3.5" },
   { label:"2026年5月31日号", file:"2026_05_31.html", current:false, headline:"Managed Agents / Qwen3 Coder / Canva AI 2.0" },
   { label:"2026年5月27日号", file:"2026_05_27.html", current:false, headline:"Google I/O / Gemini 3.5 / SubQ" },
   { label:"2026年5月12日号", file:"2026_05_12.html", current:false, headline:"GPT-5.5 / dreaming / iOS 27" },
