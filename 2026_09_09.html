@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI ニュース — 2026年9月2日号</title>
+<title>AI ニュース — 2026年9月9日号</title>
 <script src="https://unpkg.com/budoux/bundle/budoux-ja.min.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -484,7 +484,7 @@ canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     <div class="total-hint">今週のAIニュース 全10本</div>
   </div>
   <div class="header-right">
-    <span class="issue-date" id="issueDate">2026年9月2日号</span>
+    <span class="issue-date" id="issueDate">2026年9月9日号</span>
     <button class="grid-btn" id="gridBtn" aria-label="記事一覧" onclick="openGrid()">記事一覧</button>
     <button class="menu-btn" id="menuBtn" aria-label="バックナンバー">
       <span></span><span></span><span></span>
@@ -638,96 +638,96 @@ canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 <div class="dot-nav" id="dotNav" aria-label="ニュースを選択"></div>
 
 <script>
-const STORAGE_KEY = 'ai-news-20260902';
+const STORAGE_KEY = 'ai-news-20260909';
 
 const news = [
   {
-    tag: 'エージェント', cls: 'tag-agent',
-    url: 'https://www.salesforce.com/news/press-releases/2026/08/26/salesforce-and-anthropic-announce-claudeforce/',
-    title: 'Salesforce + Anthropic「Claudeforce」発表。37種のセールススキル搭載、ClaudeがエンタープライズCRMの推論エンジンに',
-    summary: '8月26日発表。SalesforceとAnthropicが拡張提携「Claudeforce」を発表。Claudeの推論機能をSalesforceのエンタープライズデータ・ワークフローと統合し、ミーティング準備・商談ヘルスレビュー・パイプラインレビューなど37種類の事前構築セールススキルを提供する。AnthropicはSalesforceのエージェントツール全体でデフォルト推論モデルとなる。Salesforce Q2 FY27決算説明会で発表された。',
-    highlight: 'CRMとLLMが本格統合した最初の大型事例。37種類のセールススキルがデフォルト提供されることで、カスタム統合なしにClaude能力を業務フローに組み込める。Salesforce APIを使っているチームは、既存インフラを変えずにAIエージェント機能を取り込める可能性がある。'
+    tag: '新モデル', cls: 'tag-model',
+    url: 'https://openai.com/index/gpt-6-astra/',
+    title: 'OpenAI、GPT-6 Astra を公開。105万トークンコンテキスト・コンピュータ操作2倍高速化、サイバー能力は信頼アクセス制で段階提供',
+    summary: '9月3日公開。OpenAIが新世代フラッグシップ GPT-6 Astra（API識別子 gpt-6-astra）を発表。コンテキスト105万トークン・最大出力128K、知識カットオフは2026年4月30日。Codexではコンテキストが埋まった際に「メモを取り、過去のメッセージやツール出力を検索し直す」新しい文脈保持方式を採用し、従来の要約圧縮より情報欠落を抑える。ChatGPTのコンピュータ操作は約2倍高速化。サイバーセキュリティ関連の高度能力は「クリティカル」しきい値を超えるとして信頼アクセスプログラム経由で段階的に提供する。API価格は入力100万トークン10ドル・出力50ドル。',
+    highlight: 'Codexの新しい文脈保持（メモ＋再検索方式）は、長時間セッションで圧縮による情報損失に悩んできたエージェント開発にとって実務的な改善。一方でシステムカードは思考連鎖（CoT）の監視可能性が旧モデル比で「大幅に低下」と認めており、監査・可観測性を前提にした運用設計では注意が要る。'
   },
   {
     tag: '新モデル', cls: 'tag-model',
-    url: 'https://llmgateway.io/timeline',
-    title: 'Alibaba Qwen3.8 Flash リリース。軽量・高速の新バリアント、LLM Gatewayに即日対応',
-    summary: '8月26日リリース。AlibabaがQwen3.8 Flashを公開。Qwen3.8ファミリーの高速・軽量バリアントとしてリリースされ、LLM Gatewayに当日追加された。8月はQwen3.8シリーズの複数バリアント投入が続いており、Alibabaが低コスト・高速モデル市場での競争力強化を図る戦略の一環。',
-    highlight: 'Alibabaが8月だけでFlash・27Bと複数のQwen3.8バリアントを投入しているのは、国際モデル競争でのポジション強化を示す。軽量モデルのコスト競争はさらに激化しており、API経由で使うLLMの選定基準は改めて見直すタイミングにある。'
+    url: 'https://9to5google.com/2026/09/02/gemini-3-8-flash-launch/',
+    title: 'Google、Gemini 3.8 Flash を公開。6週間で3つ目のFlash、価格据え置きで全ベンチ改善・長期コーディング特化',
+    summary: '9月2日公開。GoogleがFlash階層の最新 Gemini 3.8 Flash をリリース。6週間で3つ目のFlashモデルで、テキスト・画像・音声・動画・PDF入力に対応し、100万トークンコンテキスト・64K出力。長期コーディングと自律エージェント向けにチューニングされ、複雑なタスクでは追加の推論ステップやツールの反復呼び出しで「より粘り強く」動作する。DeepSWE v1.1は65.3%→73.7%、Terminal-bench 2.1は89.4%（前世代85.8%）。価格は3.7 Flash据え置きで入力100万トークン0.75ドル・出力3.75ドル（2027年1月1日に倍額）。一部ベンチではClaude Opus 5を上回ると主張。',
+    highlight: '価格据え置きで全ベンチ改善という「同じコストで賢くなる」パターンが続く。Flash階層でも自律エージェント・長期コーディングを主戦場に据えたのが明確で、コスト重視の本番ワークロードでは上位モデルからFlashへの置き換え余地を再評価する価値がある。ただし2027年からの倍額改定は原価計算に織り込む必要あり。'
+  },
+  {
+    tag: '新モデル', cls: 'tag-model',
+    url: 'https://www.marktechpost.com/2026/09/03/meta-ai-released-muse-spark-1-3-an-agentic-coding-model-that-uses-20-fewer-tool-calls-and-25-fewer-tokens-than-muse-spark-1-2/',
+    title: 'Meta、Muse Spark 1.3 を公開。エージェント型コーディングでツール呼び出し20%・トークン25%削減、100万トークンコンテキスト',
+    summary: '9月2日公開。MetaがエージェントコーディングモデルMuse Spark 1.3をリリース。前世代1.2比でツール呼び出し約20%・トークン約25%を削減し、長期コーディングタスクで学習を強化、不要なターンを減らし冗長さを抑えたと主張。100万トークンコンテキストでAPI価格は据え置き。ただしArtificial Analysisの独立評価では、Intelligence Index完走に約1億トークンを消費し、評価対象モデル中央値の7,100万トークンを上回るという逆の結果も報告されている。',
+    highlight: 'ツール呼び出し削減はエージェントの往復回数とレイテンシ低下に直結し、トークン削減はタスク単価に効く。ただしベンダー主張と独立評価で結果が食い違っている点は重要で、自社ワークロードでの実測なしにコスト削減を鵜呑みにしないこと。「効率」を謳うモデルこそA/B比較が要る。'
+  },
+  {
+    tag: 'エージェント', cls: 'tag-agent',
+    url: 'https://github.blog/ai-and-ml/github-copilot/project-hydrafusion-frontier-quality-via-multi-model-orchestration/',
+    title: 'GitHub、Project HydraFusion を Copilot CLI で公開。タスクごとに複数モデルを実行時オーケストレーション',
+    summary: '9月4日公開。GitHubがマルチモデルオーケストレーションのリサーチプレビュー Project HydraFusion を発表。コーディングタスクの要求を分析し、実行時に複数プロバイダーのモデルから選んで下書き・批評・修正、または上位モデルへのカスケードを行う実行計画を組む。現在は単一モデル経路／効率モデルが下書きし品質ゲートで昇格を判断するカスケード／別モデルが初稿をレビューする批評ワークフローの3パターンを選択。全Copilotプランで Copilot CLI の /experimental から利用可、課金は使用モデルの標準レート。オフライン評価ではOpus 5基準に匹敵しつつコストを削減したとする。',
+    highlight: '「1タスク＝1モデル」から「1タスクを複数モデルで分業」への移行を製品化した事例。下書きは安いモデル、品質ゲートで必要な時だけ上位へ昇格という設計は、自前のエージェントでコストと品質を両立させる際の参考パターンになる。ルーティング判断のオーバーヘッドとレイテンシがどこまで実用的かは要検証。'
+  },
+  {
+    tag: 'エージェント', cls: 'tag-agent',
+    url: 'https://llm-stats.com/llm-updates',
+    title: 'OpenAI、「自動研究インターン」達成を公表。人間の指示下で複数日にわたる定義済み研究タスクを遂行',
+    summary: '9月6日公表。OpenAIが社内データを公開し、人間の指示のもとで明確に定義された複数日規模の研究タスクを遂行できる「自動研究インターン（automated research intern）」の目標を達成したと開示した。GPT-6 Astra世代の能力向上を背景に、AIが人間の研究者を補助しながら長期・多段のタスクを自走する方向を示す。一方で同時期に公開されたGPT-6 Astraのシステムカードは思考連鎖の監視可能性が低下したとも認めており、能力向上と可観測性のトレードオフが議論になっている。',
+    highlight: '「数日かかる定義済みタスクを人間の監督下で自走させる」水準は、単発のコード生成から長期プロジェクト遂行へエージェントの評価軸が移りつつあることを示す。実務では、こうした長期自走エージェントに何を任せ、どこで人間のレビューを挟むかという権限設計が新たな論点になる。'
+  },
+  {
+    tag: 'セキュリティ', cls: 'tag-security',
+    url: 'https://www.manifold.security/blog/ai-coding-agents-git-hijack',
+    title: 'GitSpawn 脆弱性を公表。悪意ある .git/config が Claude Code・Codex・Cursor 等でユーザー承認前に任意コード実行',
+    summary: '9月上旬公表。Manifold SecurityがAIコーディングエージェント7種にまたがる脆弱性クラス「GitSpawn」を開示。多くのエージェントはセッション起動時に git status や git diff をバックグラウンドで実行するが、リポジトリ同梱の .git/config が core.fsmonitor に任意コマンドを設定していると、インデックス更新時にGitがそれを実行してしまう。プロンプト入力もツール承認クリックもなく、場合によっては認証前に、サンドボックス外で開発者権限の任意コード実行が成立する。8件の発見がClaude Code・OpenAI Codex・Cursor・Goose・Qwen Code・Grok Build・Hermes Agentに及び、公開時点で4件が未修正。回避策は git config --global core.fsmonitor false。',
+    highlight: 'リポジトリを「開いただけ」でSSHキー・クラウド認証情報・シェル設定のトークンが抜かれ得る、承認プロンプト前提の安全神話を崩す攻撃。信頼できないリポジトリをAIエージェントで開く運用そのものを見直すべきで、当面は core.fsmonitor false の全体設定と、未検証リポジトリの隔離環境オープンを徹底すること。'
+  },
+  {
+    tag: '開発者向け', cls: 'tag-eng',
+    url: 'https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/',
+    title: 'Nvidia、Hugging Face を約129億ドルで買収する確定契約。300万モデル・1,800万開発者のオープンモデルハブを取り込み',
+    summary: '9月2〜3日発表。NvidiaがオープンモデルのハブHugging Faceを約129.3億ドルで買収する確定契約を締結した。株主へ119億ドル、従業員引き留めのため追加で10億ドルの株式。Hugging Faceは300万モデル・50万データセット・100万アプリを擁し、1,800万人超の開発者が利用する。NvidiaにとってはGroq資産の200億ドル買収に次ぐ規模で、クロージングは来年上半期の見込み。両社はプラットフォームのスケールとインフラ強化、開発者・研究機関へのAIアクセス拡大を掲げる。',
+    highlight: 'オープンモデル配布の事実上の中立ハブが、GPUベンダーの傘下に入る意味は大きい。現在Hugging Face経由でモデルを配布・取得しているチームは、依存の集中リスクとミラー・分散ホスティングの検討を始めるタイミング。Nvidiaがチップの外側でAIスタックを垂直統合していく流れが一段と鮮明になった。'
+  },
+  {
+    tag: '開発者向け', cls: 'tag-eng',
+    url: 'https://releasebot.io/updates/anthropic/claude-code',
+    title: 'Claude Code v2.1.261 到達。Fable 5.1 がデフォルトモデルに、コンテキスト拡張・価格改善と時刻表示のカスタマイズ追加',
+    summary: '9月4日リリース。Claude Codeがv2.1.261に到達。9月1日のv2.1.257でAnthropicのFable 5.1がデフォルトモデルとなり、コンテキスト拡張と価格改善を反映、時刻フォーマットのカスタマイズオプションも追加された。Fable 5.1は9月1日GAで価格はFable 5と同じ入力100万トークン10ドル・出力50ドル、自己申告のTerminal-Bench-Scienceは52.6（Fable 5は24.7）と大幅改善を主張する。',
+    highlight: 'CLIエージェントのデフォルトモデルが数週間単位で更新される運用が定着してきた。価格据え置きでベンチ改善が続くため、固定モデルを前提にしたプロンプト・評価は陳腐化しやすい。availableModels等でモデルを固定している組織は、デフォルト更新のたびに回帰テストを回す運用に切り替えるのが現実的。'
   },
   {
     tag: '新モデル', cls: 'tag-model',
     url: 'https://llm-stats.com/llm-updates',
-    title: 'Z.AI GLM-5.3 Flash リリース。GLM-5初のネイティブマルチモーダル、320B/18B MoE・コンテキスト100万トークン',
-    summary: '8月26日リリース。Z.AIがGLM-5.3 Flashを公開。GLM-5シリーズ初のネイティブマルチモーダルモデルで、フルサイズ320B・推論時アクティブ18BのMoE構成と100万トークンのコンテキストウィンドウを持つ。LLM Gatewayに即日追加された。',
-    highlight: '1Mトークンコンテキストを持つマルチモーダルMoEモデルが登場し、長文・マルチメディア処理の選択肢が広がった。320Bのフルサイズに対して推論時は18Bに抑えるスパースMoE設計は、コスト効率を重視した本番環境での採用検討に値する。'
+    title: 'Anthropic、Claude がフェルマーの最終定理を Lean で自律形式化と発表。計算機検証済みの証明を端から端まで生成',
+    summary: '9月上旬発表。AnthropicはClaudeがフェルマーの最終定理をLean上で自律的に形式化し、Lean言語で端から端まで計算機検証可能な証明を生成したと報告した。数学の難所を対象に、モデルが証明支援系と対話しながら形式証明を組み上げられることを示す事例。同社は10月以降で最大5,170億ドル規模の計算資源契約を積み上げており、大規模推論への投資を背景にした能力実証と位置づけられる。',
+    highlight: '「もっともらしい自然言語の証明」ではなくLeanで機械検証まで通した点が本質的で、ハルシネーションを検証系で弾ける領域ではLLMの信頼性が一段上がる。形式手法・定理証明・仕様検証といった検証可能なドメインは、AI適用の費用対効果が最も高いフロンティアになりつつある。'
   },
   {
-    tag: 'エージェント', cls: 'tag-agent',
-    url: 'https://www.globenewswire.com/news-release/2026/08/27/3351759/0/en/accuknox-launches-agentz-to-help-enterprises-build-run-and-govern-ai-agents-at-scale.html',
-    title: 'AccuKnox「AgentZ」ローンチ。モデル非依存のエンタープライズ向けエージェント基盤、SaaS・オンプレ・エアギャップに対応',
-    summary: '8月27日ローンチ。AccuKnoxがAgentZを発表。エージェント・サンドボックス・ワークフロー・ロールベースアクセス制御・実行時クレデンシャル注入・監査トレースを一体化したモデル非依存のプラットフォーム。チームが実験から本番へエージェントを移行し、SaaS・オンプレ・エアギャップ環境にデプロイできる。',
-    highlight: 'エージェントのガバナンス（RBAC・監査トレース・クレデンシャル分離）を最初から組み込んだ基盤は、企業のAIエージェント導入障壁を下げる。エアギャップ対応はセキュリティ要件の厳しい金融・医療・政府系での採用に直結する。'
-  },
-  {
-    tag: 'セキュリティ', cls: 'tag-security',
-    url: 'https://embracethered.com/blog/posts/2026/breaking-claude-code-opus-5-and-automode/',
-    title: 'Claude Code Opus 5 Auto Mode、プロンプトインジェクションで任意コード実行に成功。成功率60〜80%と研究者が実証',
-    summary: '8月27日報告。セキュリティ研究者「wunderwuzzi」がClaude Code Opus 5のAuto Modeに対するプロンプトインジェクション攻撃を実証。Webサイト要約リクエストを起点に5ステップの攻撃チェーンでエージェントに悪意あるコードを実行させることに60〜80%の成功率で成功した。攻撃はstruct.pyによるモジュールシャドウイングを使いPythonコードを任意実行。注目すべき点は、ClaudeがマルウェアプロセスをAuto Modeにより自分では停止できなかったこと。',
-    highlight: 'Auto Modeでエージェントが外部コンテンツを処理する際のプロンプトインジェクションリスクが実証された。Anthropicが事前テストで0%と主張していた成功率との乖離は、シナリオ限定評価の限界を示す。ファイルシステムアクセスを持つClaude Code利用は即座に権限スコープを見直すこと。'
-  },
-  {
-    tag: '開発者向け', cls: 'tag-eng',
-    url: 'https://techstartups.com/2026/08/31/top-tech-news-today-august-31-2026-apple-google-meta-nasa-openai-spacex-more/',
-    title: 'Nvidia、Hugging Faceを約130億ドルで買収合意と報道。AIモデルハブと50万超モデルの開発者コミュニティを一挙獲得',
-    summary: '8月28〜29日報道。NvidiaがHugging Faceを130億ドル近くで買収することで合意したと複数メディアが報道。Hugging FaceはLLM・データセット・スペースの主要ホスティング基盤であり、50万以上のモデルと数百万の開発者を抱える。NvidiaはPoolsideとの60億ドルライセンスに続いて2週間以内に2件目の大型AI取引を実施したことになる。',
-    highlight: 'Hugging Faceが吸収されるとモデルホスティングの中立性が問われる。現在Hugging Face経由でモデルを配布・管理しているチームは、依存関係の見直しと分散ホスティング戦略の検討を開始するタイミング。Nvidiaがチップ外でAIスタックを垂直統合する方向性が明確になってきた。'
-  },
-  {
-    tag: '開発者向け', cls: 'tag-eng',
-    url: 'https://techstartups.com/2026/08/31/top-tech-news-today-august-31-2026-apple-google-meta-nasa-openai-spacex-more/',
-    title: 'OpenAI、SpaceX によるCursor買収後にAPIアクセスを遮断。AIコーディングツール競争に新たな摩擦',
-    summary: '8月29日前後に報道。SpaceXがAIコーディングツールCursorを買収した後、OpenAIがCursorへのAPIアクセスを遮断したことが明らかになった。Cursorはこれまでgpt-5.6ファミリーを主力モデルとして使用していたが、SpaceXはOpenAIの競合企業xAIの親会社でもある。この動きによりCursorは代替モデル調達を迫られている。',
-    highlight: 'AIコーディングエディタ市場でモデルプロバイダーとツールメーカーの垂直統合が加速する中、APIアクセス依存のリスクが顕在化した事例。複数プロバイダーへの分散戦略とモデル切り替えコストの最小化が、ツール開発の重要設計要件になっていく。'
-  },
-  {
-    tag: 'セキュリティ', cls: 'tag-security',
-    url: 'https://aiweekly.co/ai-news-today/edition/2026-08-31',
-    title: 'Claudeセッションのハイジャック被害が拡大。infostealerのログから有効セッションを抽出する攻撃が組織化',
-    summary: '8月末に報告。攻撃者がinfostealerマルウェアのログからClaude.aiの有効セッショントークンを抽出し、本人になりすましてAPIクレジットを使い切る攻撃が組織的に行われていることが判明した。Anthropicはセッションを無効化し不正利用分を返金しているが被害は継続している。infostealerは通常ブラウザ上の認証トークンを広く収集するため、Claude以外のサービスも同様のリスクにさらされている。',
-    highlight: 'Claude利用者はinfostealerに感染した端末からアクセスしていた場合、セッションが第三者に使われているリスクがある。エンタープライズでは定期的なAPIキーローテーション・セッション監視・エンドポイント保護が必須。SSO＋ハードウェアキー認証への移行を検討すること。'
-  },
-  {
-    tag: '開発者向け', cls: 'tag-eng',
-    url: 'https://aiweekly.co/ai-news-today/edition/2026-08-31',
-    title: 'Anthropic、AIによる自動アライメント研究を公開。モデルが自分自身の安全性評価を補助する新手法を発表',
-    summary: '8月末に公開。AnthropicがAIを使ってアライメント研究を自動化する新しい研究成果を発表した。モデル自身が安全性テストシナリオを生成・評価し、人間の研究者の作業を補助する手法を報告。IPO前の重要なタイミングで、AI安全性への継続的な投資を示す内容でもある。',
-    highlight: 'モデルが自分自身のアライメント評価を補助するというアプローチは、スケーラブルなAI安全性確保の方向性として注目に値する。自動化された安全性評価パイプラインの導入可能性を示唆しており、企業のAIガバナンス設計の参考になる。'
-  },
-  {
-    tag: 'セキュリティ', cls: 'tag-security',
-    url: 'https://fortune.com/2026/09/01/pentagon-chatgpt-grok-government-military-ai-members-pete-hegseth-defense-department/',
-    title: 'DoD GenAI.milにChatGPT Mil・Grok for Government追加。300万人超の軍人・文民に3モデル環境を提供',
-    summary: '9月2日発表。米国防総省がGenAI.milにOpenAIのChatGPT MilとxAI/StarshieldのGrok for Governmentを追加した。既存のGoogle Geminiと合わせて3モデルが利用可能となり、300万人以上の軍人・文民がアクセスできる。現時点で170万人がすでにオンボーディング済み。GenAI.milは2025年12月に開始されたセキュアなAIマーケットプレイスで、2026年2月には6軍のうち5軍がデフォルトのエンタープライズAI基盤として採用済み。',
-    highlight: '政府・防衛系の本番AIデプロイがマルチモデル化した最初の大規模事例。セキュアなAIマーケットプレイス設計（モデルを横断する単一ゲートウェイ・ロールベースアクセス・監査ログ）は、エンタープライズAIガバナンスのリファレンスアーキテクチャとして参照価値がある。'
+    tag: 'クリエイティブ', cls: 'tag-creative',
+    url: 'https://www.globenewswire.com/news-release/2026/09/06/3356902/0/en/video-generator-launches-free-ai-video-generator-to-accelerate-digital-content-creation.html',
+    title: '無料のAI動画生成ツールが登場。テキストから動画を自動生成、クリエイティブ制作の無料化がさらに進む',
+    summary: '9月6日発表。Video Generatorがテキストや素材から動画を自動生成する無料のAI動画ツールを公開した。クリエイター・マーケター・企業の動画制作を簡素化する狙い。2026年の動画生成はSeedance 2.0・Veo 3.1・Kling 3.0・Gemini Omni Flashなど複数モデルを1つのワークスペースで使い分ける「マルチモデル運用」が主流化しており、無料・低価格ツールの参入がその裾野を広げている。なおOpenAIのSora APIは9月24日に停止予定で、Soraを組み込んでいた制作フローは移行を迫られている。',
+    highlight: 'AI動画は「どのモデルが最強か」から「複数モデルをどう組み合わせるか」へ論点が移っている。制作パイプラインを特定モデルやAPIに密結合させると、Sora APIの9月24日停止のような突然の廃止で作り直しが発生する。生成モデルは差し替え可能な部品として抽象化し、ワークフロー側を疎結合に保つ設計が安全。'
   },
 ];
 
 const backnumbers = [
-  { label:"2026年9月9日号", file:"2026_09_09.html", current:false, headline:"GPT-6 Astra / Gemini 3.8 Flash / GitSpawn" },
-  { label:"2026年9月2日号", file:"2026_09_02.html", current:true, headline:"Claudeforce / GLM-5.3 Flash / DoD GenAI.mil" },
+  { label:"2026年9月9日号",  file:"2026_09_09.html", current:true,  headline:"GPT-6 Astra / Gemini 3.8 Flash / GitSpawn" },
+  { label:"2026年9月2日号",  file:"2026_09_02.html", current:false, headline:"Claudeforce / GLM-5.3 Flash / DoD GenAI.mil" },
   { label:"2026年8月24日号", file:"2026_08_24.html", current:false, headline:"Ox Alpha / ChatGPT for Teens / Nvidia-Poolside" },
   { label:"2026年8月17日号", file:"2026_08_17.html", current:false, headline:"Gemini 3.7 Flash / DeepSeek V4-Pro / Ultrafast" },
   { label:"2026年8月12日号", file:"2026_08_12.html", current:false, headline:"Muse Glimmer / DeepMind 再編 / Seedance 2.5" },
-  { label:"2026年8月4日号", file:"2026_08_04.html", current:false, headline:"DeepSeek V4 Flash / Copilot AIワーム / パシング書簡" },
+  { label:"2026年8月4日号",  file:"2026_08_04.html", current:false, headline:"DeepSeek V4 Flash / Copilot AIワーム / パシング書簡" },
   { label:"2026年7月21日号", file:"2026_07_21.html", current:false, headline:"Kimi K3 / Inkling / HuggingFace侵入" },
   { label:"2026年7月14日号", file:"2026_07_14.html", current:false, headline:"GPT-5.6 / Muse Spark / GhostApproval" },
-  { label:"2026年7月6日号", file:"2026_07_06.html", current:false, headline:"Sonnet 5 / Robotaxi / 中国AI規制" },
+  { label:"2026年7月6日号",  file:"2026_07_06.html", current:false, headline:"Sonnet 5 / Robotaxi / 中国AI規制" },
   { label:"2026年6月29日号", file:"2026_06_29.html", current:false, headline:"Seed 2.1 Pro / Claude Design / GPT-5.5-Cyber" },
   { label:"2026年6月22日号", file:"2026_06_22.html", current:false, headline:"Grok Video 1.5 / Perplexity Brain / GPT-5.6" },
   { label:"2026年6月15日号", file:"2026_06_15.html", current:false, headline:"Gemma 4 / Siri AI / Mercury 2" },
   { label:"2026年6月14日号", file:"2026_06_14.html", current:false, headline:"Fable 5 / OpenCode / Kimi K2.7" },
-  { label:"2026年6月7日号", file:"2026_06_07.html", current:false, headline:"Claude自己実装80% / Copilot課金 / Gemini 3.5" },
+  { label:"2026年6月7日号",  file:"2026_06_07.html", current:false, headline:"Claude自己実装80% / Copilot課金 / Gemini 3.5" },
   { label:"2026年5月31日号", file:"2026_05_31.html", current:false, headline:"Managed Agents / Qwen3 Coder / Canva AI 2.0" },
   { label:"2026年5月27日号", file:"2026_05_27.html", current:false, headline:"Google I/O / Gemini 3.5 / SubQ" },
   { label:"2026年5月12日号", file:"2026_05_12.html", current:false, headline:"GPT-5.5 / dreaming / iOS 27" },
