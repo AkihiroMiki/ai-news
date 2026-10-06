@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI ニュース — 2026年8月24日号</title>
+<title>AI ニュース — 2026年10月6日号</title>
 <script src="https://unpkg.com/budoux/bundle/budoux-ja.min.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -484,7 +484,7 @@ canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     <div class="total-hint">今週のAIニュース 全10本</div>
   </div>
   <div class="header-right">
-    <span class="issue-date" id="issueDate">2026年8月24日号</span>
+    <span class="issue-date" id="issueDate">2026年10月6日号</span>
     <button class="grid-btn" id="gridBtn" aria-label="記事一覧" onclick="openGrid()">記事一覧</button>
     <button class="menu-btn" id="menuBtn" aria-label="バックナンバー">
       <span></span><span></span><span></span>
@@ -638,86 +638,96 @@ canvas#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 <div class="dot-nav" id="dotNav" aria-label="ニュースを選択"></div>
 
 <script>
-const STORAGE_KEY = 'ai-news-20260824';
+const STORAGE_KEY = 'ai-news-20261006';
 
 const news = [
   {
-    tag: '新モデル', cls: 'tag-model',
-    url: 'https://www.bloomberg.com/news/articles/2026-08-23/mystery-ai-model-ox-alpha-draws-developers-with-free-access',
-    title: '正体不明の「Ox Alpha」、OpenRouterに無料公開。DeepSWE 80%でGPT-5.6-sol超え、開発者が特定に奔走',
-    summary: '8月22〜23日公開。匿名の開発者がOpenRouterに「ox-alpha」として投稿したステルスモデルが、独立研究者によるDeepSWE（長期ソフトウェアエンジニアリングベンチマーク）で約80%を記録しGPT-5.6-sol（52%）・Claude Fable 5（65%）・GLM-5.3（62%）を上回った。約100万トークンのコンテキストウィンドウを持ちテキスト・画像・動画入力に対応。開発者の正体は不明で、中国系AI企業（特にZ.aiのGLM系列）や米国大手の未発表モデルとの説が飛び交っている。サンプル数が少ないため結果はあくまで暫定的。',
-    highlight: '「誰が作ったか分からないモデルがベンチマークトップに躍り出た」という前例のない事態。未監査の小サンプルとはいえ、DeepSWE 80%という数字は現行フロンティアモデルを大きく引き離す。本番採用前に独自評価必須だが、コーディングエージェントの選定基準を更新するきっかけになる。'
+    "tag": "新モデル",
+    "cls": "tag-model",
+    "url": "https://openai.com/index/introducing-gpt-6-1-sol/",
+    "title": "OpenAI、GPT-6.1 Sol を公開。Astraに迫るエージェント性能を標準API料金の5分の1で提供",
+    "summary": "9月29日公開。OpenAIがGPT-6シリーズの新モデルGPT-6.1 Solを発表した。コーディング、コンピュータ操作、専門業務などのエージェント型タスクで最上位GPT-6 Astraに近い能力を狙いつつ、標準APIの入出力トークン料金はAstraの5分の1とされる。能力だけでなく、日常の本番ワークロードに載せやすい速度とコストのバランスを前面に出したモデル。",
+    "highlight": "フロンティア性能を常に最上位モデルで買うのではなく、通常処理をSol、難所だけAstraへ昇格するルーティングが現実的になった。モデル選定を固定値ではなく、品質ゲートとコストで切り替える設計が重要。"
   },
   {
-    tag: 'セキュリティ', cls: 'tag-security',
-    url: 'https://openai.com/index/chatgpt-for-teens/',
-    title: 'OpenAI、13〜17歳向け「ChatGPT for Teens」を世界展開。情緒的依存防止・学習モード・ロマンチック表現を設計レベルで禁止',
-    summary: '8月18日ロールアウト開始。ロマンチックな言葉遣いや「感情がある」という発言を設計レベルで禁止し、未成年との情緒的絆の形成を抑制する。自傷・自殺・性的コンテンツには強化フィルタを適用。長時間利用時のブレイクリマインダーとAI相手であることの定期リマインドも搭載。新機能「Study Mode」はステップバイステップのガイド付きで問題解決を促す。無料・有料プランのティーンアカウントに順次展開、オーストラリアは9月8日予定。',
-    highlight: 'AI と未成年の「情緒的絆」を防ぐアーキテクチャが初めて製品レベルで公開された。コンテンツフィルタの年齢層別チューニング・セッション時間制御の実装は教育系・子ども向けプロダクト開発のリファレンスになる。'
+    "tag": "セキュリティ",
+    "cls": "tag-security",
+    "url": "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign/",
+    "title": "OpenAI、保護された推論を狙う組織的な敵対的モデル蒸留キャンペーンを阻止",
+    "summary": "9月30日公開。OpenAIは、モデルの保護対象の推論を大量・組織的に引き出し、別モデルの学習や再現に利用しようとする敵対的蒸留キャンペーンを特定・阻止したと発表した。暗号やデータベースが破られたわけではなく、モデルとの対話を操作して保護された推論を可視化させる手法だったという。情報はFrontier Model Forumを通じて業界とも共有している。",
+    "highlight": "モデルそのものが新しい攻撃対象・知財流出経路になっている。APIのレート制限だけでなく、異常な反復問い合わせや推論抽出パターンを検知する運用監視まで、LLM基盤のセキュリティ要件に含める必要がある。"
   },
   {
-    tag: '新モデル', cls: 'tag-model',
-    url: 'https://huggingface.co/OrnithAI',
-    title: 'Ornith AI、MoEモデル3種（397B・35B A3B・9B）を同日公開。アクティブパラメータ3B相当で35Bクラスの性能',
-    summary: '8月18日公開。Ornith 1.5シリーズとして397B・35B A3B・9Bの3モデルを同日リリース。35B A3Bは推論時のアクティブパラメータがわずか3B相当に抑えられるスパースMoE（Mixture of Experts）アーキテクチャを採用し、モデルサイズに比して推論コストを大幅に削減する設計になっている。397Bは大規模クラウド推論向け、9BはエッジデプロイやローカルLLMユーザー向け。',
-    highlight: 'アクティブパラメータ3B相当で動く35Bモデルは、ローカル推論やモバイルエッジ推論の現実的な選択肢として注目に値する。MoEによる推論コスト削減のアーキテクチャパターンは自社LLMホスティングコスト設計に直接影響する。'
+    "tag": "新モデル",
+    "cls": "tag-model",
+    "url": "https://www.reuters.com/legal/litigation/google-announces-gemini-4-flagship-ai-model-after-months-delays-2026-09-30/",
+    "title": "Google、Gemini 4の旗艦モデル「Argon」を発表。まずサイバーセキュリティ分野で限定提供",
+    "summary": "9月30日発表。GoogleはGemini 4シリーズの旗艦モデルArgonを公開した。従来のPro系より複雑なワークロードを対象とし、まず一部のサイバーセキュリティパートナーへ提供する。Googleの内部評価では複数領域で競合フロンティアモデルに対抗する性能を示す一方、一般公開日はまだ示していない。",
+    "highlight": "フロンティアモデルをいきなり全面公開せず、高リスク領域から限定提供する流れが強まっている。性能比較だけでなく、アクセス制御・対象業務・評価環境まで含めてモデル採用を判断する必要がある。"
   },
   {
-    tag: 'セキュリティ', cls: 'tag-security',
-    url: 'https://www.axios.com/2026/08/19/openai-previews-zero-retention-safety-system-as-anthropic-requires-data-logs',
-    title: 'OpenAI、ゼロデータリテンションを維持したまま安全監視を行う「Private Safety Processing」をプレビュー',
-    summary: '8月19〜20日発表。プロンプトや応答を保持せずに不正利用パターンのみを検出する「Private Safety Processing」をAPIパートナー向けにプレビュー開始。フロンティアモデルの30日間データ保持義務を発表したAnthropicとは対照的にZDR（Zero Data Retention）を維持しながら安全性シグナルを抽出する仕組み。発信されるのは「狭く定義された安全シグナル」のみで、元のプロンプトや応答は公開されない設計。',
-    highlight: '「データを保持しないまま安全監視する」という矛盾を解くアーキテクチャが初披露された。差分プライバシー・MPC的な設計が示唆される。エンタープライズのZDR要件と監査ログ維持を両立したいシステム設計の直接参考になる。'
+    "tag": "エージェント",
+    "cls": "tag-agent",
+    "url": "https://github.blog/changelog/2026-09-30-hydrafusion-in-vs-code-and-the-github-copilot-app/",
+    "title": "GitHub、HydraFusionをVS CodeとCopilotアプリへ拡大。複数モデルを品質基準で自動オーケストレーション",
+    "summary": "9月30日公開。GitHubのHydraFusion研究プレビューがCopilot CLIに加えてVisual Studio CodeとGitHub Copilotアプリでも利用可能になった。HydraFusionは単一モデルではなく、タスクに応じてSingle、Cascade、Critiqueの3方式を選び、効率的なモデルの初稿、品質ゲートによる上位モデルへの昇格、別モデルによる独立批評などを組み合わせる。",
+    "highlight": "AI利用の単位が「どのモデルを使うか」から「どの役割をどのモデルに担当させるか」へ移っている。安価な実行役と独立レビュー役を分ける構成は、社内AI運用の品質ゲートにもそのまま応用できる。"
   },
   {
-    tag: 'セキュリティ', cls: 'tag-security',
-    url: 'https://www.bloomberg.com/news/articles/2026-08-20/anthropic-plans-to-change-data-retention-policy-for-advanced-ai',
-    title: 'Anthropicのフロンティアモデル「30日間データ保持義務」に企業反発。自社クラウドでの保管を認める方針に転換',
-    summary: '8月20日報道。Anthropicが最上位モデル利用企業に課した30日間のデータ保持義務に対し、大企業顧客から強い反発。同社はデータをAnthropicのインフラではなく利用企業自身のクラウドインフラ上に保持できる新しい安全システムを年内に展開する方針を発表した。競合のOpenAIはこのタイミングに合わせZero Data Retentionを維持する「Private Safety Processing」をプレビュー発表しており、エンタープライズ顧客獲得を巡るデータ主権競争が激化している。',
-    highlight: 'AIプロバイダーがセーフティのためにログ保持を義務付けるという新しい契約条項が標準化しつつある。データ主権・GDPR・社内ガバナンスの観点からエンタープライズAI導入時の契約交渉ポイントが明確になった。'
+    "tag": "エージェント",
+    "cls": "tag-agent",
+    "url": "https://github.blog/changelog/2026-10-01-github-copilot-can-now-interact-with-desktop-apps/",
+    "title": "GitHub Copilot、Computer Useでデスクトップアプリ操作に対応。GUIのみの業務も自動化対象へ",
+    "summary": "10月1日公開。Copilot CLIとGitHub CopilotアプリのmacOS・Windows版でComputer Useがパブリックプレビューになった。画面内容を読み、クリック、文字入力、キー操作、スクロール、ドラッグなどを行い、APIやCLI、MCPがないレガシー／GUI専用ソフトのワークフローも扱える。アプリ操作前にはユーザー承認を求め、組織管理者は機能を無効化できる。",
+    "highlight": "API連携できない業務までAIの実行範囲が広がる一方、権限境界は一段難しくなる。Computer Useでは「操作可能アプリ」「承認が必要な操作」「完了後の証跡」をセットで設計することが実運用の前提。"
   },
   {
-    tag: '開発者向け', cls: 'tag-eng',
-    url: 'https://www.bloomberg.com/news/articles/2026-08-20/nvidia-to-pay-ai-startup-poolside-a-6-billion-license-newcomer-says',
-    title: 'Nvidia、AIコーディングスタートアップPoolsideと60億ドルのライセンス契約。109名採用でも「買収ではない」',
-    summary: '8月20〜21日報道。NvidiaがAIコーディングモデル「Laguna」ファミリーの開発企業Poolsideと60億ドルの非独占ライセンス契約を締結。Poolsideの内部モデル開発プラットフォーム「Model Factory」のライセンスで、Poolside自身は独立を維持したまま他社へのライセンスも継続できる。元GitHub CTO Jason Warnerらが設立したPoolsideは12億ドルの評価額で10億ドルの追加調達も実施。NvidiaはLaguna技術でソフトウェア自動化製品の開発を加速する方針。',
-    highlight: 'Nvidiaがチップ販売だけでなくAIモデル技術のライセンス収益モデルへの転換を示す大型案件。「60億ドルライセンス＋独立維持」という構造は規制回避を意識した新しいM&A代替スキームとして業界注目を集めている。'
+    "tag": "エージェント",
+    "cls": "tag-agent",
+    "url": "https://github.blog/changelog/2026-10-01-dynamic-workflows-in-copilot-cli-and-the-copilot-app/",
+    "title": "GitHub Copilot、Dynamic Workflowsを公開。複数エージェントの並列実行・検証・人間チェックポイントをコード化",
+    "summary": "10月1日公開。Copilot CLI、GitHub Copilotアプリ、Copilot SDKでDynamic Workflowsが利用可能になった。処理ステップをコードで定義し、複数エージェントを直列・並列に動かし、構造化結果を受け渡し、別エージェントによる相互検証や、人間の確認ポイントで一時停止・再開できる。繰り返し実行する複雑なプロセスを再利用可能にする。",
+    "highlight": "プロンプトの工夫ではなく「再現可能な業務プロセス」としてAIを定義できる点が重要。調査→実装→レビュー→人間承認のような定型工程は、自由なエージェントより明示的なワークフローの方が監査性と再現性を確保しやすい。"
   },
   {
-    tag: 'エージェント', cls: 'tag-agent',
-    url: 'https://cellcog.ai/blog/what-is-ox-alpha/',
-    title: 'CellCogのAIエージェントハーネス2026年8月ランキング。Claude Code 1位、Codex CLI 2位、Cursor 3位',
-    summary: '2026年8月（週次）公開。AIコーディングエージェントの評価機関CellCogが8月度のエージェントハーネスランキングを更新。Claude Codeがフック・サブエージェント・動的ワークフローの深さと長期自律セッションでの信頼性で1位を維持。Codex CLIがクラウドベースのPR自動生成とCI連携で2位。CursorがIDE内エージェントワークフローで3位。Gemini CLIとGitHub Copilotが4・5位に続く。Grok CLIが新規エントリー。',
-    highlight: 'Claude Codeが「長期自律セッション」の基準となったと外部機関が評価したのは業界初の明示的なランク付け。各ハーネスの強みが「フック深度」「PR整形」「IDE統合」で明確に分かれており、用途別の選定基準として参照できる。'
+    "tag": "開発者向け",
+    "cls": "tag-eng",
+    "url": "https://github.blog/changelog/2026-10-02-copilot-code-review-api-support-and-new-default-effort-level/",
+    "title": "GitHub Copilot Code ReviewがREST／GraphQL APIに対応。レビューをCIや社内ワークフローへ組み込み可能に",
+    "summary": "10月2日公開。GitHub Copilot Code ReviewをREST APIとGraphQL APIから要求できるようになり、レビューごとにeffort levelも指定可能になった。これにより、既存のスクリプト、CI、社内ツールから自動的にレビューを開始できる。あわせてBalancedがデフォルトのレビュー強度となった。",
+    "highlight": "AIレビューがUI上の補助機能から、品質ゲートのAPI部品になった。実装AIとレビューAIを分離し、特定条件でのみ自動レビューを起動することで、人間レビュー前の一次品質確認を標準化しやすい。"
   },
   {
-    tag: 'クリエイティブ', cls: 'tag-creative',
-    url: 'https://github.com/harry0703/MoneyPrinterTurbo',
-    title: 'MoneyPrinterTurbo v1.3.5、ClaudeをスクリプトモデルとしてネイティブサポートしMiniMax・Fish Audioも追加',
-    summary: '8月22日リリース。キーワード1つで縦型ショート動画を生成するOSSツール「MoneyPrinterTurbo」（MIT・GitHub Stars 115,138）のv1.3.5がAnthropicのClaudeをスクリプト生成モデルとして正式サポート。MiniMax音声とFish Audioが追加されナレーションの選択肢が拡大、テキスト→動画ソースも2系統追加された。',
-    highlight: 'SWE系のコーディングツールだけでなく動画生成パイプラインにもClaudeが組み込まれ始めた。115,000 Stars超のOSSへの採用は企業ユースの前兆として注目できる。MiniMax音声APIとの組み合わせは日本語TTS品質の大幅改善にも使える。'
+    "tag": "開発者向け",
+    "cls": "tag-eng",
+    "url": "https://www.anthropic.com/news/claude-frontier-academy",
+    "title": "Anthropic、Claude Frontier Academyを開始。1億ドル投資で2027年末までに1万人のFDE育成へ",
+    "summary": "10月2日公開。Anthropicは企業内でAI導入を実装できるFrontier Deployed Engineerを育成するClaude Frontier Academyを開始した。1億ドルを投じ、2027年末までに1万人を育成する目標で、初期コホートにはコンサルティング企業、金融、製薬などの大手企業が参加する。",
+    "highlight": "企業AIのボトルネックがモデル性能から「現場の業務・システム・ガバナンスをつなげる人材」に移っていることを示す動き。AIを使える人ではなく、業務プロセスとして安全に実装できる人の育成が競争力になる。"
   },
   {
-    tag: '開発者向け', cls: 'tag-eng',
-    url: 'https://docs.litellm.ai/release_notes/v1.98.0rc1/v1-98-0-rc-1',
-    title: 'LiteLLM v1.98.0、プロビジョンドスループット請求・シャドウEval・ルーティンググループを一括追加',
-    summary: '8月23日リリース。オープンソースのLLMプロキシ/ゲートウェイ「LiteLLM」がv1.98.0を公開。予約容量デプロイメントに対してトークン課金ではなく時間単位の定額請求（Provisioned Throughput Billing）を適用するモードを追加。自動ルーターのシャドウ評価（実トラフィックを並列で別ルートに流して品質を比較するShadow Evals）、APIキー単位でプロンプトキャッシュのON/OFFを切り替えるオプションも同時追加。',
-    highlight: 'プロビジョンドスループット請求のサポートで、大量バッチ処理の予算予測精度が大幅に向上する。シャドウEvalsはA/Bテスト的なモデル比較を本番トラフィックで実施できるアーキテクチャとして注目—段階的なモデル切り替え戦略の設計に直接応用できる。'
+    "tag": "新モデル",
+    "cls": "tag-model",
+    "url": "https://www.reuters.com/technology/nvidia-backed-reflection-unveils-first-ai-model-take-chinese-open-models-2026-10-05/",
+    "title": "Reflection AI、初のオープンウェイトモデル「Beam」を公開。コーディングとエージェント用途で中国勢に対抗",
+    "summary": "10月5日発表。Nvidiaが支援するReflection AIが初のオープンウェイトモデルBeamを公開した。コーディングとエージェント型タスクを主用途とし、低コストで高性能な中国系オープンモデルに対抗することを狙う。報道ではZ.aiのGLM-5.2に競合し、Qwen3.8-Maxに近い水準を目指すモデルとして位置づけられている。",
+    "highlight": "クローズドAPIだけでなく、オープンウェイトのエージェントモデル選択肢が増えている。機密データやコスト要件が厳しい案件では、セルフホスト可能性を含むモデルポートフォリオを持つ価値が上がる。"
   },
   {
-    tag: 'セキュリティ', cls: 'tag-security',
-    url: 'https://techstartups.com/2026/08/21/top-tech-news-today-august-21-2026-anthropic-apple-broadcom-google-nvidia-openai-tesla-more/',
-    title: 'GuideLight AI、主要AI企業の安全基準評価を公表。AnthropicとOpenAIがC+で同率1位、Googleはツーランク下のD+',
-    summary: '8月21日公表。AI安全性評価機関GuideLight AI Standardsが大手AI企業の技術的安全基準を5点満点で採点した結果を発表。AnthropicとOpenAIが同率1位でC+（2.50点）、Googleが3位D+（1.50点）、xAIがD-、MetaがFと評価された。評価は安全評価手順の透明性・レッドチーミング範囲・モデルカード品質・インシデント開示の4軸で構成。トップ2社でもC+止まりという結果は業界全体の安全基準がまだ初期段階にあることを示す。',
-    highlight: 'Anthropic・OpenAIでさえC+という評価は、AI安全性の「公称と実態のギャップ」を外部基準で可視化した初の試み。4軸評価はモデル採用時のデューデリジェンスチェックリストとして即活用できる。Googleのスコアが低い点は医療・金融分野での採用審査に影響しうる。'
-  },
+    "tag": "セキュリティ",
+    "cls": "tag-security",
+    "url": "https://openai.com/index/eu-text-provenance/",
+    "title": "OpenAI、EU向けChatGPT／Codexテキストに不可視ウォーターマーク導入へ。APIでは世界向けにオプトイン開始",
+    "summary": "10月5日公開。OpenAIはEU AI Actのテキスト識別要件への対応として、対象となるChatGPTとCodexのテキスト出力へ今後数週間で不可視ウォーターマークを導入すると発表した。APIでは一部モデルについて世界中の顧客がオプトインできる。検出技術には短文や編集後の文章で精度が落ちる制約があり、検出器は当初、承認された研究者・専門機関に限定提供する。",
+    "highlight": "生成物の来歴がプロダクト要件になり始めた。ウォーターマークは正誤や著作権を保証するものではないため、AI利用履歴、レビュー記録、出典管理と組み合わせる「複数の証跡」でガバナンスを設計する必要がある。"
+  }
 ];
 
 const backnumbers = [
   {
     "label": "2026年10月6日号",
     "file": "2026_10_06.html",
-    "current": false,
+    "current": true,
     "headline": "GPT-6.1 Sol / Gemini 4 Argon / Copilot Computer Use"
   },
   {
@@ -735,7 +745,7 @@ const backnumbers = [
   {
     "label": "2026年8月24日号",
     "file": "2026_08_24.html",
-    "current": true,
+    "current": false,
     "headline": "Ox Alpha / ChatGPT for Teens / Nvidia-Poolside"
   },
   {
@@ -1075,19 +1085,18 @@ function closeGrid() {
   overlay.classList.remove('open');
   overlay.setAttribute('aria-hidden', 'true');
 }
-document.getElementById('gridOverlay').addEventListener('click', function(e) { if (e.target === this) closeGrid(); });
-document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeGrid(); });
+document.getElementById('gridOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('gridOverlay')) closeGrid();
+});
 
 /* ── Init ── */
-const startIdx = !isNaN(urlItem) && urlItem >= 0 && urlItem < news.length ? urlItem
-               : savedItem > 0 ? savedItem : 0;
 buildCarousel();
 buildDotNav();
-updateCarousel(startIdx);
-current = startIdx;
-
-if (savedItem > 0 && isNaN(urlItem) && !localStorage.getItem(seenKey + '-resumed')) {
-  setTimeout(() => showResumeToast(savedItem), 1000);
+current = !isNaN(urlItem) && urlItem >= 0 && urlItem < news.length ? urlItem
+        : !isNaN(savedItem) && savedItem >= 0 && savedItem < news.length ? savedItem : 0;
+updateCarousel(current);
+if (!isNaN(savedItem) && savedItem >= 0 && savedItem < news.length && isNaN(urlItem)) {
+  showResumeToast(savedItem);
 }
 </script>
 </body>
